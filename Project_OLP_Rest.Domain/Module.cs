@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace TemplateCore.Domain
+namespace Project_OLP_Rest.Domain
 {
     public class Module
     {
@@ -10,5 +10,8 @@ namespace TemplateCore.Domain
         public string Name { get; set; }
         public string Description { get; set; }
 
+        public Course Course{ get; set; }
+
+        public List<Record> Records { get; set; }
     }
 }

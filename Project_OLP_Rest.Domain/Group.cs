@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace TemplateCore.Domain
+namespace Project_OLP_Rest.Domain
 {
     public class Group
     {
         public int GroupId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+
+
         public List<Course> Courses { get; set; }
+        public List<Student> Students { get; set; }
     }
 }
