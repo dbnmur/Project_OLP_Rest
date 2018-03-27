@@ -9,6 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.Swagger;
+using Project_OLP_Rest.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Project_OLP_Rest
 {
@@ -36,6 +38,11 @@ namespace Project_OLP_Rest
                     Contact = new Contact() { Name = "Talking Dotnet", Email = "asdf@email.com", Url = "nourl.com" }
                 });
             });
+
+            services.AddDbContext<OLP_Context>(
+                options => options.UseSqlServer(
+                     Configuration.GetConnectionString("OLPConnection")));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

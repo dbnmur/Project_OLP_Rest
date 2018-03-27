@@ -11,4 +11,8 @@
     <PackageReference Include="NuGet.CommandLine" Version="4.5.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Project_OLP_Rest.Domain\Project_OLP_Rest.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
