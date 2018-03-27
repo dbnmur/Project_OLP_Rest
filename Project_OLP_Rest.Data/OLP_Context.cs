@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using TemplateCore.Domain;
+using Project_OLP_Rest.Domain;
 
 namespace Project_OLP_Rest.Data
 {
@@ -18,8 +18,7 @@ namespace Project_OLP_Rest.Data
         public DbSet<Course> Courses { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Module> Modules { get; set; }
-        public DbSet<Group> Groups { get; set; }
-        public DbSet<Role> Roles { get; set; }
+        public DbSet<Group> Groups { get; set; }      
         public DbSet<Record> Records { get; set; }
 
     }
