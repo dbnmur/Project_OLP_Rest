@@ -15,6 +15,7 @@ namespace Project_OLP_Rest.Data
 
         }
 
+
         public DbSet<Course> Courses { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Module> Modules { get; set; }
