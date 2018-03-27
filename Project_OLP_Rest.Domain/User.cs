@@ -2,18 +2,16 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace TemplateCore.Domain
+namespace Project_OLP_Rest.Domain
 {
-   public class User
+   public abstract class User
     {
         public int UserId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
-        public Role Role {get; set; }
-        public Course Course { get; set; }
-        public List<Group> Groups { get; set; }
-        public List<Course> Courses { get; set; }
-        
+
+     
+
     }
 }
