@@ -40,5 +40,12 @@ namespace Project_OLP_Rest.Controllers
         public void Delete(int id)
         {
         }
+
+        [Route("test")]
+        [HttpPost]
+        public string TestMethod()
+        {
+            return "SUCC";
+        }
     }
 }
