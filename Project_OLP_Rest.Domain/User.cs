@@ -10,6 +10,8 @@ namespace TemplateCore.Domain
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
+        public Role Role {get; set; }
+        public Course Course { get; set; }
         public List<Group> Groups { get; set; }
         public List<Course> Courses { get; set; }
         
