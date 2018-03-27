@@ -11,9 +11,10 @@ namespace Project_OLP_Rest.Domain
         public string Description { get; set; }
         public int OwnerUserID { get; set; }
         //M to M
-        public List<Group> Groups { get; set; }
+        public int GroupId { get; set; }
+        public List<GroupCourse> GroupCourses { get; set; }
 
-        public List<Teacher> Teachers { get; set; }
+        public List<TeacherCourse> TeacherCourses { get; set; }
 
         //O to M
         

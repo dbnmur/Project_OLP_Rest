@@ -6,7 +6,7 @@ namespace Project_OLP_Rest.Domain
 {
     public class Teacher: User
     {
-        public List<Course> Courses { get; set; }
+        public List<TeacherCourse> TeacherCourses { get; set; }
 
     }
 }

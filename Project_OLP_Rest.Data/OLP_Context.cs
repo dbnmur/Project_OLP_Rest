@@ -21,5 +21,21 @@ namespace Project_OLP_Rest.Data
         public DbSet<Group> Groups { get; set; }      
         public DbSet<Record> Records { get; set; }
 
+
+        //protected override void OnModelCreating(ModelBuilder builder)
+        //{
+        //    base.OnModelCreating(builder);
+
+        //    builder.Entity<TeacherCourse)
+        //        .HasKey(t => new {});
+
+        //    builder.Entity<GroupCourse)
+        //        .HasKey(t => new { t.TeamId, t.UserId });
+
+            
+        //}
+
+
+
     }
 }

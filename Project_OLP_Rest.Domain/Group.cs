@@ -10,8 +10,7 @@ namespace Project_OLP_Rest.Domain
         public string Name { get; set; }
         public string Description { get; set; }
 
-
-        public List<Course> Courses { get; set; }
+        public List<GroupCourse> GroupCourses { get; set; }
         public List<Student> Students { get; set; }
     }
 }
