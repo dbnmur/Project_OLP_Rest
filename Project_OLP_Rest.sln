@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project_OLP_Rest.Domain", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project_OLP_Rest.Data", "Project_OLP_Rest.Data\Project_OLP_Rest.Data.csproj", "{7F3D972C-F3A0-46B9-9BD7-F13CCFF30FE7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "UnitTest\UnitTest.csproj", "{FB656153-9BD9-4008-A921-86EA9A412C81}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project_OLP_UnitTests", "UnitTest\Project_OLP_UnitTests.csproj", "{FB656153-9BD9-4008-A921-86EA9A412C81}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
