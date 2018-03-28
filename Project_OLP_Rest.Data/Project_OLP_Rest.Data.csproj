@@ -15,4 +15,8 @@
     <ProjectReference Include="..\Project_OLP_Rest.Domain\Project_OLP_Rest.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
+  </ItemGroup>
+
 </Project>
