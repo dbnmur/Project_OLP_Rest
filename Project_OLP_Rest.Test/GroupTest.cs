@@ -14,9 +14,6 @@ namespace Project_OLP_Rest.Test
     [TestClass]
     public class GroupTest
     {
-
-       
-
         [TestMethod]
         public void Group_GetAll_Groups()
         {
