@@ -11,6 +11,8 @@ using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.Swagger;
 using Project_OLP_Rest.Data;
 using Microsoft.EntityFrameworkCore;
+using Project_OLP_Rest.Data.Interfaces;
+using Project_OLP_Rest.Data.Services;
 
 namespace Project_OLP_Rest
 {
@@ -42,6 +44,10 @@ namespace Project_OLP_Rest
             services.AddDbContext<OLP_Context>(
                 options => options.UseSqlServer(
                      Configuration.GetConnectionString("OLPConnection")));
+
+            services.AddTransient<IGroupService, GroupService>();
+            services.AddTransient<ICourseService, CourseService>();
+            services.AddTransient<IModuleService, ModuleService>();
 
         }
 

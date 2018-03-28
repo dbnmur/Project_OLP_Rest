@@ -3,6 +3,7 @@ using Project_OLP_Rest.Domain;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace Project_OLP_Rest.Data.Services
 {
@@ -12,11 +13,7 @@ namespace Project_OLP_Rest.Data.Services
 
         public IEnumerable<Group> GetAll()
         {
-            // Some implementation DO IT
-            throw new NotImplementedException();
+            return _entities.ToList();
         }
-
-
-
     }
 }
