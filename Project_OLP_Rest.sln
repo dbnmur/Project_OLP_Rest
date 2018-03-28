@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project_OLP_Rest.Domain", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project_OLP_Rest.Data", "Project_OLP_Rest.Data\Project_OLP_Rest.Data.csproj", "{7F3D972C-F3A0-46B9-9BD7-F13CCFF30FE7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project_OLP_Rest.Tests", "Project_OLP_Rest.Tests\Project_OLP_Rest.Tests.csproj", "{09785F60-B613-45BF-A7F1-B72224455D77}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project_OLP_Rest.Test", "Project_OLP_Rest.Test\Project_OLP_Rest.Test.csproj", "{0D649A3B-1F4A-4294-9D6D-28318D3C334F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{7F3D972C-F3A0-46B9-9BD7-F13CCFF30FE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F3D972C-F3A0-46B9-9BD7-F13CCFF30FE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7F3D972C-F3A0-46B9-9BD7-F13CCFF30FE7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{09785F60-B613-45BF-A7F1-B72224455D77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{09785F60-B613-45BF-A7F1-B72224455D77}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{09785F60-B613-45BF-A7F1-B72224455D77}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{09785F60-B613-45BF-A7F1-B72224455D77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D649A3B-1F4A-4294-9D6D-28318D3C334F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D649A3B-1F4A-4294-9D6D-28318D3C334F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D649A3B-1F4A-4294-9D6D-28318D3C334F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D649A3B-1F4A-4294-9D6D-28318D3C334F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
