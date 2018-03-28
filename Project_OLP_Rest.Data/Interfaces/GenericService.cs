@@ -7,7 +7,7 @@ namespace Project_OLP_Rest.Data.Interfaces
 {
     public abstract class GenericService<T> : IGenericService<T> where T : Entity
     {
-        private OLP_Context _context;
+        protected OLP_Context _context;
         protected DbSet<T> _entities;
 
         public GenericService(OLP_Context context)
