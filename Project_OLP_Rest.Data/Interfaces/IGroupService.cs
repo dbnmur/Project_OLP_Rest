@@ -23,9 +23,4 @@ namespace Project_OLP_Rest.Data.Interfaces
         /// <returns></returns>
         IEnumerable<Module> GetRecords(int moduleId);
     }
-
-    public interface ICourseService : IGenericService<Course>
-    {
-
-    }
 }
