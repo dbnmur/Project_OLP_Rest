@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Project_OLP_Rest.Data.Services
 {
-    class GroupService : GenericService<Group>, IGroupService
+    public class GroupService : GenericService<Group>, IGroupService
     {
         public GroupService(OLP_Context context) : base(context) { }
 
@@ -15,5 +15,8 @@ namespace Project_OLP_Rest.Data.Services
             // Some implementation DO IT
             throw new NotImplementedException();
         }
+
+
+
     }
 }
