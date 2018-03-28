@@ -8,9 +8,7 @@ namespace Project_OLP_Rest.Data.Services
 {
     class GroupService : GenericService<Group>, IGroupService
     {
-        public GroupService(OLP_Context context) : base(context)
-        {
-        }
+        public GroupService(OLP_Context context) : base(context) { }
 
         public IEnumerable<Group> GetAll()
         {
