@@ -16,14 +16,11 @@ namespace Project_OLP_Rest.Data.Services
         {
             _context.Add(newUser);
             _context.SaveChanges();
-          
-
         }
       
         public User Get(int id)
         {
             return _context.Users.FirstOrDefault(user => user.UserId == id);
         }
-
     }
 }
