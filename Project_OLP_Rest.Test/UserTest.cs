@@ -18,8 +18,6 @@ namespace Project_OLP_Rest.Test
             var options = new DbContextOptionsBuilder<OLP_Context>()
             .UseInMemoryDatabase(databaseName: "Add_writes_to_database")
                 .Options;
-
-
         }
     }
 }
