@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Project_OLP_Rest.Domain
 {
-    public class Course
+    public class Course : Entity
     {
         public int CourseId { get; set; }
         public string Name { get; set; }
