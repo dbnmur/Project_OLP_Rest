@@ -1,4 +1,5 @@
-﻿using Project_OLP_Rest.Domain;
+﻿using Project_OLP_Rest.Data.Interfaces;
+using Project_OLP_Rest.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,24 +7,15 @@ using System.Text;
 
 namespace Project_OLP_Rest.Data.Services
 {
-    class UserService : Service
+    public class UserService : GenericService<User>, IUserService
     {
-        protected UserService(OLP_Context context) : base(context)
+        public UserService(OLP_Context context) : base(context)
         {
         }
 
-        public void Add(User newUser)
+        public IEnumerable<User> GetUsers()
         {
-            _context.Add(newUser);
-            _context.SaveChanges();
-          
-
+            throw new NotImplementedException();
         }
-      
-        public User Get(int id)
-        {
-            return _context.Users.FirstOrDefault(user => user.UserId == id);
-        }
-
     }
 }
