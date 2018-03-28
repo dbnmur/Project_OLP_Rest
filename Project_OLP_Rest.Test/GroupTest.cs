@@ -25,7 +25,6 @@ namespace Project_OLP_Rest.Test
             // Run the test against one instance of the context
             using (var context = new OLP_Context(options))
             {
-
                 Domain.Group group = new Domain.Group() {
                     Name = "Test1",
                     Description =  "test desc1"
@@ -36,12 +35,8 @@ namespace Project_OLP_Rest.Test
 
                 Domain.Group fecthedGroup = service.FindBy(x => x.Name == group.Name);
 
-
                 Assert.AreEqual(fecthedGroup.Name, group.Name);
-
             }
-
         }
-
     }
 }

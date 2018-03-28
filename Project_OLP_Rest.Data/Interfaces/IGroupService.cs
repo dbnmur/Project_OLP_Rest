@@ -13,14 +13,4 @@ namespace Project_OLP_Rest.Data.Interfaces
         /// <returns></returns>
         IEnumerable<Group> GetAll();
     }
-
-    public interface IModuleService : IGenericService<Module>
-    {
-        /// <summary>
-        /// Includes all module records
-        /// </summary>
-        /// <param name="courseId"></param>
-        /// <returns></returns>
-        IEnumerable<Module> GetRecords(int moduleId);
-    }
 }

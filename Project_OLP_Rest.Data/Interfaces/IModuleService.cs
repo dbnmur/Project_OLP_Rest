@@ -1,15 +1,15 @@
 ﻿using Project_OLP_Rest.Domain;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Project_OLP_Rest.Data.Interfaces
 {
-    public interface ICourseService : IGenericService<Course>
+    public interface IModuleService : IGenericService<Module>
     {
         /// <summary>
-        /// Fetches all courses
+        /// Includes all module records
         /// </summary>
+        /// <param name="courseId"></param>
         /// <returns></returns>
-        IEnumerable<Course> GetAll();
+        IEnumerable<Module> GetRecords(int moduleId);
     }
 }

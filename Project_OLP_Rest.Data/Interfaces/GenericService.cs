@@ -16,10 +16,11 @@ namespace Project_OLP_Rest.Data.Interfaces
             _entities = context.Set<T>();
         }
 
-        public void Create(T entity)
+        public T Create(T entity)
         {
-            _entities.Add(entity);
+            T addedEntity = _entities.Add(entity).Entity;
             _context.SaveChanges();
+            return addedEntity;
         }
 
         public void Delete(T entity)
