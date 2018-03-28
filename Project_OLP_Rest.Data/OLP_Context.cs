@@ -8,7 +8,10 @@ namespace Project_OLP_Rest.Data
 {
     public class OLP_Context : DbContext
     {
+        public OLP_Context()
+        {
 
+        }
 
         public OLP_Context (DbContextOptions<OLP_Context> options) : base (options)
         {
