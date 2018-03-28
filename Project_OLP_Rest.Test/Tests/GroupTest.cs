@@ -15,28 +15,31 @@ namespace Project_OLP_Rest.Test
     public class GroupTest
     {
         [TestMethod]
-        public void Group_GetAll_Groups()
+        public void GroupAddTest()
         {
             var options = new DbContextOptionsBuilder<OLP_Context>()
-           .UseInMemoryDatabase(databaseName: "Add_writes_to_database")
-               .Options;
-
-
+            .UseInMemoryDatabase(databaseName: "Add_writes_to_database_ADD")
+             .Options;
             // Run the test against one instance of the context
             using (var context = new OLP_Context(options))
             {
-                Domain.Group group = new Domain.Group() {
+                Domain.Group group = new Domain.Group()
+                {
                     Name = "Test1",
-                    Description =  "test desc1"
+                    Description = "test desc1"
                 };
 
                 var service = new GroupService(context);
                 service.Create(group);
 
                 Domain.Group fecthedGroup = service.FindBy(x => x.Name == group.Name);
-
                 Assert.AreEqual(fecthedGroup.Name, group.Name);
+                Console.Write("Group was : " + group.Name + " successfully added");
+
             }
+
+
         }
+
     }
 }
