@@ -10,7 +10,11 @@ namespace Project_OLP_Rest.Data.Interfaces
         private OLP_Context _context;
         protected DbSet<T> _entities;
 
-        public GenericService(OLP_Context context) { _context = context; }
+        public GenericService(OLP_Context context)
+        {
+            _context = context;
+            _entities = context.Set<T>();
+        }
 
         public void Create(T entity)
         {
