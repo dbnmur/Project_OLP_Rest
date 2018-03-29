@@ -14,6 +14,11 @@ namespace Project_OLP_Rest.Data.Seeders
         {
             // Add all seeders here
             new GroupSeeder(context).Run();
+            new CourseSeeder(context).Run();
+            new ModuleSeeder(context).Run();
+            new RecordSeeder(context).Run();
+            new StudentSeeder(context).Run();
+            new TeacherSeeder(context).Run();
         }
     }
 }

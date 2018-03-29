@@ -14,7 +14,8 @@ namespace Project_OLP_Rest.Data.Seeders
             _entities.Add(new Group()
             {
                 Name = "Some name",
-                Description = "Some description"
+                Description = "Some description",
+                
             });
 
             _entities.Add(new Group()
