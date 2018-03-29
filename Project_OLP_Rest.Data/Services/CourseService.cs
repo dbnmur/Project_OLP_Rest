@@ -8,7 +8,7 @@ namespace Project_OLP_Rest.Data.Services
 {
     public class CourseService : GenericService<Course>, ICourseService
     {
-        protected CourseService(OLP_Context context) : base(context) { }
+        public CourseService(OLP_Context context) : base(context) { }
 
         public IEnumerable<Course> GetAll()
         {

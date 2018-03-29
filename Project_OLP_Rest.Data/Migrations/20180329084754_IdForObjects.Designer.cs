@@ -12,9 +12,10 @@ using System;
 namespace Project_OLP_Rest.Data.Migrations
 {
     [DbContext(typeof(OLP_Context))]
-    partial class OLP_ContextModelSnapshot : ModelSnapshot
+    [Migration("20180329084754_IdForObjects")]
+    partial class IdForObjects
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
