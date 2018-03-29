@@ -13,7 +13,7 @@ namespace Project_OLP_Rest.Data.Services
         {
         }
 
-        public IEnumerable<User> GetUsers()
+        public IEnumerable<User> GetAll()
         {
             throw new NotImplementedException();
         }
