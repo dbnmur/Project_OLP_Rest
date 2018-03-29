@@ -51,8 +51,13 @@ namespace Project_OLP_Rest.Test
             {
                 Domain.Group group = new Domain.Group()
                 {
+                    GroupId = 1,
                     Name = "Test1",
-                    Description = "test desc1"
+                    Description = "test desc1",
+                    
+
+                 
+                    
                 };
 
                 var service = new GroupService(context);
@@ -61,14 +66,15 @@ namespace Project_OLP_Rest.Test
                 Domain.Group fecthedGroup = service.FindBy(x => x.Name == group.Name);
                 Assert.AreEqual(fecthedGroup.Name, group.Name);
                 Console.Write("Group was : " + group.Name + " successfully added");
-
+                
                 //user insert
                 Domain.Student student = new Domain.Student()
                 {
+                    
                     FirstName = "Daniel",
                     LastName = "Zeimo",
-                    Email = "cccp@cc.cc",
-
+                    Email = "cccp@cc.cc"
+                    
 
                 };
 
