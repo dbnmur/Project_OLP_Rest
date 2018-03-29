@@ -13,5 +13,9 @@ namespace Project_OLP_Rest.Data.Services
         {
 
         }
+        public IEnumerable<Course> GetAll()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
