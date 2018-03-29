@@ -10,7 +10,7 @@ namespace Project_OLP_Rest.Test.Tests
     [TestClass]
     public class TeacherCourseTest
     {
-        [TestMethod]
+        [TestMethod] [Ignore]
         public void AddTeacher_ToCourse_Test()
         {
             var options = new DbContextOptionsBuilder<OLP_Context>()

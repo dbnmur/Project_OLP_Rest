@@ -114,6 +114,7 @@
     <Compile Include="Tests\AuthorizationTest.cs" />
     <Compile Include="Tests\GroupTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tests\SeederManagerTest.cs" />
     <Compile Include="Tests\TeacherCourseTest.cs" />
     <Compile Include="Tests\UserTest.cs" />
   </ItemGroup>
