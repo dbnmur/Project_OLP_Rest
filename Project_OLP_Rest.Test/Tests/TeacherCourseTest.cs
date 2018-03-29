@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Project_OLP_Rest.Data;
 using Project_OLP_Rest.Data.Services;
+using Project_OLP_Rest.Domain;
 
 namespace Project_OLP_Rest.Test.Tests
 {
@@ -32,16 +33,42 @@ namespace Project_OLP_Rest.Test.Tests
 
                 Domain.Teacher fecthedTeacher = teacherService.FindBy(x => x.FirstName == teacher.FirstName);
 
-                Assert.AreEqual(fecthedTeacher.FirstName, fecthedTeacher.FirstName);
+                Assert.AreEqual(fecthedTeacher.FirstName, teacher.FirstName);
 
                 Domain.Course course = new Domain.Course()
                 {
                     Name = "Test course name",
                     Description = "test course desc",
-                    
                 };
 
-    
+                var courseService = new CourseService(context);
+                courseService.Create(course);
+
+
+                Domain.Course fecthedCourse = courseService.FindBy(x => x.Name == course.Name);
+
+                Assert.AreEqual(fecthedCourse.Name, course.Name);
+
+                //teacher.TeacherCourses.Add(course);
+               
+                TeacherCourse teacherCourse = new TeacherCourse()
+                {
+                    Course = course,
+                    Teacher = teacher
+                };
+
+                context.Add(teacherCourse);
+                context.SaveChanges();
+
+                Domain.TeacherCourse fethedTeacherCourse = context.TeacherCourses.Find();
+
+                Assert.AreEqual(fethedTeacherCourse.Teacher, teacher);
+
+                Assert.AreEqual(teacherCourse.Teacher, teacher);
+                Assert.AreEqual(teacherCourse.Course, course);
+
+                //Assert.AreEqual(teacher.TeacherCourses, teacherCourse.Course);
+
 
             }
 
