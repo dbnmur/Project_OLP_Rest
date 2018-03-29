@@ -1,25 +1,17 @@
-﻿using Project_OLP_Rest.Domain;
+﻿using Project_OLP_Rest.Data.Interfaces;
+using Project_OLP_Rest.Domain;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace Project_OLP_Rest.Data.Services
 {
-    class TeacherService : Service
+    public class TeacherService : GenericService<Teacher>, ITeacherService
     {
-        protected TeacherService(OLP_Context context) : base(context) { }
-
-        public void Add(Teacher newTeacher)
+        public TeacherService(OLP_Context context) : base(context)
         {
-            _context.Add(newTeacher);
-            _context.SaveChanges();
-        }
 
-        /* TODO FIX
-        public Teacher Get(int id)
-        {
-            return _context.Teacher.FirstOrDefault(teacher => teacher.TeacherId == id);
         }
-        */
     }
 }
