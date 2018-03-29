@@ -7,6 +7,6 @@ namespace Project_OLP_Rest.Data.Interfaces
 {
     public interface IUserService : IGenericService<User>
     {
-        IEnumerable<User> GetUsers();
+        IEnumerable<User> GetAll();
     }
 }
