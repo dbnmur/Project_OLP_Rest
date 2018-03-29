@@ -13,6 +13,7 @@ using Project_OLP_Rest.Data;
 using Microsoft.EntityFrameworkCore;
 using Project_OLP_Rest.Data.Interfaces;
 using Project_OLP_Rest.Data.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace Project_OLP_Rest
 {
@@ -28,7 +29,6 @@ namespace Project_OLP_Rest
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info
@@ -41,6 +41,18 @@ namespace Project_OLP_Rest
                 });
             });
 
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options => 
+            {
+                options.Authority = Configuration["Auth0:Authority"];
+                options.Audience = Configuration["Auth0:Audience"];
+            });
+
+            services.AddMvc();
+
             services.AddDbContext<OLP_Context>(
                 options => options.UseSqlServer(
                      Configuration.GetConnectionString("OLPConnection")));
@@ -48,7 +60,6 @@ namespace Project_OLP_Rest
             services.AddTransient<IGroupService, GroupService>();
             services.AddTransient<ICourseService, CourseService>();
             services.AddTransient<IModuleService, ModuleService>();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,6 +69,8 @@ namespace Project_OLP_Rest
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseAuthentication();
 
             app.UseMvc();
             app.UseSwagger();
