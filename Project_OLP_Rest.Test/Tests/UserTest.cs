@@ -72,10 +72,10 @@ namespace Project_OLP_Rest.Test
 
                 };
 
-                var service1 = new UserService(context);
-                service1.Create(student);
+                var userService = new UserService(context);
+                userService.Create(student);
 
-                Domain.User fetchedUser = service1.FindBy(x => x.FirstName == student.FirstName);
+                Domain.User fetchedUser = userService.FindBy(x => x.FirstName == student.FirstName);
                 Assert.AreEqual(fetchedUser.FirstName, student.FirstName);
 
                 Console.Write("User was : " + student.FirstName + " successfully added");
