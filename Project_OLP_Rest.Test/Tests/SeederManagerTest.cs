@@ -19,7 +19,6 @@ namespace Project_OLP_Rest.Test.Tests
             using (var context = new OLP_Context(options))
             {
                 var SeederManager = new SeederManager(context);
-
             }
         }
     }

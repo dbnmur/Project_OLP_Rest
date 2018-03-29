@@ -10,7 +10,7 @@ namespace Project_OLP_Rest.Test.Tests
     [TestClass]
     public class TeacherCourseTest
     {
-        [TestMethod] [Ignore]
+        [TestMethod]
         public void AddTeacher_ToCourse_Test()
         {
             var options = new DbContextOptionsBuilder<OLP_Context>()
@@ -24,12 +24,10 @@ namespace Project_OLP_Rest.Test.Tests
                     FirstName = "Test Name",
                     LastName = "Test last name",
                     Email = "test email",
-                    
                 };
 
                 var teacherService = new TeacherService(context);
                 teacherService.Create(teacher);
-
 
                 Domain.Teacher fecthedTeacher = teacherService.FindBy(x => x.FirstName == teacher.FirstName);
 
@@ -43,7 +41,6 @@ namespace Project_OLP_Rest.Test.Tests
 
                 var courseService = new CourseService(context);
                 courseService.Create(course);
-
 
                 Domain.Course fecthedCourse = courseService.FindBy(x => x.Name == course.Name);
 
@@ -68,11 +65,7 @@ namespace Project_OLP_Rest.Test.Tests
                 Assert.AreEqual(teacherCourse.Course, course);
 
                 //Assert.AreEqual(teacher.TeacherCourses, teacherCourse.Course);
-
-
             }
-
-
         }
     }
 }
