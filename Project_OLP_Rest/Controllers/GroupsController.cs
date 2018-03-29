@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Project_OLP_Rest.Data;
+using Project_OLP_Rest.Data.Interfaces;
 using Project_OLP_Rest.Domain;
 
 namespace Project_OLP_Rest.Controllers
@@ -15,17 +16,19 @@ namespace Project_OLP_Rest.Controllers
     public class GroupsController : Controller
     {
         private readonly OLP_Context _context;
+        private IGroupService _groupService;
 
-        public GroupsController(OLP_Context context)
+        public GroupsController(OLP_Context context, IGroupService groupService)
         {
             _context = context;
+            _groupService = groupService;
         }
 
         // GET: api/Groups
         [HttpGet]
         public IEnumerable<Group> GetGroups()
         {
-            return _context.Groups;
+            return _groupService.GetAll();
         }
 
         // GET: api/Groups/5

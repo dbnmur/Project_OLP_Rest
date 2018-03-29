@@ -24,6 +24,7 @@ namespace Project_OLP_Rest.Data
         public DbSet<Module> Modules { get; set; }
         public DbSet<Group> Groups { get; set; }      
         public DbSet<Record> Records { get; set; }
+        public object Teacher { get; internal set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
