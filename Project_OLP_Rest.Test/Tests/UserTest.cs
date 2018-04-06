@@ -36,12 +36,10 @@ namespace Project_OLP_Rest.Test
                 Assert.AreEqual(fetchedUser.FirstName, student.FirstName);
 
                 Console.Write("User was : " + student.FirstName + " successfully added");
-
             }
         }
-
         [TestMethod]
-        public void UserGroupTest()
+        public void OneToManyStudentGroupTest()
         {
             var options = new DbContextOptionsBuilder<OLP_Context>()
             .UseInMemoryDatabase(databaseName: "UserGroupTest")
@@ -52,42 +50,35 @@ namespace Project_OLP_Rest.Test
                 Domain.Group group = new Domain.Group()
                 {
                     GroupId = 1,
-                    Name = "Test1",
-                    Description = "test desc1",
-                    
-
-                 
-                    
+                    Name = "PI15B",
+                    Description = "make viko great again"  
                 };
 
-                var service = new GroupService(context);
-                service.Create(group);
+                var groupService = new GroupService(context);
+                groupService.Create(group);
 
-                Domain.Group fecthedGroup = service.FindBy(x => x.Name == group.Name);
+                Domain.Group fecthedGroup = groupService.FindBy(x => x.Name == group.Name);
                 Assert.AreEqual(fecthedGroup.Name, group.Name);
-                Console.Write("Group was : " + group.Name + " successfully added");
+                Console.Write("Group  : " + group.Name + " successfully added");
                 
                 //user insert
                 Domain.Student student = new Domain.Student()
                 {
-                    
+                    GroupId = 1,
                     FirstName = "Daniel",
                     LastName = "Zeimo",
                     Email = "cccp@cc.cc"
-                    
 
                 };
 
-                var userService = new UserService(context);
-                userService.Create(student);
+                var studentService = new StudentService(context);
+                studentService.Create(student);
 
-                Domain.User fetchedUser = userService.FindBy(x => x.FirstName == student.FirstName);
+                Domain.Student fetchedUser = studentService.FindBy(x => x.FirstName == student.FirstName);
                 Assert.AreEqual(fetchedUser.FirstName, student.FirstName);
-
-                Console.Write("User was : " + student.FirstName + " successfully added");
-
-
-
+                Assert.AreEqual(group.Name, fetchedUser.Group.Name);
+                Console.Write("|User  : " + student.FirstName + " successfully added");
+                Console.Write("|User group : " + fetchedUser.Group.Name  +" Description"+ fetchedUser.Group.Description);
             }
         }
 

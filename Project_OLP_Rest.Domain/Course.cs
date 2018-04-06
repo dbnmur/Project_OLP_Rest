@@ -9,7 +9,7 @@ namespace Project_OLP_Rest.Domain
         public int CourseId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public int OwnerUserID { get; set; }
+     
         //M to M
         
         public List<GroupCourse> GroupCourses { get; set; }
