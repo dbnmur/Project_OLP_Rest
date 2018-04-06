@@ -92,7 +92,7 @@ namespace QXS.ChatBot
         /// <param name="session">The session, that should be used</param>
         /// <param name="messageIn">The message that came in</param>
         /// <returns>the response string or null in case no answer was found</returns>
-        protected string findAnswer(ChatSessionInterface session, string messageIn)
+        public string findAnswer(ChatSessionInterface session, string messageIn)
         {
             foreach (List<BotRule> rules in this._botRules.Values)
             {
@@ -110,7 +110,6 @@ namespace QXS.ChatBot
                     }
                 }
             }
-
             return null;
         }
 

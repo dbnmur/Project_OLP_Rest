@@ -16,6 +16,11 @@ namespace QXS.ChatBot.ChatSessions
 
         protected List<BotResponse> _responseHistory = new List<BotResponse>();
 
+        public RestChatSession()
+        {
+            SessionStorage = new SessionStorage();
+        }
+
         public void AddResponseToHistory(BotResponse response)
         {
             _responseHistory.Add(response);

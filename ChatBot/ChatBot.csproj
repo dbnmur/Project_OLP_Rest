@@ -74,6 +74,7 @@
     <Compile Include="ChatSessions\TimeOutConsoleChatSession.cs" />
     <Compile Include="Generators\BotRuleCodeCompiler.cs" />
     <Compile Include="MethodExtensions\ChatBotXmlNodeExtensions.cs" />
+    <Compile Include="RestChatBot.cs" />
     <Compile Include="Rules\BotRule.cs" />
     <Compile Include="ChatBot.cs" />
     <Compile Include="Generators\ChatBotRuleGenerator.cs" />
