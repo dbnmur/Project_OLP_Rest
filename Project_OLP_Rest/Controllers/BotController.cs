@@ -107,7 +107,6 @@ namespace Project_OLP_Rest.Controllers
                         }
                         return answer;
                     }
-
                 ),
                 // greet
                 new BotRule(
@@ -136,8 +135,13 @@ namespace Project_OLP_Rest.Controllers
             chatBot = new RestChatBot(dummyRules);
         }
 
+        public class ChatRequestBody
+        {
+            public string Message { get; set; }
+        }
+
         [HttpPost]
-        public JsonResult Chat([FromBody]string message, [FromHeader]string sessionId)
+        public JsonResult Chat([FromBody]ChatRequestBody body, [FromHeader]string sessionId)
         {
             ChatSessionInterface currentChatSession = null;
             if (String.IsNullOrEmpty(sessionId) || !chatSessions.ContainsKey(sessionId))
@@ -151,7 +155,7 @@ namespace Project_OLP_Rest.Controllers
                 currentChatSession = chatSessions[sessionId];
             }
 
-            string chatbotResponse = chatBot.FindAnswer(currentChatSession, message);
+            string chatbotResponse = chatBot.FindAnswer(currentChatSession, body.Message);
 
             return Json(new { sessionId = sessionId, chatbotResponse = chatbotResponse });
         }
