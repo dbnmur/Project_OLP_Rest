@@ -84,6 +84,7 @@
     <Compile Include="ChatSessions\LyncChatSession.cs" />
     <Compile Include="Rules\BotRuleContainer.cs" />
     <Compile Include="Rules\ConditionBotRule.cs" />
+    <Compile Include="Rules\PhpCourseRule.cs" />
     <Compile Include="Rules\PowershellBotRule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rules\RandomAnswersBotRule.cs" />
