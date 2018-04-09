@@ -59,11 +59,18 @@ namespace Project_OLP_Rest.Test.Tests
         public void AllCourses()
         {
             CreateJavaBot();
-            string Message = "show tasks java";
+            string Message = "show me tasks";
             ChatSessionInterface session = new RestChatSession();
             Console.WriteLine(javaChatBot.FindAnswer(session, Message));
-
-
         }
+        [TestMethod]
+        public void Learning()
+        {
+            CreateJavaBot();
+            string Message = "where can i ";
+            ChatSessionInterface session = new RestChatSession();
+            Console.WriteLine(javaChatBot.FindAnswer(session, Message));
+        }
+
     }
 }

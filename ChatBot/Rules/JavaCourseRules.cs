@@ -23,10 +23,10 @@ namespace QXS.ChatBot.Rules
                  new BotRule(
                 Name: "showexcersices",
                 Weight: 10,
-                MessagePattern: new Regex("(show excersices|(show me|give me tasks) java)", RegexOptions.IgnoreCase),
+                MessagePattern: new Regex("(show me |( tasks|exercises) java)", RegexOptions.IgnoreCase),
                 Process: delegate(Match match, ChatSessionInterface session) {
-                    return "Java Courses: \n" + "-------------------\n" + "1. Knowing Java\n" + "Classes\n" +
-                        "2.Pro tips Java\n" + "3.Collections and Generics\n" + "Reflection & Persistence\n" + "Threads\n";
+                    return "Java Courses: \n" + "-------------------\n" + "1.Knowing Java\n" + "2.Classes\n" +
+                        "3.Pro tips Java\n" + "4.Collections and Generics\n" + "5.Reflection & Persistence\n" + "6.Threads\n";
                 }
             ),
 
@@ -50,17 +50,28 @@ namespace QXS.ChatBot.Rules
                        "gettask", 40, new Regex("give (me task|task)",
                            RegexOptions.IgnoreCase),
                        
-                       new string[] {"your task is begginer",
-                           "your task is intermediate",
-                           "your task is easy" }
+                       new string[] {"Check 1.Knowing Java",
+                           "Check 1.Knowing Java",
+                           "Check 2.Classe",
+                           "Check 3.Pro tips Java",
+                           "Check 4.Collections and Generics",
+                           "Check 5.Reflection & Persistence",
+                           "Check 6.Threads"
+                       }
                        ),
-                //new BotRule(
-                //    Name: "bestframeworks",
-                //    Weight: 10,
-                //    MessagePattern: new Regex("tell(me|)")
+
+                new BotRule(
+                    Name: "learningmaterial",
+                    Weight: 10,
+                    MessagePattern: new Regex("where(can i|should i)|learn ", RegexOptions.IgnoreCase),
+                    Process: delegate(Match match, ChatSessionInterface session)
+                    {
+                        return "Pluralsight \n Udemy \n CodeAcademy";
+                    }
+                    ),
 
 
-                    
+
 
             };
     }
