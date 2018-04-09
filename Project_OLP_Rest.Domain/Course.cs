@@ -11,14 +11,14 @@ namespace Project_OLP_Rest.Domain
         public string Description { get; set; }
      
         //M to M
-        
         public List<GroupCourse> GroupCourses { get; set; }
-
         public List<TeacherCourse> TeacherCourses { get; set; }
 
         //O to M
-        
         public List<Module> Modules { get; set; }
 
+        //One to one
+        public int ChatBotId { get; set; }
+        public ChatBot ChatBot { get; set; }
     }
 }

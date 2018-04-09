@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Project_OLP_Rest.Data.Services
 {
-    public class StudentService : GenericService<Student>
+    public class StudentService : GenericService<Student>, IStudentService
     {
         public StudentService(OLP_Context context) : base(context)
         {
