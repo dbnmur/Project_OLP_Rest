@@ -57,7 +57,7 @@ namespace QXS.ChatBot.Rules
                         "Dependency Heaven\n";
                 }
             ),
-
+            // Hello World
             new BotRule(
                 Name: "selecthelloworldexcersice",
                 Weight: 10,
@@ -68,7 +68,7 @@ namespace QXS.ChatBot.Rules
             ),
 
             new BotRule(
-                Name: "selecthelloworldexcersicehint",
+                Name: "helloworldexcersicehint",
                 Weight: 10,
                 MessagePattern: new Regex("(hello world hint|(give me hello world|hw) hint)", RegexOptions.IgnoreCase),
                 Process: delegate(Match match, ChatSessionInterface session) {
@@ -82,6 +82,34 @@ namespace QXS.ChatBot.Rules
                     "Read more here: http://php.net/manual/en/language.basic-syntax.phptags.php The second line is the instruction to print out some text.";
                 }
             ),
+            //Baby-Steps 
+                new BotRule(
+                Name: "selectbabystepsexcersice",
+                Weight: 10,
+                MessagePattern: new Regex("(baby-steps|baby steps|(give me baby steps|bs|give me baby-steps) task)", RegexOptions.IgnoreCase),
+                Process: delegate(Match match, ChatSessionInterface session) {
+                    return "Write a program that accepts one or more numbers as command-line arguments " +
+                    "and prints the sum of those numbers to the console (stdout).";
+                }
+            ),
+
+            new BotRule(
+                Name: "babystepsexcersicehint",
+                Weight: 10,
+                MessagePattern: new Regex("(baby-steps hint|baby steps hint|(give me baby steps|bs|give me baby-steps) hint)", RegexOptions.IgnoreCase),
+                Process: delegate(Match match, ChatSessionInterface session) {
+                    return "HINTS:\n" +
+                    "You can access command-line arguments via the global $argv array.\n" +
+                    "To get started, write a program that simply contains:\n" +
+                    "\nvar_dump($argv);\n\n" +
+                    "Run it with php program.php and some numbers as arguments. e.g:\n\n" +
+                    "$ php program.php 1 2 3\n\n" +
+                    "You'll need to think about how to loop through the number of arguments so you can output just their sum. " +
+                    "The first element of the $argv array is always the name of your script. eg program.php, " +
+                    "so you need to start at the 2nd element (index 1), adding each item to the total until you reach the end of the array.";
+                }
+            ),
+            //
         };
     }
 }
