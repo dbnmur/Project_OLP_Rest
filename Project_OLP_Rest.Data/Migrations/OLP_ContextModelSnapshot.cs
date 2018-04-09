@@ -3,8 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore.Storage.Internal;
 using Microsoft.EntityFrameworkCore.ValueGeneration;
 using Project_OLP_Rest.Data;
 using System;
@@ -21,16 +19,49 @@ namespace Project_OLP_Rest.Data.Migrations
                 .HasAnnotation("ProductVersion", "2.0.2-rtm-10011")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Project_OLP_Rest.Domain.ChatBot", b =>
+                {
+                    b.Property<int>("ChatBotId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("ChatBotId");
+
+                    b.ToTable("ChatBots");
+                });
+
+            modelBuilder.Entity("Project_OLP_Rest.Domain.ChatSession", b =>
+                {
+                    b.Property<Guid>("ChatSessionId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("ChatBotId");
+
+                    b.Property<string>("Data");
+
+                    b.HasKey("ChatSessionId");
+
+                    b.HasIndex("ChatBotId");
+
+                    b.ToTable("ChatSessions");
+                });
+
             modelBuilder.Entity("Project_OLP_Rest.Domain.Course", b =>
                 {
                     b.Property<int>("CourseId")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<int>("ChatBotId");
 
                     b.Property<string>("Description");
 
                     b.Property<string>("Name");
 
                     b.HasKey("CourseId");
+
+                    b.HasIndex("ChatBotId")
+                        .IsUnique();
 
                     b.ToTable("Courses");
                 });
@@ -155,6 +186,22 @@ namespace Project_OLP_Rest.Data.Migrations
                     b.ToTable("Teacher");
 
                     b.HasDiscriminator().HasValue("Teacher");
+                });
+
+            modelBuilder.Entity("Project_OLP_Rest.Domain.ChatSession", b =>
+                {
+                    b.HasOne("Project_OLP_Rest.Domain.ChatBot", "ChatBot")
+                        .WithMany("ChatSessions")
+                        .HasForeignKey("ChatBotId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Project_OLP_Rest.Domain.Course", b =>
+                {
+                    b.HasOne("Project_OLP_Rest.Domain.ChatBot", "ChatBot")
+                        .WithOne("Course")
+                        .HasForeignKey("Project_OLP_Rest.Domain.Course", "ChatBotId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Project_OLP_Rest.Domain.GroupCourse", b =>
