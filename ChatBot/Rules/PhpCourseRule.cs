@@ -58,6 +58,30 @@ namespace QXS.ChatBot.Rules
                 }
             ),
 
+            new BotRule(
+                Name: "selecthelloworldexcersice",
+                Weight: 10,
+                MessagePattern: new Regex("(hello world|(give me hello world|hw) task)", RegexOptions.IgnoreCase),
+                Process: delegate(Match match, ChatSessionInterface session) {
+                    return "Write a program that prints the text \"Hello World\" to the console (stdout).";
+                }
+            ),
+
+            new BotRule(
+                Name: "selecthelloworldexcersicehint",
+                Weight: 10,
+                MessagePattern: new Regex("(hello world hint|(give me hello world|hw) hint)", RegexOptions.IgnoreCase),
+                Process: delegate(Match match, ChatSessionInterface session) {
+                    return "HINTS:\n" +
+                    "To make a PHP program, create a new file with a .php extension and start writing PHP! " +
+                    "Execute your program by running it with the php command. e.g.:\n" +
+                    "\n$ php program.php\n\n" +
+                    "You can write to the console from a PHP program with the following code" +
+                    "\n\n<?php \n echo \"text\"\n" +
+                    "\n The first line tells the PHP to interpret the code following it. It is required before any PHP code is written." +
+                    "Read more here: http://php.net/manual/en/language.basic-syntax.phptags.php The second line is the instruction to print out some text.";
+                }
+            ),
         };
     }
 }

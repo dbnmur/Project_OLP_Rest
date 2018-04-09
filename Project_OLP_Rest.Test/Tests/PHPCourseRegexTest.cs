@@ -60,5 +60,36 @@ namespace Project_OLP_Rest.Test.Tests
 
             Console.WriteLine(PHPChatBot.FindAnswer(session, Message));
         }
+
+        [TestMethod]
+        public void PHPgetHelloWorldTask()
+        {
+            CreatePHPBot();
+            string Message = "give me hello world task";
+
+            ChatSessionInterface session = new RestChatSession();
+            Assert.AreEqual(PHPChatBot.FindAnswer(session, Message),
+                "Write a program that prints the text \"Hello World\" to the console (stdout).");
+
+            Console.WriteLine(PHPChatBot.FindAnswer(session, Message));
+        }
+
+        [TestMethod]
+        public void PHPgetHelloWorldTaskHint()
+        {
+            CreatePHPBot();
+            string Message = "hw hint";
+            ChatSessionInterface session = new RestChatSession();
+            Assert.AreEqual(PHPChatBot.FindAnswer(session, Message), "HINTS:\n" +
+                    "To make a PHP program, create a new file with a .php extension and start writing PHP! " +
+                    "Execute your program by running it with the php command. e.g.:\n" +
+                    "\n$ php program.php\n\n" +
+                    "You can write to the console from a PHP program with the following code" +
+                    "\n\n<?php \n echo \"text\"\n" +
+                    "\n The first line tells the PHP to interpret the code following it. It is required before any PHP code is written." +
+                    "Read more here: http://php.net/manual/en/language.basic-syntax.phptags.php The second line is the instruction to print out some text.");
+
+            Console.WriteLine(PHPChatBot.FindAnswer(session, Message));
+        }
     }
 }
