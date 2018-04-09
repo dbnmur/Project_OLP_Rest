@@ -9,7 +9,6 @@ namespace QXS.ChatBot.Rules
 {
     public class JavaCourseRules
     {
-
         public List<BotRule> createJavaCourseRules = new List<BotRule>()
         {
                  new BotRule(
@@ -33,11 +32,20 @@ namespace QXS.ChatBot.Rules
                         }
                         if (match.Value.ToLower() == "what course")
                         {
-                            return "course is " + session.SessionStorage.Values["CourseName"];
+                            return "Course is " + session.SessionStorage.Values["CourseName"];
                         }
                         return "Youre in " + session.SessionStorage.Values["CourseName"];
                     }
                 ),
+                   new RandomAnswersBotRule(
+                       "getfeeling", 40, new Regex("give (me task|task)",
+                           RegexOptions.IgnoreCase),
+                       
+                       new string[] {"your task is begginer",
+                           "your task is intermediate",
+                           "your task is easy" }
+                       ),
+
             };
     }
 }
