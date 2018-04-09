@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QXS.ChatBot;
+using QXS.ChatBot.ChatSessions;
 
 namespace Project_OLP_Rest.Test.Tests
 {
@@ -123,16 +124,22 @@ namespace Project_OLP_Rest.Test.Tests
                 )
             };
         private RestChatBot chatBot;
-        
 
         [TestMethod]
         public void CreateBot() => chatBot = new RestChatBot(botRules);
 
+        [TestMethod]
         public void BotGreetCMD_Test()
         {
+            CreateBot();
+            string Message = "Hi";
+            
+            ChatSessionInterface session = new RestChatSession();
+            
+            Console.WriteLine(chatBot.FindAnswer(session, Message));
             
         }
-
+        
 
     }
 }
