@@ -34,9 +34,30 @@ namespace QXS.ChatBot.Rules
                     {
                         return "course is " + session.SessionStorage.Values["CourseName"];
                     }
-                    return "Youre in " + session.SessionStorage.Values["CourseName"];
+                    return "You are in " + session.SessionStorage.Values["CourseName"];
                 }
             ),
+
+            new BotRule(
+                Name: "showexcersices",
+                Weight: 10,
+                MessagePattern: new Regex("(show excersices|(teach me|give me tasks) php)", RegexOptions.IgnoreCase),
+                Process: delegate(Match match, ChatSessionInterface session) {
+                    if (match.Value.ToLower() == "teach me php")
+                        {
+                            return "Choose excersise from list bellow\n\n" +
+                            "PHP EXCERCISES: \n" + "-------------------\n" + "Hello World\n" + "Baby Steps\n" +
+                            "My First IO\n" + "Filtered LS\n" + "Concerned about Separation?\n" + "Array We Go!\n" +
+                            "Exceptional Coding\n" + "Database Read\n" + "Time server\n" + "HTTP JSON API\n" +
+                            "Dependency Heaven\n";
+                        }
+                    return "PHP EXCERCISES: \n" + "-------------------\n" + "Hello World\n" + "Baby Steps\n" +
+                        "My First IO\n" + "Filtered LS\n" + "Concerned about Separation?\n" + "Array We Go!\n" +
+                        "Exceptional Coding\n" + "Database Read\n" + "Time server\n" + "HTTP JSON API\n" +
+                        "Dependency Heaven\n";
+                }
+            ),
+
         };
     }
 }
