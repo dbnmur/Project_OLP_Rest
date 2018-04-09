@@ -100,7 +100,7 @@ namespace QXS.ChatBot.Rules
                     Weight: 1,
                     MessagePattern: new Regex(".*", RegexOptions.IgnoreCase),
                     Process: delegate (Match match, ChatSessionInterface session) {
-                        string answer = "well, i have to think about that";
+                        string answer = "sorry what ?";
 
                         if (session.SessionStorage.Values.ContainsKey("UserName"))
                         {
