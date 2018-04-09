@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace QXS.ChatBot.Rules
 {
-    public class PhpCourseRule
+    public class PHPCourseRule
     {
-        public List<BotRule> PHPCourseRule = new List<BotRule>()
+        public List<BotRule> CourseRule = new List<BotRule>()
         {
             new BotRule(
                 Name: "setcoursename",

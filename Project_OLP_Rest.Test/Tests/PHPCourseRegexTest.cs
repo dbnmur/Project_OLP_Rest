@@ -13,10 +13,10 @@ namespace Project_OLP_Rest.Test.Tests
     {
         private RestChatBot PHPChatBot;
 
-        PhpCourseRule phpCourseRule = new PhpCourseRule();
+        PHPCourseRule phpCourseRule = new PHPCourseRule();
 
         [TestMethod]
-        public void CreatePHPBot() => PHPChatBot = new RestChatBot(phpCourseRule.PHPCourseRules);
+        public void CreatePHPBot() => PHPChatBot = new RestChatBot(phpCourseRule.CourseRule);
 
         [TestMethod]
         public void PHPCourseNameTest()
@@ -28,7 +28,6 @@ namespace Project_OLP_Rest.Test.Tests
             Assert.AreEqual(PHPChatBot.FindAnswer(session, Message), "I do not know course name");
 
             Console.WriteLine(PHPChatBot.FindAnswer(session, Message));
-
         }
     }
 }
