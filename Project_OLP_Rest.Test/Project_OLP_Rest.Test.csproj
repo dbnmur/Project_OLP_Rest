@@ -119,6 +119,7 @@
     <Compile Include="Tests\GroupTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\JavaCourseRegexTest.cs" />
+    <Compile Include="Tests\PHPCourseRegexTest.cs" />
     <Compile Include="Tests\SeederManagerTest.cs" />
     <Compile Include="Tests\Serialization\SessionStorageTest.cs" />
     <Compile Include="Tests\TeacherCourseTest.cs" />
