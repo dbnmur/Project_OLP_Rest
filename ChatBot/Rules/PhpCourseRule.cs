@@ -71,7 +71,7 @@ namespace QXS.ChatBot.Rules
 
             new BotRule(
                 Name: "helloworldexcersicehint",
-                Weight: 10,
+                Weight: 11,
                 MessagePattern: new Regex("(hello world hint|(give me hello world|hw) hint)", RegexOptions.IgnoreCase),
                 Process: delegate(Match match, ChatSessionInterface session) {
                     return "HINTS:\n" +
@@ -99,7 +99,7 @@ namespace QXS.ChatBot.Rules
 
             new BotRule(
                 Name: "babystepsexcersicehint",
-                Weight: 10,
+                Weight: 11,
                 MessagePattern: new Regex("(baby-steps hint|baby steps hint|(give me baby steps|bs|give me baby-steps) hint)", RegexOptions.IgnoreCase),
                 Process: delegate(Match match, ChatSessionInterface session) {
                     return "HINTS:\n" +
@@ -129,7 +129,7 @@ namespace QXS.ChatBot.Rules
 
             new BotRule(
                 Name: "myfirstioexcersicehint",
-                Weight: 10,
+                Weight: 11,
                 MessagePattern: new Regex("(my-first-io hint|my first io hint|(give me my first io|mfio|give me my-first-io) hint)", RegexOptions.IgnoreCase),
                 Process: delegate(Match match, ChatSessionInterface session) {
                     return "HINTS:\n" +
@@ -140,6 +140,40 @@ namespace QXS.ChatBot.Rules
                     "here: http://php.net/manual/en/function.file-get-contents.php \n\n" +
                     "If you're looking for an easy way to count the number of newlines in a string, recall the PHP " +
                     "function substr_count can be used to count the number of substring occurrences.";
+                }
+            ),
+
+            // Filter-ls
+
+                new BotRule(
+                Name: "selectfilterlsexcersice",
+                Weight: 10,
+                MessagePattern: new Regex("(filter-ls|filter ls|(give me filter ls|fls|give me filter-ls) task)", RegexOptions.IgnoreCase),
+                Process: delegate(Match match, ChatSessionInterface session) {
+                    return "Create a program that prints a list of files in a given directory, filtered by the extension of the files. " +
+                    "You will be provided a directory name as the first argument to your program (e.g. '/path/to/dir/') and a file" +
+                    " extension to filter by as the second argument.\n\n" +
+                    "For example, if you get 'txt' as the second argument then you will need to filter the list to only files that end with .txt. " +
+                    "Note that the second argument will not come prefixed with a '.'.\n\n" +
+                    "The list of files should be printed to the console, one file per line.";
+                }
+            ),
+
+            new BotRule(
+                Name: "filterlsexcersicehint",
+                Weight: 11,
+                MessagePattern: new Regex("(filter-ls hint|filter ls hint|(give me filter ls|fls|give me filter-ls) hint)", RegexOptions.IgnoreCase),
+                Process: delegate(Match match, ChatSessionInterface session) {
+                    return "HINTS:\n" +
+                    "The DirectoryIterator class takes a pathname as its first argument." +
+                    " Using an iterator in a foreach loop will provide you with a SplFileInfo object for each file.\n\n" +
+                    "<?php \n" +
+                    "foreach (new DirectoryIterator('/some/path') as $file) {}\n\n" +
+                    "Documentation on the SplFileInfo class can be found by pointing your browser here:\n\n" +
+                    "http://php.net/manual/en/class.splfileinfo.php \n\n" +
+                    "You may also find SplFileInfo's getExtension() method helpful \n\n" +
+                    "Documentation on the getExtension() method can be found by pointing " +
+                    "your browser here: http://php.net/manual/en/splfileinfo.getextension.php";
                 }
             ),
         };

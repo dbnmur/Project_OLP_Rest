@@ -29,7 +29,7 @@ namespace Project_OLP_Rest.Test.Tests
 
             Console.WriteLine(PHPChatBot.FindAnswer(session, Message));
         }
-        
+
         [TestMethod]
         public void PHPgetExercisesListTest()
         {
@@ -166,6 +166,49 @@ namespace Project_OLP_Rest.Test.Tests
                     "here: http://php.net/manual/en/function.file-get-contents.php \n\n" +
                     "If you're looking for an easy way to count the number of newlines in a string, recall the PHP " +
                     "function substr_count can be used to count the number of substring occurrences."
+                );
+
+            Console.WriteLine(PHPChatBot.FindAnswer(session, Message));
+        }
+
+        // Filter-ls
+
+        [TestMethod]
+        public void PHPgetFilterLSTask()
+        {
+            CreatePHPBot();
+            string Message = "fls task";
+
+            ChatSessionInterface session = new RestChatSession();
+            Assert.AreEqual(PHPChatBot.FindAnswer(session, Message),
+                    "Create a program that prints a list of files in a given directory, filtered by the extension of the files. " +
+                    "You will be provided a directory name as the first argument to your program (e.g. '/path/to/dir/') and a file" +
+                    " extension to filter by as the second argument.\n\n" +
+                    "For example, if you get 'txt' as the second argument then you will need to filter the list to only files that end with .txt. " +
+                    "Note that the second argument will not come prefixed with a '.'.\n\n" +
+                    "The list of files should be printed to the console, one file per line."
+                );
+
+            Console.WriteLine(PHPChatBot.FindAnswer(session, Message));
+        }
+
+        [TestMethod]
+        public void PHPgeFilterLSTaskHint()
+        {
+            CreatePHPBot();
+            string Message = "filter ls hint";
+
+            ChatSessionInterface session = new RestChatSession();
+            Assert.AreEqual(PHPChatBot.FindAnswer(session, Message), "HINTS:\n" +
+                    "The DirectoryIterator class takes a pathname as its first argument." +
+                    " Using an iterator in a foreach loop will provide you with a SplFileInfo object for each file.\n\n" +
+                    "<?php \n" +
+                    "foreach (new DirectoryIterator('/some/path') as $file) {}\n\n" +
+                    "Documentation on the SplFileInfo class can be found by pointing your browser here:\n\n" +
+                    "http://php.net/manual/en/class.splfileinfo.php \n\n" +
+                    "You may also find SplFileInfo's getExtension() method helpful \n\n" +
+                    "Documentation on the getExtension() method can be found by pointing " +
+                    "your browser here: http://php.net/manual/en/splfileinfo.getextension.php"
                 );
 
             Console.WriteLine(PHPChatBot.FindAnswer(session, Message));
