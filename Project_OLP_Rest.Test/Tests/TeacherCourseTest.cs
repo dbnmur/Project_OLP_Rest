@@ -57,12 +57,13 @@ namespace Project_OLP_Rest.Test.Tests
                 context.Add(teacherCourse);
                 context.SaveChanges();
 
-                Domain.TeacherCourse fethedTeacherCourse = context.TeacherCourses.Find();
+                Domain.TeacherCourse fecthedTeacherCourse = context.TeacherCourses.FirstOrDefaultAsync().Result;
 
-                Assert.AreEqual(fethedTeacherCourse.Teacher, teacher);
+                Assert.AreEqual(fecthedTeacherCourse.Teacher.UserId, teacher.UserId);
 
-                Assert.AreEqual(teacherCourse.Teacher, teacher);
-                Assert.AreEqual(teacherCourse.Course, course);
+                fecthedCourse = courseService.FindBy(x => x.Name == course.Name);
+
+                Assert.AreEqual(fecthedCourse.TeacherCourses.Count, 1);
 
                 //Assert.AreEqual(teacher.TeacherCourses, teacherCourse.Course);
             }
