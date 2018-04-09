@@ -60,6 +60,8 @@ namespace Project_OLP_Rest
             services.AddTransient<IGroupService, GroupService>();
             services.AddTransient<ICourseService, CourseService>();
             services.AddTransient<IModuleService, ModuleService>();
+            services.AddTransient<IChatBotService, ChatBotService>();
+            services.AddTransient<IChatSessionService, ChatSessionService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
