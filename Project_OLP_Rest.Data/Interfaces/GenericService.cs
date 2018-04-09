@@ -39,5 +39,10 @@ namespace Project_OLP_Rest.Data.Interfaces
             _entities.Update(entity);
             _context.SaveChanges();
         }
+
+        public bool Exists(Expression<Func<T, bool>> predicate)
+        {
+            return _entities.AnyAsync(predicate).Result;
+        }
     }
 }

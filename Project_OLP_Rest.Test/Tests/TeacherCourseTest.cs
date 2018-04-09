@@ -10,7 +10,6 @@ namespace Project_OLP_Rest.Test.Tests
     [TestClass]
     public class TeacherCourseTest
     {
-        [Ignore]
         [TestMethod]
         public void AddTeacher_ToCourse_Test()
         {

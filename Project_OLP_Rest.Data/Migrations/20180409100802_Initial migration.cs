@@ -40,7 +40,8 @@ namespace Project_OLP_Rest.Data.Migrations
                 name: "ChatSessions",
                 columns: table => new
                 {
-                    ChatSessionId = table.Column<Guid>(nullable: false),
+                    ChatSessionId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ChatBotId = table.Column<int>(nullable: false),
                     Data = table.Column<string>(nullable: true)
                 },

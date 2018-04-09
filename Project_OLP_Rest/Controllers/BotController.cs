@@ -5,6 +5,8 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using Project_OLP_Rest.Data.Interfaces;
 using QXS.ChatBot;
 using QXS.ChatBot.ChatSessions;
 
@@ -14,6 +16,9 @@ namespace Project_OLP_Rest.Controllers
     [Route("api/Bot")]
     public class BotController : Controller
     {
+        private readonly IChatBotService _chatBotService;
+        private readonly IChatSessionService _chatSessionService;
+
         public static List<BotRule> dummyRules = new List<BotRule>()
         {
                 new PowershellBotRule("pstest", 10, new Regex("powershell"), @" ( ""Hi from PowerShell "" + $PSVersionTable.PSVersion) "),
@@ -128,11 +133,19 @@ namespace Project_OLP_Rest.Controllers
             };
         private static Dictionary<string, ChatSessionInterface> chatSessions = new Dictionary<string, ChatSessionInterface>();
         private static List<string> sessionIds = new List<string>();
-        private static RestChatBot chatBot;
+        private static RestChatBot _chatBot;
 
-        public BotController()
+        /// <summary>
+        /// Chatbot name IMPORTANT
+        /// </summary>
+        private string _chatBotName = "TestChatBot";
+
+        public BotController(IChatBotService chatBotService, IChatSessionService chatSessionService)
         {
-            chatBot = new RestChatBot(dummyRules);
+            _chatBot = new RestChatBot(dummyRules);
+            _chatBotService = chatBotService;
+            _chatSessionService = chatSessionService;
+
         }
 
         public class ChatRequestBody
@@ -144,20 +157,42 @@ namespace Project_OLP_Rest.Controllers
         public JsonResult Chat([FromBody]ChatRequestBody body, [FromHeader]string sessionId)
         {
             ChatSessionInterface currentChatSession = null;
-            if (String.IsNullOrEmpty(sessionId) || !chatSessions.ContainsKey(sessionId))
+            Domain.ChatBot chatBot = GetChatBot();
+            Domain.ChatSession chatSession = null;
+            if (String.IsNullOrEmpty(sessionId))
             {
-                sessionId = DateTime.Now.ToString();
-                chatSessions.Add(sessionId, new RestChatSession());
-                currentChatSession = chatSessions[sessionId];
+                chatSession = _chatSessionService.Create(new Domain.ChatSession() { ChatBotId = chatBot.ChatBotId });
+                currentChatSession = new RestChatSession();
             }
             else
             {
-                currentChatSession = chatSessions[sessionId];
-            }
+                if (_chatSessionService.Exists(session => session.ChatSessionId == Int32.Parse(sessionId)))
+                    chatSession = _chatSessionService.FindBy(session => session.ChatSessionId == Int32.Parse(sessionId));
 
-            string chatbotResponse = chatBot.FindAnswer(currentChatSession, body.Message);
+                else
+                    chatSession = _chatSessionService.Create(new Domain.ChatSession() { ChatBotId = chatBot.ChatBotId });
+
+                Dictionary<string, string> sessionData = JsonConvert.DeserializeObject<Dictionary<string, string>>(chatSession.Data);
+                currentChatSession = new RestChatSession(sessionData);
+            }
+            string chatbotResponse = _chatBot.FindAnswer(currentChatSession, body.Message);
 
             return Json(new { sessionId = sessionId, chatbotResponse = chatbotResponse });
+        }
+
+        /// <summary>
+        /// Fetches chatbot or creates if it doesn't exist
+        /// </summary>
+        /// <returns></returns>
+        private Domain.ChatBot GetChatBot()
+        {
+            Domain.ChatBot chatBotModel = null;
+            if (!_chatBotService.Exists(cb => cb.Name == this._chatBotName))
+                chatBotModel = _chatBotService.Create(new Domain.ChatBot { Name = "Example Bot" });
+            else
+                chatBotModel = _chatBotService.FindBy(cb => cb.Name == this._chatBotName);
+
+            return chatBotModel;
         }
     }
 }

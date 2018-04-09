@@ -22,7 +22,7 @@ namespace Project_OLP_Rest.Test.Tests
 
         
         [TestMethod]
-        public void BotGreetCMD_Test()
+        public void BotTest_Greeting()
         {
             chatBot = new RestChatBot(GreetingBotRules);
             string Message = "hi";
@@ -64,7 +64,7 @@ namespace Project_OLP_Rest.Test.Tests
         }
 
         [TestMethod]
-        public void BotGoodByeCMD_Test()
+        public void BotTest_Goodbye()
         {
             chatBot = new RestChatBot(GoodByeBotRules);
             string Message = "ate";
@@ -77,16 +77,27 @@ namespace Project_OLP_Rest.Test.Tests
         }
 
         [TestMethod]
-        public void BotErrorCMD_Test()
+        public void BotTest_HaveError()
         {
-            chatBot = new RestChatBot(GoodByeBotRules);
-            string Message = "I have error";
+            chatBot = new RestChatBot(ErrorBotRules);
+            string Message = "I have exception";
 
             ChatSessionInterface session = new RestChatSession();
             string answer = chatBot.FindAnswer(session, Message);
 
-            Assert.IsTrue(answer.Contains( new[] { "what kind of error ?", "whats wrong pal ?", "whats seems to be a problem ?" }));
+            Assert.AreEqual(answer, "Whats the problem ?");
+        }
 
+        [TestMethod]
+        public void BotTest_FindSolutionForError()
+        {
+            chatBot = new RestChatBot(ErrorBotRules);
+            string Message = "find the solution to this error";
+
+            ChatSessionInterface session = new RestChatSession();
+            string answer = chatBot.FindAnswer(session, Message);
+
+            Assert.AreEqual(answer, "try this.  google.com");
         }
 
     }
