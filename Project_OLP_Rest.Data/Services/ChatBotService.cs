@@ -2,12 +2,13 @@
 using Project_OLP_Rest.Domain;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace Project_OLP_Rest.Data.Services
 {
-    public class RecordService : GenericService<Record>, IRecordService
+    public class ChatBotService : GenericService<ChatBot>, IChatBotService
     {
-        public RecordService(OLP_Context context) : base(context) { }
+        public ChatBotService(OLP_Context context) : base(context) { }
     }
 }

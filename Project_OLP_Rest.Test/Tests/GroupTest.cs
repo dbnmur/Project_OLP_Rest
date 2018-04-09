@@ -35,11 +35,7 @@ namespace Project_OLP_Rest.Test
                 Domain.Group fecthedGroup = service.FindBy(x => x.Name == group.Name);
                 Assert.AreEqual(fecthedGroup.Name, group.Name);
                 Console.Write("Group was : " + group.Name + " successfully added");
-
             }
-
-
         }
-
     }
 }

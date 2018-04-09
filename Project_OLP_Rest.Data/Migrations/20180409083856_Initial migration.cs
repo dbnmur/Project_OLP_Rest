@@ -5,24 +5,21 @@ using System.Collections.Generic;
 
 namespace Project_OLP_Rest.Data.Migrations
 {
-    public partial class initial : Migration
+    public partial class Initialmigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Courses",
+                name: "ChatBots",
                 columns: table => new
                 {
-                    CourseId = table.Column<int>(nullable: false)
+                    ChatBotId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Description = table.Column<string>(nullable: true),
-                    GroupId = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
-                    OwnerUserID = table.Column<int>(nullable: false)
+                    Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Courses", x => x.CourseId);
+                    table.PrimaryKey("PK_ChatBots", x => x.ChatBotId);
                 });
 
             migrationBuilder.CreateTable(
@@ -40,24 +37,66 @@ namespace Project_OLP_Rest.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Modules",
+                name: "ChatSessions",
                 columns: table => new
                 {
-                    ModuleId = table.Column<int>(nullable: false)
+                    ChatSessionId = table.Column<Guid>(nullable: false),
+                    ChatBotId = table.Column<int>(nullable: false),
+                    Data = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ChatSessions", x => x.ChatSessionId);
+                    table.ForeignKey(
+                        name: "FK_ChatSessions_ChatBots_ChatBotId",
+                        column: x => x.ChatBotId,
+                        principalTable: "ChatBots",
+                        principalColumn: "ChatBotId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Courses",
+                columns: table => new
+                {
+                    CourseId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    CourseId = table.Column<int>(nullable: true),
+                    ChatBotId = table.Column<int>(nullable: false),
                     Description = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Modules", x => x.ModuleId);
+                    table.PrimaryKey("PK_Courses", x => x.CourseId);
                     table.ForeignKey(
-                        name: "FK_Modules_Courses_CourseId",
-                        column: x => x.CourseId,
-                        principalTable: "Courses",
-                        principalColumn: "CourseId",
-                        onDelete: ReferentialAction.Restrict);
+                        name: "FK_Courses_ChatBots_ChatBotId",
+                        column: x => x.ChatBotId,
+                        principalTable: "ChatBots",
+                        principalColumn: "ChatBotId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    GroupId = table.Column<int>(nullable: true),
+                    UserId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Discriminator = table.Column<string>(nullable: false),
+                    Email = table.Column<string>(nullable: true),
+                    FirstName = table.Column<string>(nullable: true),
+                    LastName = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.UserId);
+                    table.ForeignKey(
+                        name: "FK_Users_Groups_GroupId",
+                        column: x => x.GroupId,
+                        principalTable: "Groups",
+                        principalColumn: "GroupId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -85,26 +124,48 @@ namespace Project_OLP_Rest.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Users",
+                name: "Modules",
                 columns: table => new
                 {
-                    GroupId = table.Column<int>(nullable: true),
-                    UserId = table.Column<int>(nullable: false)
+                    ModuleId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Discriminator = table.Column<string>(nullable: false),
-                    Email = table.Column<string>(nullable: true),
-                    FirstName = table.Column<string>(nullable: true),
-                    LastName = table.Column<string>(nullable: true)
+                    CourseId = table.Column<int>(nullable: false),
+                    Description = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.UserId);
+                    table.PrimaryKey("PK_Modules", x => x.ModuleId);
                     table.ForeignKey(
-                        name: "FK_Users_Groups_GroupId",
-                        column: x => x.GroupId,
-                        principalTable: "Groups",
-                        principalColumn: "GroupId",
-                        onDelete: ReferentialAction.Restrict);
+                        name: "FK_Modules_Courses_CourseId",
+                        column: x => x.CourseId,
+                        principalTable: "Courses",
+                        principalColumn: "CourseId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TeacherCourses",
+                columns: table => new
+                {
+                    CourseId = table.Column<int>(nullable: false),
+                    TeacherId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TeacherCourses", x => new { x.CourseId, x.TeacherId });
+                    table.ForeignKey(
+                        name: "FK_TeacherCourses_Courses_CourseId",
+                        column: x => x.CourseId,
+                        principalTable: "Courses",
+                        principalColumn: "CourseId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_TeacherCourses_Users_TeacherId",
+                        column: x => x.TeacherId,
+                        principalTable: "Users",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -114,7 +175,7 @@ namespace Project_OLP_Rest.Data.Migrations
                     RecordId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Description = table.Column<string>(nullable: true),
-                    ModuleId = table.Column<int>(nullable: true),
+                    ModuleId = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     Url = table.Column<string>(nullable: true)
                 },
@@ -126,32 +187,19 @@ namespace Project_OLP_Rest.Data.Migrations
                         column: x => x.ModuleId,
                         principalTable: "Modules",
                         principalColumn: "ModuleId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "TeacherCourse",
-                columns: table => new
-                {
-                    CourseId = table.Column<int>(nullable: false),
-                    TeacherId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TeacherCourse", x => new { x.CourseId, x.TeacherId });
-                    table.ForeignKey(
-                        name: "FK_TeacherCourse_Courses_CourseId",
-                        column: x => x.CourseId,
-                        principalTable: "Courses",
-                        principalColumn: "CourseId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_TeacherCourse_Users_TeacherId",
-                        column: x => x.TeacherId,
-                        principalTable: "Users",
-                        principalColumn: "UserId",
-                        onDelete: ReferentialAction.Cascade);
-                });
+            migrationBuilder.CreateIndex(
+                name: "IX_ChatSessions_ChatBotId",
+                table: "ChatSessions",
+                column: "ChatBotId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Courses_ChatBotId",
+                table: "Courses",
+                column: "ChatBotId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_GroupCourse_CourseId",
@@ -169,8 +217,8 @@ namespace Project_OLP_Rest.Data.Migrations
                 column: "ModuleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TeacherCourse_TeacherId",
-                table: "TeacherCourse",
+                name: "IX_TeacherCourses_TeacherId",
+                table: "TeacherCourses",
                 column: "TeacherId");
 
             migrationBuilder.CreateIndex(
@@ -182,13 +230,16 @@ namespace Project_OLP_Rest.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "ChatSessions");
+
+            migrationBuilder.DropTable(
                 name: "GroupCourse");
 
             migrationBuilder.DropTable(
                 name: "Records");
 
             migrationBuilder.DropTable(
-                name: "TeacherCourse");
+                name: "TeacherCourses");
 
             migrationBuilder.DropTable(
                 name: "Modules");
@@ -201,6 +252,9 @@ namespace Project_OLP_Rest.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Groups");
+
+            migrationBuilder.DropTable(
+                name: "ChatBots");
         }
     }
 }
