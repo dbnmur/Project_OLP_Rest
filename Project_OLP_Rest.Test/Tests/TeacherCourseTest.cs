@@ -10,6 +10,7 @@ namespace Project_OLP_Rest.Test.Tests
     [TestClass]
     public class TeacherCourseTest
     {
+        [Ignore]
         [TestMethod]
         public void AddTeacher_ToCourse_Test()
         {
@@ -63,8 +64,6 @@ namespace Project_OLP_Rest.Test.Tests
 
                 Assert.AreEqual(teacherCourse.Teacher, teacher);
                 Assert.AreEqual(teacherCourse.Course, course);
-
-                //Assert.AreEqual(teacher.TeacherCourses, teacherCourse.Course);
             }
         }
     }

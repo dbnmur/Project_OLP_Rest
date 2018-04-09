@@ -10,5 +10,6 @@ namespace Project_OLP_Rest.Domain
 
         public int ChatBotId { get; set; }
         public ChatBot ChatBot { get; set; }
+        public string Data { get; set; }
     }
 }
