@@ -121,6 +121,7 @@
     <Compile Include="Tests\SeederManagerTest.cs" />
     <Compile Include="Tests\Serialization\SessionStorageTest.cs" />
     <Compile Include="Tests\TeacherCourseTest.cs" />
+    <Compile Include="Tests\RegexTests.cs" />
     <Compile Include="Tests\UserTest.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -129,7 +130,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ChatBot\ChatBot.csproj">
-      <Project>{9ce1c326-a14c-4cac-864a-9465b904c3e2}</Project>
+      <Project>{9CE1C326-A14C-4CAC-864A-9465B904C3E2}</Project>
       <Name>ChatBot</Name>
     </ProjectReference>
     <ProjectReference Include="..\Project_OLP_Rest.Data\Project_OLP_Rest.Data.csproj">

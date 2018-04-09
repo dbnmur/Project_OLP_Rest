@@ -2,6 +2,7 @@
 using System.Text;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using QXS.ChatBot;
 
 namespace Project_OLP_Rest.Test.Tests.ControllerTests
 {
@@ -13,9 +14,7 @@ namespace Project_OLP_Rest.Test.Tests.ControllerTests
     {
         public BotControllerTest()
         {
-            //
-            // TODO: Add constructor logic here
-            //
+            
         }
 
         private TestContext testContextInstance;
