@@ -19,7 +19,7 @@ namespace Project_OLP_Rest.Test.Tests
             // Run the test against one instance of the context
             using (var context = new OLP_Context(options))
             {
-                Domain.Teacher teacher = new Domain.Teacher()
+                Teacher teacher = new Domain.Teacher()
                 {
                     FirstName = "Test Name",
                     LastName = "Test last name",
@@ -29,11 +29,11 @@ namespace Project_OLP_Rest.Test.Tests
                 var teacherService = new TeacherService(context);
                 teacherService.Create(teacher);
 
-                Domain.Teacher fecthedTeacher = teacherService.FindBy(x => x.FirstName == teacher.FirstName);
+                Teacher fecthedTeacher = teacherService.FindBy(x => x.FirstName == teacher.FirstName);
 
                 Assert.AreEqual(fecthedTeacher.FirstName, teacher.FirstName);
 
-                Domain.Course course = new Domain.Course()
+                Course course = new Domain.Course()
                 {
                     Name = "Test course name",
                     Description = "test course desc",
@@ -42,7 +42,7 @@ namespace Project_OLP_Rest.Test.Tests
                 var courseService = new CourseService(context);
                 courseService.Create(course);
 
-                Domain.Course fecthedCourse = courseService.FindBy(x => x.Name == course.Name);
+                Course fecthedCourse = courseService.FindBy(x => x.Name == course.Name);
 
                 Assert.AreEqual(fecthedCourse.Name, course.Name);
 
@@ -57,7 +57,7 @@ namespace Project_OLP_Rest.Test.Tests
                 context.Add(teacherCourse);
                 context.SaveChanges();
 
-                Domain.TeacherCourse fecthedTeacherCourse = context.TeacherCourses.FirstOrDefaultAsync().Result;
+                TeacherCourse fecthedTeacherCourse = context.TeacherCourses.FirstOrDefaultAsync().Result;
 
                 Assert.AreEqual(fecthedTeacherCourse.Teacher.UserId, teacher.UserId);
 
