@@ -31,7 +31,7 @@ namespace Project_OLP_Rest.Controllers
 
         // GET: api/ChatSessions/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetChatSession([FromRoute] Guid id)
+        public async Task<IActionResult> GetChatSession([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
@@ -50,7 +50,7 @@ namespace Project_OLP_Rest.Controllers
 
         // PUT: api/ChatSessions/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutChatSession([FromRoute] Guid id, [FromBody] ChatSession chatSession)
+        public async Task<IActionResult> PutChatSession([FromRoute] int id, [FromBody] ChatSession chatSession)
         {
             if (!ModelState.IsValid)
             {
@@ -97,7 +97,7 @@ namespace Project_OLP_Rest.Controllers
 
         // DELETE: api/ChatSessions/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteChatSession([FromRoute] Guid id)
+        public async Task<IActionResult> DeleteChatSession([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
@@ -115,7 +115,7 @@ namespace Project_OLP_Rest.Controllers
             return Ok(chatSession);
         }
 
-        private bool ChatSessionExists(Guid id)
+        private bool ChatSessionExists(int id)
         {
             return _chatSessionService.Exists(e => e.ChatSessionId == id);
         }

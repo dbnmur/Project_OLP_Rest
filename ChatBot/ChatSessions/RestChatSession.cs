@@ -21,6 +21,11 @@ namespace QXS.ChatBot.ChatSessions
             SessionStorage = new SessionStorage();
         }
 
+        public RestChatSession(Dictionary<string, string> sessionStorageData)
+        {
+            SessionStorage = new SessionStorage(sessionStorageData);
+        }
+
         public void AddResponseToHistory(BotResponse response)
         {
             _responseHistory.Add(response);

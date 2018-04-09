@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.EntityFrameworkCore.Storage.Internal;
 using Microsoft.EntityFrameworkCore.ValueGeneration;
 using Project_OLP_Rest.Data;
 using System;
@@ -33,7 +35,7 @@ namespace Project_OLP_Rest.Data.Migrations
 
             modelBuilder.Entity("Project_OLP_Rest.Domain.ChatSession", b =>
                 {
-                    b.Property<Guid>("ChatSessionId")
+                    b.Property<int>("ChatSessionId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("ChatBotId");
