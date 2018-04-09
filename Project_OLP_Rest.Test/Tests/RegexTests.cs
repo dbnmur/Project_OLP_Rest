@@ -79,14 +79,13 @@ namespace Project_OLP_Rest.Test.Tests
         [TestMethod]
         public void BotErrorCMD_Test()
         {
-            chatBot = new RestChatBot(GoodByeBotRules);
-            string Message = "I have error";
+            chatBot = new RestChatBot(ErrorBotRules);
+            string Message = "I have exception";
 
             ChatSessionInterface session = new RestChatSession();
             string answer = chatBot.FindAnswer(session, Message);
 
-            Assert.IsTrue(answer.Contains( new[] { "what kind of error ?", "whats wrong pal ?", "whats seems to be a problem ?" }));
-
+            Assert.AreEqual(answer, "Whats the problem ?");
         }
 
     }
