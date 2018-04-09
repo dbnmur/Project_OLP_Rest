@@ -6,5 +6,7 @@ using System.Text;
 namespace Project_OLP_Rest.Data.Interfaces
 {
     public interface IChatBotService : IGenericService<ChatBot>
-    { }
+    {
+        IEnumerable<ChatBot> GetAll();
+    }
 }

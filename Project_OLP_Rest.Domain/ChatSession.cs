@@ -6,7 +6,7 @@ namespace Project_OLP_Rest.Domain
 {
     public class ChatSession : Entity
     {
-        public Guid ChatSessionId { get; set; }
+        public int ChatSessionId { get; set; }
 
         public string Data { get; set; }
 

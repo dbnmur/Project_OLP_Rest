@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Project_OLP_Rest.Data;
+using Project_OLP_Rest.Data.Interfaces;
 using Project_OLP_Rest.Domain;
 
 namespace Project_OLP_Rest.Controllers
@@ -14,18 +15,18 @@ namespace Project_OLP_Rest.Controllers
     [Route("api/ChatBots")]
     public class ChatBotsController : Controller
     {
-        private readonly OLP_Context _context;
+        private readonly IChatBotService _chatBotService;
 
-        public ChatBotsController(OLP_Context context)
+        public ChatBotsController(IChatBotService chatBotService)
         {
-            _context = context;
+            _chatBotService = chatBotService;
         }
 
         // GET: api/ChatBots
         [HttpGet]
         public IEnumerable<ChatBot> GetChatBots()
         {
-            return _context.ChatBots;
+            return _chatBotService.GetAll();
         }
 
         // GET: api/ChatBots/5
@@ -37,7 +38,7 @@ namespace Project_OLP_Rest.Controllers
                 return BadRequest(ModelState);
             }
 
-            var chatBot = await _context.ChatBots.SingleOrDefaultAsync(m => m.ChatBotId == id);
+            var chatBot = _chatBotService.FindBy(m => m.ChatBotId == id);
 
             if (chatBot == null)
             {
@@ -61,11 +62,9 @@ namespace Project_OLP_Rest.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(chatBot).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                _chatBotService.Update(chatBot);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -91,8 +90,7 @@ namespace Project_OLP_Rest.Controllers
                 return BadRequest(ModelState);
             }
 
-            _context.ChatBots.Add(chatBot);
-            await _context.SaveChangesAsync();
+            _chatBotService.Create(chatBot);
 
             return CreatedAtAction("GetChatBot", new { id = chatBot.ChatBotId }, chatBot);
         }
@@ -106,21 +104,20 @@ namespace Project_OLP_Rest.Controllers
                 return BadRequest(ModelState);
             }
 
-            var chatBot = await _context.ChatBots.SingleOrDefaultAsync(m => m.ChatBotId == id);
+            var chatBot = _chatBotService.FindBy(m => m.ChatBotId == id);
             if (chatBot == null)
             {
                 return NotFound();
             }
 
-            _context.ChatBots.Remove(chatBot);
-            await _context.SaveChangesAsync();
+            _chatBotService.Delete(chatBot);
 
             return Ok(chatBot);
         }
 
         private bool ChatBotExists(int id)
         {
-            return _context.ChatBots.Any(e => e.ChatBotId == id);
+            return _chatBotService.Exists(e => e.ChatBotId == id);
         }
     }
 }

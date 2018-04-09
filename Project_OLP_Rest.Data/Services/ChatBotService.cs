@@ -2,6 +2,7 @@
 using Project_OLP_Rest.Domain;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 
@@ -10,5 +11,10 @@ namespace Project_OLP_Rest.Data.Services
     public class ChatBotService : GenericService<ChatBot>, IChatBotService
     {
         public ChatBotService(OLP_Context context) : base(context) { }
+
+        public IEnumerable<ChatBot> GetAll()
+        {
+            return _entities.ToList();
+        }
     }
 }

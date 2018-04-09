@@ -12,7 +12,7 @@ using System;
 namespace Project_OLP_Rest.Data.Migrations
 {
     [DbContext(typeof(OLP_Context))]
-    [Migration("20180409083856_Initial migration")]
+    [Migration("20180409100802_Initial migration")]
     partial class Initialmigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -36,7 +36,7 @@ namespace Project_OLP_Rest.Data.Migrations
 
             modelBuilder.Entity("Project_OLP_Rest.Domain.ChatSession", b =>
                 {
-                    b.Property<Guid>("ChatSessionId")
+                    b.Property<int>("ChatSessionId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("ChatBotId");
