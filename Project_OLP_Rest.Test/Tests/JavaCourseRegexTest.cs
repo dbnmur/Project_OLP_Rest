@@ -31,5 +31,29 @@ namespace Project_OLP_Rest.Test.Tests
             Console.WriteLine(javaChatBot.FindAnswer(session, Message));
 
         }
+
+
+        [TestMethod]
+        public void JavaCourseAskTestSucces()
+        {
+            CreateJavaBot();
+            string Message = "Course name is Java Course";
+
+            ChatSessionInterface session = new RestChatSession();
+            Assert.AreEqual(javaChatBot.FindAnswer(session, Message), "Course name now is Java Course");
+
+            Console.WriteLine(javaChatBot.FindAnswer(session, Message));
+
+        }
+        [TestMethod]
+        public void GiveTask()
+        {
+            CreateJavaBot();
+            string Message = "give me task";
+            ChatSessionInterface session = new RestChatSession();
+            Console.WriteLine(javaChatBot.FindAnswer(session, Message));
+
+
+        }
     }
 }

@@ -15,5 +15,11 @@ namespace QXS.ChatBot
             string[] newStack = Stack.ToArray();
             Stack = new Stack<string>(newStack.Skip(Math.Max(0, newStack.Length - elementsToKeep)));
         }
+
+        public SessionStorage() { }
+        public SessionStorage(Dictionary<string, string> data)
+        {
+            Values = data;
+        }
     }
 }
