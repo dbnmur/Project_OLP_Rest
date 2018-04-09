@@ -20,6 +20,15 @@ namespace QXS.ChatBot.Rules
                         return "Course name now is " + session.SessionStorage.Values["CourseName"];
                     }
                 ),
+                 new BotRule(
+                Name: "showexcersices",
+                Weight: 10,
+                MessagePattern: new Regex("(show excersices|(show me|give me tasks) java)", RegexOptions.IgnoreCase),
+                Process: delegate(Match match, ChatSessionInterface session) {
+                    return "Java Courses: \n" + "-------------------\n" + "1. Knowing Java\n" + "Classes\n" +
+                        "2.Pro tips Java\n" + "3.Collections and Generics\n" + "Reflection & Persistence\n" + "Threads\n";
+                }
+            ),
 
                  new BotRule(
                     Name: "getcoursename",
@@ -38,13 +47,20 @@ namespace QXS.ChatBot.Rules
                     }
                 ),
                    new RandomAnswersBotRule(
-                       "getfeeling", 40, new Regex("give (me task|task)",
+                       "gettask", 40, new Regex("give (me task|task)",
                            RegexOptions.IgnoreCase),
                        
                        new string[] {"your task is begginer",
                            "your task is intermediate",
                            "your task is easy" }
                        ),
+                //new BotRule(
+                //    Name: "bestframeworks",
+                //    Weight: 10,
+                //    MessagePattern: new Regex("tell(me|)")
+
+
+                    
 
             };
     }
