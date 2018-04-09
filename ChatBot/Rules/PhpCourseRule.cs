@@ -57,7 +57,9 @@ namespace QXS.ChatBot.Rules
                         "Dependency Heaven\n";
                 }
             ),
+
             // Hello World
+
             new BotRule(
                 Name: "selecthelloworldexcersice",
                 Weight: 10,
@@ -82,7 +84,9 @@ namespace QXS.ChatBot.Rules
                     "Read more here: http://php.net/manual/en/language.basic-syntax.phptags.php The second line is the instruction to print out some text.";
                 }
             ),
+
             //Baby-Steps 
+
                 new BotRule(
                 Name: "selectbabystepsexcersice",
                 Weight: 10,
@@ -109,7 +113,35 @@ namespace QXS.ChatBot.Rules
                     "so you need to start at the 2nd element (index 1), adding each item to the total until you reach the end of the array.";
                 }
             ),
-            //
+
+            // My first IO
+
+            new BotRule(
+                Name: "selectmyfirstioexcersice",
+                Weight: 10,
+                MessagePattern: new Regex("(my-first-io|my first io|(give me my first io|mfio|give me my-first-io) task)", RegexOptions.IgnoreCase),
+                Process: delegate(Match match, ChatSessionInterface session) {
+                    return "Write a program that uses a single filesystem operation to read a file and print the number of newlines (\\n) " +
+                    "it contains to the console (stdout), similar to running cat file | wc -l.\n" +
+                    "The full path to the file to read will be provided as the first command-line argument. You do not need to make your own test file.";
+                }
+            ),
+
+            new BotRule(
+                Name: "myfirstioexcersicehint",
+                Weight: 10,
+                MessagePattern: new Regex("(my-first-io hint|my first io hint|(give me my first io|mfio|give me my-first-io) hint)", RegexOptions.IgnoreCase),
+                Process: delegate(Match match, ChatSessionInterface session) {
+                    return "HINTS:\n" +
+                    "To perform a filesystem operation you can use the global PHP functions.\n\n" +
+                    "To read a file, you'll need to use file_get_contents('/path/to/file'). This method will return" +
+                    " a string containing the complete contents of the file.\n\n" +
+                    "Documentation on the file_get_contents function can be found by pointing your browser " +
+                    "here: http://php.net/manual/en/function.file-get-contents.php \n\n" +
+                    "If you're looking for an easy way to count the number of newlines in a string, recall the PHP " +
+                    "function substr_count can be used to count the number of substring occurrences.";
+                }
+            ),
         };
     }
 }
