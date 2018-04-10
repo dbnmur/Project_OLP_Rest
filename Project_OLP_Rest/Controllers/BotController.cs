@@ -45,7 +45,7 @@ namespace Project_OLP_Rest.Controllers
         [HttpPost]
         public JsonResult Chat([FromBody]ChatRequestBody body, [FromHeader]string sessionId)
         {
-            ChatSessionInterface currentChatSession = null;
+            IRestChatSession currentChatSession = null;
             Domain.ChatBot chatBot = GetChatBot();
             Domain.ChatSession chatSession = null;
             if (String.IsNullOrEmpty(sessionId))
@@ -76,7 +76,7 @@ namespace Project_OLP_Rest.Controllers
             return Json(new { sessionId = sessionId, chatbotResponse = chatbotResponse });
         }
 
-        private void SaveSessionData(ChatSessionInterface session)
+        private void SaveSessionData(IRestChatSession session)
         {
             if (_chatSessionService.Exists(s => s.ChatSessionId == session.Id))
             {
