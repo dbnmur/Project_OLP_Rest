@@ -29,7 +29,25 @@ namespace QXS.ChatBot.Rules
                         return answer;
                     }
 
+                ),
+
+                new BotRule(
+                    Name: "search",
+                    Weight: 41,
+                    MessagePattern: new Regex("(find the (solution|answer|how to| anything|about)(.*) this (error|exception))", RegexOptions.IgnoreCase),
+                    Process: delegate (Match match, ChatSessionInterface session) {
+                        string answer = "try this. "+" google.com";
+
+                        if (session.SessionStorage.Values.ContainsKey("UserName"))
+                        {
+                            answer += ", " + session.SessionStorage.Values["UserName"];
+                        }
+
+                        return answer;
+                    }
+
                 )
+
 
         };
     }

@@ -46,7 +46,7 @@ namespace Project_OLP_Rest.Test.Tests
 
         }
         [TestMethod]
-        public void GiveTask()
+        public void JavaGiveTask()
         {
             CreateJavaBot();
             string Message = "give me task";
@@ -55,5 +55,30 @@ namespace Project_OLP_Rest.Test.Tests
 
 
         }
+        [TestMethod]
+        public void JavaAllCourses()
+        {
+            CreateJavaBot();
+            string Message = "show me tasks";
+            ChatSessionInterface session = new RestChatSession();
+            Console.WriteLine(javaChatBot.FindAnswer(session, Message));
+        }
+        [TestMethod]
+        public void JavaLearning()
+        {
+            CreateJavaBot();
+            string Message = "suggest me java learning sites";
+            ChatSessionInterface session = new RestChatSession();
+            Console.WriteLine(javaChatBot.FindAnswer(session, Message));
+        }
+        [TestMethod]
+        public void JavaFact()
+        {
+            CreateJavaBot();
+            string Message = "tell me interesting fact about java";
+            ChatSessionInterface session = new RestChatSession();
+            Console.WriteLine(javaChatBot.FindAnswer(session, Message));
+        }
+
     }
 }
