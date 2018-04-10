@@ -90,6 +90,7 @@
     <Compile Include="Rules\GoodbyeRules.cs" />
     <Compile Include="Rules\GreetingsRules.cs" />
     <Compile Include="Rules\JavaCourseRules.cs" />
+    <Compile Include="Rules\JokeRules.cs" />
     <Compile Include="Rules\PHPCourseRule.cs" />
     <Compile Include="Rules\PowershellBotRule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
