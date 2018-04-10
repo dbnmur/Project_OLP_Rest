@@ -218,6 +218,35 @@ namespace QXS.ChatBot.Rules
                     "http://php.net/manual/en/function.require-once.php";
                 }
             ),
+
+            // Array We go
+
+                new BotRule(
+                Name: "selectarraywegoexcersice",
+                Weight: 10,
+                MessagePattern: new Regex("(array-we-go|array we go|" +
+                    "(give me array we go|awg|give me array-we-go) task)", RegexOptions.IgnoreCase),
+                Process: delegate(Match match, ChatSessionInterface session) {
+                    return "Write a program that takes an array of filepaths as arguments, filtering " +
+                    "out files that do not exist and mapping existing files to SplFileObject's.\n\n" +
+                    "Finally output the basename of the files, each on a new line.\n\n " +
+                    "The full path of the files to read will be provided as the command line arguments. You do not need to make your own test files.";
+                }
+            ),
+
+            new BotRule(
+                Name: "arraywegoexcersicehint",
+                Weight: 11,
+                MessagePattern: new Regex("(array-we-go hint|array we go hint|" +
+                    "(give me array we go|awg|give me array-we-go) hint)", RegexOptions.IgnoreCase),
+                Process: delegate(Match match, ChatSessionInterface session) {
+                    return "HINTS:\n" +
+                    "Remember the first argument will be the programs file path and not an argument passed to the program.\n\n" +
+                    "You will be expected to make use of core array functions, array_shift, array_filter and array_map.\n\n" +
+                    "To check a file exists you will need to use file_exists($filePath). This method will return a boolean true or false.\n\n" +
+                    "Documentation on the SplFileObject class can be found by pointing your browser here:\n http://php.net/manual/en/class.splfileobject.php";
+                }
+            ),
         };
     }
 }
