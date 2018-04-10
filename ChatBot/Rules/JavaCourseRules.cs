@@ -32,7 +32,7 @@ namespace QXS.ChatBot.Rules
 
                  new BotRule(
                     Name: "getcoursename",
-                    Weight: 10,
+                    Weight: 15,
                     MessagePattern: new Regex("(what course name|(what is|say) course name)", RegexOptions.IgnoreCase),
                     Process: delegate(Match match, ChatSessionInterface session) {
                         if (!session.SessionStorage.Values.ContainsKey("CourseName"))
@@ -79,7 +79,7 @@ namespace QXS.ChatBot.Rules
                     }
                     ),
                  new RandomAnswersBotRule(
-                       "javafact", 40, new Regex("tell|show|(me|(interesting fact| fact)|about java)tell|show|(me|(interesting fact| fact)|about java)",
+                       "javafact", 10, new Regex("tell|show|(me|(interesting fact| fact)|about java)tell|show|(me|(interesting fact| fact)|about java)",
                            RegexOptions.IgnoreCase),
 
                        new string[] {
@@ -109,6 +109,7 @@ namespace QXS.ChatBot.Rules
                            "4)final variable- the value of the variable cannot be changed once assigned"
                        }
                        ),
+
 
 
 

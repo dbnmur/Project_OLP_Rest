@@ -11,7 +11,6 @@ namespace Project_OLP_Rest.Test.Tests
     [TestClass]
     public class RegexTests
     {
-        
         private List<BotRule> GreetingBotRules = GreetingsRules.rules;
         private List<BotRule> GoodByeBotRules = GoodbyeRules.rules;
         private List<BotRule> ErrorBotRules = ErrorRules.rules;
@@ -81,10 +80,8 @@ namespace Project_OLP_Rest.Test.Tests
         {
             chatBot = new RestChatBot(ErrorBotRules);
             string Message = "I have exception";
-
             ChatSessionInterface session = new RestChatSession();
             string answer = chatBot.FindAnswer(session, Message);
-
             Assert.AreEqual(answer, "Whats the problem ?");
         }
 
@@ -93,18 +90,14 @@ namespace Project_OLP_Rest.Test.Tests
         {
             chatBot = new RestChatBot(ErrorBotRules);
             string Message = "find the solution to this error";
-
             ChatSessionInterface session = new RestChatSession();
             string answer = chatBot.FindAnswer(session, Message);
-
             Assert.AreEqual(answer, "try this.  google.com");
         }
 
         [TestMethod]
         public void BotTest_GetJoke()
         {
-
-
             chatBot = new RestChatBot(JokeBotRules);
             string Message = "tell me a joke";
             List<string> jokes = JokeRules.jokeList;
@@ -113,6 +106,7 @@ namespace Project_OLP_Rest.Test.Tests
             Console.WriteLine(answer);
             Assert.IsTrue(jokes.Contains(answer));
         }
+
 
     }
 }
