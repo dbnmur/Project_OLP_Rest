@@ -87,7 +87,7 @@ namespace QXS.ChatBot.Rules
 
             //Baby-Steps 
 
-                new BotRule(
+            new BotRule(
                 Name: "selectbabystepsexcersice",
                 Weight: 10,
                 MessagePattern: new Regex("(baby-steps|baby steps|(give me baby steps|bs|give me baby-steps) task)", RegexOptions.IgnoreCase),
@@ -145,7 +145,7 @@ namespace QXS.ChatBot.Rules
 
             // Filter-ls
 
-                new BotRule(
+            new BotRule(
                 Name: "selectfilterlsexcersice",
                 Weight: 10,
                 MessagePattern: new Regex("(filter-ls|filter ls|(give me filter ls|fls|give me filter-ls) task)", RegexOptions.IgnoreCase),
@@ -179,7 +179,7 @@ namespace QXS.ChatBot.Rules
 
             // Concerned about separation
 
-                new BotRule(
+            new BotRule(
                 Name: "selectconcernedaboutseperationexcersice",
                 Weight: 10,
                 MessagePattern: new Regex("(concerned-about-separation|concerned about separation|" +
@@ -221,7 +221,7 @@ namespace QXS.ChatBot.Rules
 
             // Array We go
 
-                new BotRule(
+            new BotRule(
                 Name: "selectarraywegoexcersice",
                 Weight: 10,
                 MessagePattern: new Regex("(array-we-go|array we go|" +
@@ -244,6 +244,34 @@ namespace QXS.ChatBot.Rules
                     "Remember the first argument will be the programs file path and not an argument passed to the program.\n\n" +
                     "You will be expected to make use of core array functions, array_shift, array_filter and array_map.\n\n" +
                     "To check a file exists you will need to use file_exists($filePath). This method will return a boolean true or false.\n\n" +
+                    "Documentation on the SplFileObject class can be found by pointing your browser here:\n http://php.net/manual/en/class.splfileobject.php";
+                }
+            ),
+
+            // Exceptional-coding
+
+            new BotRule(
+                Name: "selectexceptionalcodingexcersice",
+                Weight: 10,
+                MessagePattern: new Regex("(exceptional-coding|exceptional coding|" +
+                    "(give me exceptional coding|ec|give me exceptional-coding) task)", RegexOptions.IgnoreCase),
+                Process: delegate(Match match, ChatSessionInterface session) {
+                    return "Write a program that takes an array of filepaths as arguments and outputs the basename of each, separated by a new line.\n\n" +
+                    "Every file should exist but under exceptional circumstances some files may not. If this occurs, output a message similar to the below.\n\n" +
+                    "Unable to open file at path '/file/path'\n\n" +
+                    "The full path of the files to read will be provided as the command line arguments. You do not need to make your own test files.";
+                }
+            ),
+
+            new BotRule(
+                Name: "exceptionalcodingexcersicehint",
+                Weight: 11,
+                MessagePattern: new Regex("(exceptional-coding hint|exceptional coding hint|" +
+                    "(give me exceptional coding|ec|give me exceptional-coding) hint)", RegexOptions.IgnoreCase),
+                Process: delegate(Match match, ChatSessionInterface session) {
+                    return "HINTS:\n" +
+                    "You are urged to use try... catch logic here along with the SplFileObject contruct which " +
+                    "throws a RuntimeException when a file does not exist.\n\n" +
                     "Documentation on the SplFileObject class can be found by pointing your browser here:\n http://php.net/manual/en/class.splfileobject.php";
                 }
             ),

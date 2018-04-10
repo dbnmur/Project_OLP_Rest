@@ -298,5 +298,40 @@ namespace Project_OLP_Rest.Test.Tests
 
             Console.WriteLine(PHPChatBot.FindAnswer(session, Message));
         }
+
+        // Exceptional Coding
+
+        [TestMethod]
+        public void PHPgetExceptionalCodingTask()
+        {
+            CreatePHPBot();
+            string Message = "exceptional-coding";
+
+            ChatSessionInterface session = new RestChatSession();
+            Assert.AreEqual(PHPChatBot.FindAnswer(session, Message),
+                    "Write a program that takes an array of filepaths as arguments and outputs the basename of each, separated by a new line.\n\n" +
+                    "Every file should exist but under exceptional circumstances some files may not. If this occurs, output a message similar to the below.\n\n" +
+                    "Unable to open file at path '/file/path'\n\n" +
+                    "The full path of the files to read will be provided as the command line arguments. You do not need to make your own test files."
+                );
+
+            Console.WriteLine(PHPChatBot.FindAnswer(session, Message));
+        }
+
+        [TestMethod]
+        public void PHPgetExceptionalCodingTaskHint()
+        {
+            CreatePHPBot();
+            string Message = "ec hint";
+
+            ChatSessionInterface session = new RestChatSession();
+            Assert.AreEqual(PHPChatBot.FindAnswer(session, Message), "HINTS:\n" +
+                    "You are urged to use try... catch logic here along with the SplFileObject contruct which " +
+                    "throws a RuntimeException when a file does not exist.\n\n" +
+                    "Documentation on the SplFileObject class can be found by pointing your browser here:\n http://php.net/manual/en/class.splfileobject.php"
+                );
+
+            Console.WriteLine(PHPChatBot.FindAnswer(session, Message));
+        }
     }
 }
