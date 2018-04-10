@@ -6,10 +6,13 @@ using System.Threading.Tasks;
 
 namespace QXS.ChatBot.ChatSessions
 {
-    public class RestChatSession : ChatSessionInterface
+    public class RestChatSession : IRestChatSession
     {
         public bool IsInteractive { get { return true; } set { } }
         public SessionStorage SessionStorage { get; set; }
+
+        private int _id;
+        public int Id { get => _id; set => _id = value; }
 
         public event Action<ChatSessionInterface, string> OnMessageReceived;
         public event Action<ChatSessionInterface, string> OnMessageSent;
@@ -21,8 +24,9 @@ namespace QXS.ChatBot.ChatSessions
             SessionStorage = new SessionStorage();
         }
 
-        public RestChatSession(Dictionary<string, string> sessionStorageData)
+        public RestChatSession(int id, Dictionary<string, string> sessionStorageData)
         {
+            Id = id;
             SessionStorage = new SessionStorage(sessionStorageData);
         }
 
