@@ -70,11 +70,13 @@
   <ItemGroup>
     <Compile Include="BotResponse.cs" />
     <Compile Include="ChatSessions\ConsoleSpeechChatSession.cs" />
+    <Compile Include="ChatSessions\IRestChatSession.cs" />
     <Compile Include="ChatSessions\RestChatSession.cs" />
     <Compile Include="ChatSessions\TimeOutConsoleChatSession.cs" />
     <Compile Include="Generators\BotRuleCodeCompiler.cs" />
     <Compile Include="MethodExtensions\ChatBotXmlNodeExtensions.cs" />
     <Compile Include="RestChatBot.cs" />
+    <Compile Include="Rulesets\GenericBotRuleset.cs" />
     <Compile Include="Rules\BotRule.cs" />
     <Compile Include="ChatBot.cs" />
     <Compile Include="Generators\ChatBotRuleGenerator.cs" />
@@ -88,6 +90,7 @@
     <Compile Include="Rules\GoodbyeRules.cs" />
     <Compile Include="Rules\GreetingsRules.cs" />
     <Compile Include="Rules\JavaCourseRules.cs" />
+    <Compile Include="Rules\JokeRules.cs" />
     <Compile Include="Rules\PHPCourseRule.cs" />
     <Compile Include="Rules\PowershellBotRule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

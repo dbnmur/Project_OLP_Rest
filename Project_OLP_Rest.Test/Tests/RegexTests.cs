@@ -15,7 +15,7 @@ namespace Project_OLP_Rest.Test.Tests
         private List<BotRule> GreetingBotRules = GreetingsRules.rules;
         private List<BotRule> GoodByeBotRules = GoodbyeRules.rules;
         private List<BotRule> ErrorBotRules = ErrorRules.rules;
-
+        private List<BotRule> JokeBotRules = JokeRules.rules;
 
 
         private RestChatBot chatBot;
@@ -98,6 +98,20 @@ namespace Project_OLP_Rest.Test.Tests
             string answer = chatBot.FindAnswer(session, Message);
 
             Assert.AreEqual(answer, "try this.  google.com");
+        }
+
+        [TestMethod]
+        public void BotTest_GetJoke()
+        {
+
+
+            chatBot = new RestChatBot(JokeBotRules);
+            string Message = "tell me a joke";
+            List<string> jokes = JokeRules.jokeList;
+            ChatSessionInterface session = new RestChatSession();
+            string answer = chatBot.FindAnswer(session, Message);
+            Console.WriteLine(answer);
+            Assert.IsTrue(jokes.Contains(answer));
         }
 
     }

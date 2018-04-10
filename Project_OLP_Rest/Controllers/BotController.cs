@@ -7,132 +7,20 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Project_OLP_Rest.Data.Interfaces;
+using Project_OLP_Rest.RequestModels;
 using QXS.ChatBot;
 using QXS.ChatBot.ChatSessions;
+using QXS.ChatBot.Rulesets;
 
 namespace Project_OLP_Rest.Controllers
 {
     [Produces("application/json")]
     [Route("api/Bot")]
-    public class BotController : Controller
+    public partial class BotController : Controller
     {
         private readonly IChatBotService _chatBotService;
         private readonly IChatSessionService _chatSessionService;
 
-        public static List<BotRule> dummyRules = new List<BotRule>()
-        {
-                new PowershellBotRule("pstest", 10, new Regex("powershell"), @" ( ""Hi from PowerShell "" + $PSVersionTable.PSVersion) "),
-                // chatbot specific behaviour
-                new ConditionBotRule(
-                    "conditionBot",
-                    50,
-                    new Tuple<string, ConditionBotRule.Operator, string>[] {
-                        new Tuple<string, ConditionBotRule.Operator, string>("BotName", ConditionBotRule.Operator.EqualIgnoreCase, "chatbot")
-                    },
-                    new BotRule[] {
-                        // chatbot just knows positive feelings...
-                        new RandomAnswersBotRule("getfeeling2", 40, new Regex("how (are you|do you feel)", RegexOptions.IgnoreCase), new string[] {"i feel super", "i feel perfect", "i feel happy"}),
-                    }
-                ),
-                // repet the last known sentence
-                new ReplacementBotRule("repeatLast", 41, new Regex("(please )?repeat the last sentence", RegexOptions.IgnoreCase), new string[] { "i repeat your last sentence:$s$sentence$", "$s$BotName$ repeats your last sentence:$s$sentence$"}),
-                // repet a sentence
-                new ReplacementBotRule("repeat", 40, new Regex("(please )?repeat(?<sentence> .*)", RegexOptions.IgnoreCase), new string[] { "i repeat your sentence:$r$sentence$", "$s$BotName$ repeats your sentence:$r$sentence$"}, new Dictionary<string, string>() { {"sentence", "$r$sentence$"} }),
-                // reports your feelings
-                new RandomAnswersBotRule("getfeeling", 40, new Regex("how (are you|do you feel)", RegexOptions.IgnoreCase), new string[] {"i feel great", "i feel tired", "i feel bored"}),
-
-                // set the name of the bot
-                new BotRule(
-                    Name: "setbotname",
-                    Weight: 10,
-                    MessagePattern: new Regex("(your name is|you are) (now )?(.*)", RegexOptions.IgnoreCase),
-                    Process: delegate (Match match, ChatSessionInterface session) {
-                        session.SessionStorage.Values["BotName"] = match.Groups[3].Value;
-                        return "My name is now " + session.SessionStorage.Values["BotName"];
-                    }
-                ),
-                // show the bot's name
-                new BotRule(
-                    Name: "getbotname",
-                    Weight: 10,
-                    MessagePattern: new Regex("(who are you|(what is|say) your name)", RegexOptions.IgnoreCase),
-                    Process: delegate (Match match, ChatSessionInterface session) {
-                        if (!session.SessionStorage.Values.ContainsKey("BotName"))
-                        {
-                            return "I do not have a name";
-                        }
-                        if (match.Value.ToLower() == "who are you")
-                        {
-                            return "i am " + session.SessionStorage.Values["BotName"];
-                        }
-                        return "My name is " + session.SessionStorage.Values["BotName"];
-                    }
-                ),
-
-                // set the name of the user
-                new BotRule(
-                    Name: "setusername",
-                    Weight: 10,
-                    MessagePattern: new Regex("my name is (now )?(.*)", RegexOptions.IgnoreCase),
-                    Process: delegate (Match match, ChatSessionInterface session) {
-                        session.SessionStorage.Values["UserName"] = match.Groups[2].Value;
-                        return "Hi " + session.SessionStorage.Values["UserName"];
-                    }
-                ),
-                // show the user's name
-                new BotRule(
-                    Name: "getusername",
-                    Weight: 20,
-                    MessagePattern: new Regex("(what is|say) my name", RegexOptions.IgnoreCase),
-                    Process: delegate (Match match, ChatSessionInterface session) {
-                        if (!session.SessionStorage.Values.ContainsKey("UserName"))
-                        {
-                            return "Sorry, but you have not told my your name";
-                        }
-                        return "Your name is " + session.SessionStorage.Values["UserName"];
-                    }
-                ),
-
-                // greet
-                new BotRule(
-                    Name: "greet",
-                    Weight: 2,
-                    MessagePattern: new Regex("(hi|hello)", RegexOptions.IgnoreCase),
-                    Process: delegate (Match match, ChatSessionInterface session) {
-                        string answer = "Hi";
-
-                        if (session.SessionStorage.Values.ContainsKey("UserName"))
-                        {
-                            answer += " " + session.SessionStorage.Values["UserName"];
-                        }
-                        answer += "!";
-                        if (session.SessionStorage.Values.ContainsKey("BotName"))
-                        {
-                            answer += " I'm " + session.SessionStorage.Values["BotName"];
-                        }
-                        return answer;
-                    }
-                ),
-                // greet
-                new BotRule(
-                    Name: "default",
-                    Weight: 1,
-                    MessagePattern: new Regex(".*", RegexOptions.IgnoreCase),
-                    Process: delegate (Match match, ChatSessionInterface session) {
-                        string answer = "well, i have to think about that";
-
-                        if (session.SessionStorage.Values.ContainsKey("UserName"))
-                        {
-                            answer += ", " + session.SessionStorage.Values["UserName"];
-                        }
-
-                        return answer;
-                    }
-
-                )
-            };
-        private static Dictionary<string, ChatSessionInterface> chatSessions = new Dictionary<string, ChatSessionInterface>();
-        private static List<string> sessionIds = new List<string>();
         private static RestChatBot _chatBot;
 
         /// <summary>
@@ -142,21 +30,22 @@ namespace Project_OLP_Rest.Controllers
 
         public BotController(IChatBotService chatBotService, IChatSessionService chatSessionService)
         {
-            _chatBot = new RestChatBot(dummyRules);
+            IEnumerable<BotRule> ruleSet = this.GetRuleSet();
+            _chatBot = new RestChatBot(ruleSet);
+
             _chatBotService = chatBotService;
             _chatSessionService = chatSessionService;
-
         }
 
-        public class ChatRequestBody
+        private IEnumerable<BotRule> GetRuleSet()
         {
-            public string Message { get; set; }
+            return new GenericBotRuleset().GetRuleset();
         }
 
         [HttpPost]
         public JsonResult Chat([FromBody]ChatRequestBody body, [FromHeader]string sessionId)
         {
-            ChatSessionInterface currentChatSession = null;
+            IRestChatSession currentChatSession = null;
             Domain.ChatBot chatBot = GetChatBot();
             Domain.ChatSession chatSession = null;
             if (String.IsNullOrEmpty(sessionId))
@@ -168,16 +57,33 @@ namespace Project_OLP_Rest.Controllers
             {
                 if (_chatSessionService.Exists(session => session.ChatSessionId == Int32.Parse(sessionId)))
                     chatSession = _chatSessionService.FindBy(session => session.ChatSessionId == Int32.Parse(sessionId));
-
                 else
                     chatSession = _chatSessionService.Create(new Domain.ChatSession() { ChatBotId = chatBot.ChatBotId });
 
-                Dictionary<string, string> sessionData = JsonConvert.DeserializeObject<Dictionary<string, string>>(chatSession.Data);
-                currentChatSession = new RestChatSession(sessionData);
+                Dictionary<string, string> sessionData = null;
+                if (String.IsNullOrEmpty(chatSession.Data))
+                    sessionData = new Dictionary<string, string>();
+                else
+                    sessionData = JsonConvert.DeserializeObject<Dictionary<string, string>>(chatSession.Data);
+
+                currentChatSession = new RestChatSession(chatSession.ChatSessionId, sessionData);
             }
             string chatbotResponse = _chatBot.FindAnswer(currentChatSession, body.Message);
+            SaveSessionData(currentChatSession);
+
+            sessionId = chatSession.ChatSessionId.ToString();
 
             return Json(new { sessionId = sessionId, chatbotResponse = chatbotResponse });
+        }
+
+        private void SaveSessionData(IRestChatSession session)
+        {
+            if (_chatSessionService.Exists(s => s.ChatSessionId == session.Id))
+            {
+                Domain.ChatSession dbChatSession = _chatSessionService.FindBy(s => s.ChatSessionId == session.Id);
+                dbChatSession.Data = JsonConvert.SerializeObject(session.SessionStorage.Values);
+                _chatSessionService.Update(dbChatSession);
+            }
         }
 
         /// <summary>
@@ -187,10 +93,10 @@ namespace Project_OLP_Rest.Controllers
         private Domain.ChatBot GetChatBot()
         {
             Domain.ChatBot chatBotModel = null;
-            if (!_chatBotService.Exists(cb => cb.Name == this._chatBotName))
-                chatBotModel = _chatBotService.Create(new Domain.ChatBot { Name = "Example Bot" });
-            else
+            if (_chatBotService.Exists(cb => cb.Name == this._chatBotName))
                 chatBotModel = _chatBotService.FindBy(cb => cb.Name == this._chatBotName);
+            else
+                chatBotModel = _chatBotService.Create(new Domain.ChatBot { Name = this._chatBotName });
 
             return chatBotModel;
         }

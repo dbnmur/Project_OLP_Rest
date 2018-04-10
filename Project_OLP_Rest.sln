@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project_OLP_Rest.Test", "Pr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatBot", "ChatBot\ChatBot.csproj", "{9CE1C326-A14C-4CAC-864A-9465B904C3E2}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project_OLP_Rest.Core.Tests", "Project_OLP_Rest.Core.Tests\Project_OLP_Rest.Core.Tests.csproj", "{8C6B2222-CF49-4C76-9B13-149428DAB25E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Cucumber", "Test.Cucumber\Test.Cucumber.csproj", "{53093D24-3966-4E5E-A248-47D2F3AE69BF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +65,22 @@ Global
 		{9CE1C326-A14C-4CAC-864A-9465B904C3E2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9CE1C326-A14C-4CAC-864A-9465B904C3E2}.ReleaseWithoutLync|Any CPU.ActiveCfg = ReleaseWithoutLync|Any CPU
 		{9CE1C326-A14C-4CAC-864A-9465B904C3E2}.ReleaseWithoutLync|Any CPU.Build.0 = ReleaseWithoutLync|Any CPU
+		{8C6B2222-CF49-4C76-9B13-149428DAB25E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C6B2222-CF49-4C76-9B13-149428DAB25E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C6B2222-CF49-4C76-9B13-149428DAB25E}.DebugWithoutLync|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C6B2222-CF49-4C76-9B13-149428DAB25E}.DebugWithoutLync|Any CPU.Build.0 = Debug|Any CPU
+		{8C6B2222-CF49-4C76-9B13-149428DAB25E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C6B2222-CF49-4C76-9B13-149428DAB25E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C6B2222-CF49-4C76-9B13-149428DAB25E}.ReleaseWithoutLync|Any CPU.ActiveCfg = Release|Any CPU
+		{8C6B2222-CF49-4C76-9B13-149428DAB25E}.ReleaseWithoutLync|Any CPU.Build.0 = Release|Any CPU
+		{53093D24-3966-4E5E-A248-47D2F3AE69BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53093D24-3966-4E5E-A248-47D2F3AE69BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53093D24-3966-4E5E-A248-47D2F3AE69BF}.DebugWithoutLync|Any CPU.ActiveCfg = Debug|Any CPU
+		{53093D24-3966-4E5E-A248-47D2F3AE69BF}.DebugWithoutLync|Any CPU.Build.0 = Debug|Any CPU
+		{53093D24-3966-4E5E-A248-47D2F3AE69BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53093D24-3966-4E5E-A248-47D2F3AE69BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53093D24-3966-4E5E-A248-47D2F3AE69BF}.ReleaseWithoutLync|Any CPU.ActiveCfg = Release|Any CPU
+		{53093D24-3966-4E5E-A248-47D2F3AE69BF}.ReleaseWithoutLync|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

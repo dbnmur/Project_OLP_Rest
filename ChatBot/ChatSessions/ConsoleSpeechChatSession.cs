@@ -76,7 +76,6 @@ namespace QXS.ChatBot
 
         public SessionStorage SessionStorage { get; set; }
 
-
         public void SetResponseHistorySize(int Size)
         {
             _ResponseHistory = new LinkedList<BotResponse>(_ResponseHistory, Size, false);

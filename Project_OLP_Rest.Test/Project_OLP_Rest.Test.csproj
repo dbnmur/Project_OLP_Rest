@@ -115,7 +115,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Tests\AuthorizationTest.cs" />
-    <Compile Include="Tests\ControllerTests\BotControllerTest.cs" />
     <Compile Include="Tests\GroupTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\JavaCourseRegexTest.cs" />

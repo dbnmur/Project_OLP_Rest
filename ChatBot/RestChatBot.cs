@@ -60,18 +60,5 @@ namespace QXS.ChatBot
             }
             return null;
         }
-
-        public bool isGoodBye(string message)
-        {
-            switch (message.ToLower())
-            {
-                case "quit": return true;
-                case "exit": return true;
-                case "goodbye": return true;
-                case "good bye": return true;
-                case "bye": return true;
-            }
-            return false;
-        }
     }
 }
