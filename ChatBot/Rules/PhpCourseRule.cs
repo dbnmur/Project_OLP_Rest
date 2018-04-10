@@ -352,6 +352,45 @@ namespace QXS.ChatBot.Rules
                     "You can find the documentation here: http://php.net/manual/en/class.datetime.php";
                 }
             ),
+
+            // http-json-api
+
+            new BotRule(
+                Name: "selecthttpjsonapiexcersice",
+                Weight: 10,
+                MessagePattern: new Regex("(http-json-api|http json api|" +
+                    "(give me http json api|hja|give me http-json-api) task)", RegexOptions.IgnoreCase),
+                Process: delegate(Match match, ChatSessionInterface session) {
+                    return "Write an HTTP server that serves JSON data when it receives a GET request to the path '/api/parsetime'. " +
+                    "Expect the request to contain a query string with a key 'iso' and an ISO-format time as the value.\n\n" +
+                    "For example:\n\n /api/parsetime?iso=2015-11-15T20:18:04+0000 \n\n The JSON response should contain only 'hour', " +
+                    "'minute' and 'second' properties. For example:\n\n" +
+                    "{\n \"hour\": 14, \n \"minute\": 23, \n \"second\": 15 \n } \n\n" +
+                    "Add a second endpoint for the path '/api/unixtime' which accepts the same query string but returns UNIX epoch time in milliseconds " +
+                    "(the number of milliseconds since 1 Jan 1970 00:00:00 UTC) under the property 'unixtime'. \n\n For example: \n\n" +
+                    "{ \"unixtime\": 1376136615474 }";
+                }
+            ),
+
+            new BotRule(
+                Name: "httpjsonapiexcersicehint",
+                Weight: 11,
+                MessagePattern: new Regex("(http-json-api hint|http json api hint|" +
+                    "(give me http json api|hja|give me http-json-api) hint)", RegexOptions.IgnoreCase),
+                Process: delegate(Match match, ChatSessionInterface session) {
+                    return "HINTS:\n" +
+                    "The $_SERVER super global array has a REQUEST_URI property that you will need to use to \"route\" your requests for the two endpoints.\n\n" +
+                    "You can parse the URL using the global parse_url function. The result will be an array of helpful properties. " +
+                    "You can access the query string properties via the $_GET super global array. \n\n" +
+                    "Documentation on the parse_url function can be found by pointing your browser here:\n http://php.net/manual/en/function.parse-url.php \n\n" +
+                    "Your response should be in a JSON string format. Look at json_encode for more information.\n\n" +
+                    "You should also be a good web citizen and set the Content-Type properly:\n\n" +
+                    "header('Content-Type: application/json');\n\n" +
+                    "The PHP DateTime object can print dates as a UNIX timestamp, e.g. (new \\DateTime())->format('U');. It can also parse this format if " +
+                    "you pass the string into the \\DateTime constructor. The various parameters to format() will also come in handy. You can find the " +
+                    "documentation here: http://php.net/manual/en/class.datetime.php";
+                }
+            ),
         };
     }
 }
