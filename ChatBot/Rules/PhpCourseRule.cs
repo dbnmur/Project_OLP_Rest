@@ -391,6 +391,44 @@ namespace QXS.ChatBot.Rules
                     "documentation here: http://php.net/manual/en/class.datetime.php";
                 }
             ),
+
+            
+            // dependency-heaven
+
+            new BotRule(
+                Name: "selectdependencyheavenexcersice",
+                Weight: 10,
+                MessagePattern: new Regex("(dependency-heaven|dependency heaven|" +
+                    "(give me dependency heaven|dh|give me dependency-heaven) task)", RegexOptions.IgnoreCase),
+                Process: delegate(Match match, ChatSessionInterface session) {
+                    return "Write an HTTP server that serves JSON data when it receives a POST request to /reverse, /swapcase and /titleize.\n" +
+                    "The POST data will contain a single parameter data which you will need to manipulate depending on the endpoint.\n\n" +
+                    "/reverse \n -------------------\n\n A request with data = \"PHPbot Lessons is awesome!\" should return the response: \n\n" +
+                    "{ \n \"result\": \"!emosewa si snosseL tobPHP\" \n}\n\n" +
+                    "/swapcase \n -------------------\n\n A request with data = \"No, It Really Is...\" should return the response:\n\n" +
+                    "{ \n \"result\": \"nO, iT rEALLY iS...\" \n }\n\n" +
+                    "/titleize \n -------------------\n\n A request with data = \"you know you love it, don't you?\" should return the response:\n\n" +
+                    "{ \n \"result\": \"You Know You Love It, Don't You?\" \n}\n\n You should use the routing library klein/klein for this task " +
+                    "pulling it in as a dependency through Composer. \n\n You will also be required to use danielstjules/stringy to manipulate the " +
+                    "data as this correctly handles multibyte characters.";
+                }
+            ),
+
+            new BotRule(
+                Name: "dependencyheavenexcersicehint",
+                Weight: 11,
+                MessagePattern: new Regex("(dependency-heaven hint|dependency heaven hint|" +
+                    "(give me dependency heaven|dh|give me dependency-heaven) hint)", RegexOptions.IgnoreCase),
+                Process: delegate(Match match, ChatSessionInterface session) {
+                    return "HINTS:\n" +
+                    "Point your browser to https://getcomposer.org/doc/00-intro.md which will walk you through Installing Composer if you haven't already!\n\n" +
+                    "Use composer init to create your composer.json file with interactive search. \n\n" +
+                    "For more details look at the docs for... \n\n" +
+                    "Composer - https://getcomposer.org/doc/01-basic-usage.md Klein - https://github.com/chriso/klein.php " +
+                    "Stringy - https://github.com/danielstjules/Stringy \n\n Oh, and don't forget to use the Composer autoloader with: \n\n" +
+                    "require_once __DIR__ . '/vendor/autoload.php';";
+                }
+            ),
         };
     }
 }
