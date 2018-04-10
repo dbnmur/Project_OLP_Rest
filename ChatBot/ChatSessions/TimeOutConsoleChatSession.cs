@@ -76,7 +76,6 @@ namespace QXS.ChatBot.ChatSessions
 
         public SessionStorage SessionStorage { get; set; }
 
-
         public void SetResponseHistorySize(int Size)
         {
             _ResponseHistory = new LinkedList<BotResponse>(_ResponseHistory, Size, false);
@@ -91,13 +90,5 @@ namespace QXS.ChatBot.ChatSessions
         {
             return new Stack<BotResponse>(_ResponseHistory.GetAsReverseArray());
         }
-
-    }
-
-    class AsyncConsoleReader
-    {
-
-
-
     }
 }

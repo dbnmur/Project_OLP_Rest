@@ -56,7 +56,7 @@ namespace QXS.ChatBot
         public bool IsInteractive { get { return true; } set { } }
 
         public SessionStorage SessionStorage { get; set; }
-
+        public int Id { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public void SetResponseHistorySize(int Size)
         {
