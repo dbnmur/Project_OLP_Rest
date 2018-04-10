@@ -193,7 +193,7 @@ namespace Project_OLP_Rest.Test.Tests
         }
 
         [TestMethod]
-        public void PHPgeFilterLSTaskHint()
+        public void PHPgetFilterLSTaskHint()
         {
             CreatePHPBot();
             string Message = "filter ls hint";
@@ -209,6 +209,55 @@ namespace Project_OLP_Rest.Test.Tests
                     "You may also find SplFileInfo's getExtension() method helpful \n\n" +
                     "Documentation on the getExtension() method can be found by pointing " +
                     "your browser here: http://php.net/manual/en/splfileinfo.getextension.php"
+                );
+
+            Console.WriteLine(PHPChatBot.FindAnswer(session, Message));
+        }
+
+        // Concerned about separation
+
+        [TestMethod]
+        public void PHPgetConcernedAboutSeparationTask()
+        {
+            CreatePHPBot();
+            string Message = "concerned about separation task";
+
+            ChatSessionInterface session = new RestChatSession();
+            Assert.AreEqual(PHPChatBot.FindAnswer(session, Message),
+                    "This problem is the same as the previous but introduces the concept of classes. You will need to create two files to solve this.\n\n" +
+                    "Create a program that prints a list of files in a given directory, filtered by the extension of the files. The first argument is the " +
+                    "directory name and the second argument is the extension filter. Print the list of files (one file per line) to the console.\n\n" +
+                    "You must write a class file to do most of the work. The file must define a single class with a single function that takes two arguments:" +
+                    " the directory name and the filename extension string in that order. The filename extension argument must be the same as what was passed" +
+                    " to your program. Don't turn it into a regular expression or prefix with \".\" or do anything except pass it to your class method where " +
+                    "you can do what you need to make your filter work.\n\n" +
+                    "You must not print directly to the console from your class, only from your original program.\n\n" +
+                    "The benefit of having a contract like this is that your class can be used by anyone who expects this contract. " +
+                    "So your class could be used by anyone else who does learnyouphp, or the verifier, and just work."
+                );
+
+            Console.WriteLine(PHPChatBot.FindAnswer(session, Message));
+        }
+
+        [TestMethod]
+        public void PHPgetConcernedAboutSeparationTaskHint()
+        {
+            CreatePHPBot();
+            string Message = "concerned-about-separation hint";
+
+            ChatSessionInterface session = new RestChatSession();
+            Assert.AreEqual(PHPChatBot.FindAnswer(session, Message), "HINTS:\n" +
+                   "Create a new class by creating a new file that just contains your directory reading and filtering " +
+                    "code in a class method. To define a single method class, use the following syntax:\n\n" +
+                    "<?php\n\n class DirectoryFilter \n {\n public function filter($args) {} \n } \n\n" +
+                    "To use your new class in your original program file, use the require_once construct with the filename." +
+                    " So, if your file is named mymodule.php then:\n\n<?php\nrequire_once __DIR__ . '/mymodule.php'\n\n" +
+                    "You can now create an instance of your class and assign it to a variable!\n\n <?php \n$myFilter = new DirectoryFilter;\n\n" +
+                    "You can then call the method you defined with its required arguments.\n\n" +
+                    "Documentation on class basics can be found here:\n\n" +
+                    "http://php.net/manual/en/language.oop5.basic.php \n\n" +
+                    "Documentation on require_once can be found here:\n\n" +
+                    "http://php.net/manual/en/function.require-once.php" 
                 );
 
             Console.WriteLine(PHPChatBot.FindAnswer(session, Message));
