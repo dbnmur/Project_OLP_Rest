@@ -334,7 +334,6 @@ namespace Project_OLP_Rest.Test.Tests
             Console.WriteLine(PHPChatBot.FindAnswer(session, Message));
         }
 
-
         // database read
 
         [TestMethod]
@@ -374,6 +373,53 @@ namespace Project_OLP_Rest.Test.Tests
                     "$row is now an array of data. The key will be the columns and the value is the database value\n\n" +
                     "You should use prepared statements to perform the updating. You should be most interested in the prepare and execute methods.\n\n" +
                     "Remember the first argument will be the program's file path and not an argument passed to the program."
+                );
+
+            Console.WriteLine(PHPChatBot.FindAnswer(session, Message));
+        }
+
+        // time-server
+
+        [TestMethod]
+        public void PHPgetTimeServerTask()
+        {
+            CreatePHPBot();
+            string Message = "time-server";
+
+            ChatSessionInterface session = new RestChatSession();
+            Assert.AreEqual(PHPChatBot.FindAnswer(session, Message),
+                    "Write a TCP time server!\n\n Your server should listen to TCP connections on the IP address provided as the first argument" +
+                    " and the port provided by the second argument to your program. For each connection you must write the current date & " +
+                    "24 hour time in the format:\n\n \"YYYY-MM-DD hh:mm:ss\"\n\n followed by a newline character. Month, day, hour, minute and " +
+                    "second must be zero-filled to 2 integers. For example:\n\n \"2013-07-06 17:42:30\""
+                );
+
+            Console.WriteLine(PHPChatBot.FindAnswer(session, Message));
+        }
+
+        [TestMethod]
+        public void PHPgetTimeServerTaskHint()
+        {
+            CreatePHPBot();
+            string Message = "ts hint";
+
+            ChatSessionInterface session = new RestChatSession();
+            Assert.AreEqual(PHPChatBot.FindAnswer(session, Message), "HINTS:\n" +
+                    "For this exercise we'll be creating a raw TCP server. We will be using the core PHP socket_* functions. " +
+                    "These functions are a thin wrapper around the C libraries.\n\n To create a server you need to use the functions socket_create," +
+                    " socket_bind & socket_listen. Once the socket is listening, you can accept connections from it, which will return a new socket" +
+                    " connected to the client whenever a client connects.\n\n socket_create returns a server resource. You must bind it to a host and" +
+                    " port and then start listening.\n\n A typical PHP TCP server looks like this:\n\n" +
+                    "<?php\n $server = socket_create(AF_INET, SOCK_STREAM, SOL_TCP); \n socket_bind($server, '127.0.0.1', 8000); \n\n socket_listen($sock);\n\n" +
+                    "$client = socket_accept($server);\n\n" +
+                    "Remember to use the IP address & port number supplied to you as the first and second command-line argument.\n\n" +
+                    "You can read and write to the socket by using socket_read and socket_write. For this exercise we only need " +
+                    "to write data and then close the socket.\n\n" +
+                    "Use socket_write($client, $data, strlen($data)) to write data to the socket and then socket_close($socket) to close the socket.\n\n" +
+                    "Documentation on PHP streams can be found by pointing your browser here: http://php.net/manual/en/sockets.examples.php " +
+                    "http://php.net/manual/en/function.stream-socket-server.php \n\n To create the date you'll need to create a custom format from the " +
+                    "PHP DateTime object. The various parameters to format() will help you. " +
+                    "You can find the documentation here: http://php.net/manual/en/class.datetime.php"
                 );
 
             Console.WriteLine(PHPChatBot.FindAnswer(session, Message));
