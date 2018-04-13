@@ -12,9 +12,10 @@ using System;
 namespace Project_OLP_Rest.Data.Migrations
 {
     [DbContext(typeof(OLP_Context))]
-    partial class OLP_ContextModelSnapshot : ModelSnapshot
+    [Migration("20180413101009_Add RecordType entity and add one to many between Record and RecordType")]
+    partial class AddRecordTypeentityandaddonetomanybetweenRecordandRecordType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -122,9 +123,6 @@ namespace Project_OLP_Rest.Data.Migrations
 
                     b.Property<string>("Description");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired();
-
                     b.Property<int>("ModuleId");
 
                     b.Property<string>("Name");
@@ -140,8 +138,6 @@ namespace Project_OLP_Rest.Data.Migrations
                     b.HasIndex("RecordTypeId");
 
                     b.ToTable("Records");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("Record");
                 });
 
             modelBuilder.Entity("Project_OLP_Rest.Domain.RecordType", b =>
@@ -188,19 +184,6 @@ namespace Project_OLP_Rest.Data.Migrations
                     b.ToTable("Users");
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("User");
-                });
-
-            modelBuilder.Entity("Project_OLP_Rest.Domain.Exercise", b =>
-                {
-                    b.HasBaseType("Project_OLP_Rest.Domain.Record");
-
-                    b.Property<string>("AnswerRegex");
-
-                    b.Property<bool>("IsCompleted");
-
-                    b.ToTable("Exercise");
-
-                    b.HasDiscriminator().HasValue("Exercise");
                 });
 
             modelBuilder.Entity("Project_OLP_Rest.Domain.Student", b =>

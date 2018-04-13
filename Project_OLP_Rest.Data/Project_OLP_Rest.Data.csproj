@@ -7,6 +7,7 @@
   <ItemGroup>
     <Compile Remove="Migrations\20180409084233_Update ChatBot and Course relationship.cs" />
     <Compile Remove="Migrations\20180409084608_Update ChatBot and Course relationship.cs" />
+    <Compile Remove="Migrations\20180413101338_Add Exercise entity that inherits record.cs" />
   </ItemGroup>
 
   <ItemGroup>
