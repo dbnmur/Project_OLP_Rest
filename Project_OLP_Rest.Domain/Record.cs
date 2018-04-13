@@ -17,10 +17,4 @@ namespace Project_OLP_Rest.Domain
         public int RecordTypeId { get; set; }
         public RecordType RecordType { get; set; }
     }
-
-    public class Exercise : Record
-    {
-        public string AnswerRegex { get; set; }
-        public bool IsCompleted { get; set; }
-    }
 }
