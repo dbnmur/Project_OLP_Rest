@@ -16,31 +16,31 @@ namespace Project_OLP_Rest.Data.Interfaces
             _entities = context.Set<T>();
         }
 
-        public T Create(T entity)
+        public virtual T Create(T entity)
         {
             T addedEntity = _entities.Add(entity).Entity;
             _context.SaveChanges();
             return addedEntity;
         }
 
-        public void Delete(T entity)
+        public virtual void Delete(T entity)
         {
             _entities.Remove(entity);
             _context.SaveChanges();
         }
 
-        public T FindBy(Expression<Func<T, bool>> predicate)
+        public virtual T FindBy(Expression<Func<T, bool>> predicate)
         {
             return _entities.SingleAsync(predicate).Result;
         }
 
-        public void Update(T entity)
+        public virtual void Update(T entity)
         {
             _entities.Update(entity);
             _context.SaveChanges();
         }
 
-        public bool Exists(Expression<Func<T, bool>> predicate)
+        public virtual bool Exists(Expression<Func<T, bool>> predicate)
         {
             return _entities.AnyAsync(predicate).Result;
         }
