@@ -13,5 +13,14 @@ namespace Project_OLP_Rest.Domain
 
         public int ModuleId { get; set; }
         public Module Module { get; set; }
+
+        public int RecordTypeId { get; set; }
+        public RecordType RecordType { get; set; }
+    }
+
+    public class Exercise : Record
+    {
+        public string AnswerRegex { get; set; }
+        public bool IsCompleted { get; set; }
     }
 }

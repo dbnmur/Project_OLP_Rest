@@ -34,6 +34,8 @@ namespace Project_OLP_Rest.Data
 
             modelBuilder.Entity<GroupCourse>()
                 .HasKey(s => new { s.GroupId, s.CourseId });
+
+            modelBuilder.Entity<Exercise>().HasBaseType<Record>();
         }
     }
 }
