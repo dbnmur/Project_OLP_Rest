@@ -15,18 +15,18 @@ namespace Project_OLP_Rest.Controllers
     [Route("api/Records")]
     public class RecordsController : Controller
     {
-        private readonly OLP_Context _context;
+        private readonly IRecordService _recordService;
 
-        public RecordsController(OLP_Context context)
+        public RecordsController(IRecordService recordService)
         {
-            _context = context;
+            _recordService = recordService;
         }
 
         // GET: api/Records
         [HttpGet]
         public IEnumerable<Record> GetRecords()
         {
-            return _context.Records;
+            return _recordService.GetAll();
         }
 
         // GET: api/Records/5
@@ -38,7 +38,7 @@ namespace Project_OLP_Rest.Controllers
                 return BadRequest(ModelState);
             }
 
-            var record = await _context.Records.SingleOrDefaultAsync(m => m.RecordId == id);
+            var record = _recordService.FindBy(m => m.RecordId == id);
 
             if (record == null)
             {
@@ -62,11 +62,9 @@ namespace Project_OLP_Rest.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(record).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                _recordService.Update(record);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -92,8 +90,7 @@ namespace Project_OLP_Rest.Controllers
                 return BadRequest(ModelState);
             }
 
-            _context.Records.Add(record);
-            await _context.SaveChangesAsync();
+            _recordService.Create(record);
 
             return CreatedAtAction("GetRecord", new { id = record.RecordId }, record);
         }
@@ -107,21 +104,20 @@ namespace Project_OLP_Rest.Controllers
                 return BadRequest(ModelState);
             }
 
-            var record = await _context.Records.SingleOrDefaultAsync(m => m.RecordId == id);
+            var record = _recordService.FindBy(m => m.RecordId == id);
             if (record == null)
             {
                 return NotFound();
             }
 
-            _context.Records.Remove(record);
-            await _context.SaveChangesAsync();
+            _recordService.Delete(record);
 
             return Ok(record);
         }
 
         private bool RecordExists(int id)
         {
-            return _context.Records.Any(e => e.RecordId == id);
+            return _recordService.Exists(e => e.RecordId == id);
         }
     }
 }

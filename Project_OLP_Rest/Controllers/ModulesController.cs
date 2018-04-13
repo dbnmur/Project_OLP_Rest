@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Project_OLP_Rest.Data;
+using Project_OLP_Rest.Data.Interfaces;
 using Project_OLP_Rest.Domain;
 
 namespace Project_OLP_Rest.Controllers
@@ -14,18 +15,18 @@ namespace Project_OLP_Rest.Controllers
     [Route("api/Modules")]
     public class ModulesController : Controller
     {
-        private readonly OLP_Context _context;
+        private readonly IModuleService _moduleService;
 
-        public ModulesController(OLP_Context context)
+        public ModulesController(IModuleService moduleService)
         {
-            _context = context;
+            _moduleService = moduleService;
         }
 
         // GET: api/Modules
         [HttpGet]
         public IEnumerable<Module> GetModules()
         {
-            return _context.Modules;
+            return _moduleService.GetAll();
         }
 
         // GET: api/Modules/5
@@ -37,19 +38,19 @@ namespace Project_OLP_Rest.Controllers
                 return BadRequest(ModelState);
             }
 
-            var @module = await _context.Modules.SingleOrDefaultAsync(m => m.ModuleId == id);
+            var module = _moduleService.FindBy(m => m.ModuleId == id);
 
-            if (@module == null)
+            if (module == null)
             {
                 return NotFound();
             }
 
-            return Ok(@module);
+            return Ok(module);
         }
 
         // PUT: api/Modules/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutModule([FromRoute] int id, [FromBody] Module @module)
+        public async Task<IActionResult> PutModule([FromRoute] int id, [FromBody] Module module)
         {
             if (!ModelState.IsValid)
             {
@@ -61,11 +62,9 @@ namespace Project_OLP_Rest.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(@module).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                _moduleService.Update(module);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -84,15 +83,14 @@ namespace Project_OLP_Rest.Controllers
 
         // POST: api/Modules
         [HttpPost]
-        public async Task<IActionResult> PostModule([FromBody] Module @module)
+        public async Task<IActionResult> PostModule([FromBody] Module module)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _context.Modules.Add(@module);
-            await _context.SaveChangesAsync();
+            _moduleService.Create(module);
 
             return CreatedAtAction("GetModule", new { id = @module.ModuleId }, @module);
         }
@@ -106,21 +104,20 @@ namespace Project_OLP_Rest.Controllers
                 return BadRequest(ModelState);
             }
 
-            var @module = await _context.Modules.SingleOrDefaultAsync(m => m.ModuleId == id);
-            if (@module == null)
+            var module = _moduleService.FindBy(m => m.ModuleId == id);
+            if (module == null)
             {
                 return NotFound();
             }
 
-            _context.Modules.Remove(@module);
-            await _context.SaveChangesAsync();
+            _moduleService.Delete(module);
 
             return Ok(@module);
         }
 
         private bool ModuleExists(int id)
         {
-            return _context.Modules.Any(e => e.ModuleId == id);
+            return _moduleService.Exists(module => module.ModuleId == id);
         }
     }
 }

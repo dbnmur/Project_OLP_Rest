@@ -11,5 +11,6 @@ namespace Project_OLP_Rest.Data.Interfaces
         /// <param name="courseId"></param>
         /// <returns></returns>
         IEnumerable<Module> GetRecords(int moduleId);
+        IEnumerable<Module> GetAll();
     }
 }
