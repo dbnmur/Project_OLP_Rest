@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Project_OLP_Rest.Data;
+using Project_OLP_Rest.Data.Interfaces;
 using Project_OLP_Rest.Domain;
 
 namespace Project_OLP_Rest.Controllers
@@ -14,18 +15,18 @@ namespace Project_OLP_Rest.Controllers
     [Route("api/Courses")]
     public class CoursesController : Controller
     {
-        private readonly OLP_Context _context;
+        private readonly ICourseService _courseService;
 
-        public CoursesController(OLP_Context context)
+        public CoursesController(ICourseService courseService)
         {
-            _context = context;
+            _courseService = courseService;
         }
 
         // GET: api/Courses
         [HttpGet]
         public IEnumerable<Course> GetCourses()
         {
-            return _context.Courses;
+            return _courseService.GetAll();
         }
 
         // GET: api/Courses/5
@@ -37,7 +38,7 @@ namespace Project_OLP_Rest.Controllers
                 return BadRequest(ModelState);
             }
 
-            var course = await _context.Courses.SingleOrDefaultAsync(m => m.CourseId == id);
+            var course = _courseService.FindBy(m => m.CourseId == id);
 
             if (course == null)
             {
@@ -61,11 +62,9 @@ namespace Project_OLP_Rest.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(course).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                _courseService.Update(course);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -91,8 +90,7 @@ namespace Project_OLP_Rest.Controllers
                 return BadRequest(ModelState);
             }
 
-            _context.Courses.Add(course);
-            await _context.SaveChangesAsync();
+            _courseService.Create(course);
 
             return CreatedAtAction("GetCourse", new { id = course.CourseId }, course);
         }
@@ -106,21 +104,20 @@ namespace Project_OLP_Rest.Controllers
                 return BadRequest(ModelState);
             }
 
-            var course = await _context.Courses.SingleOrDefaultAsync(m => m.CourseId == id);
+            var course = _courseService.FindBy(c => c.CourseId == id);
             if (course == null)
             {
                 return NotFound();
             }
 
-            _context.Courses.Remove(course);
-            await _context.SaveChangesAsync();
+            _courseService.Delete(course);
 
             return Ok(course);
         }
 
         private bool CourseExists(int id)
         {
-            return _context.Courses.Any(e => e.CourseId == id);
+            return _courseService.Exists(e => e.CourseId == id);
         }
     }
 }
