@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Project_OLP_Rest.Data;
 using Project_OLP_Rest.Domain;
+using RiskFirst.Hateoas;
 
 namespace Project_OLP_Rest.Controllers
 {
@@ -22,14 +23,15 @@ namespace Project_OLP_Rest.Controllers
         }
 
         // GET: api/Courses
-        [HttpGet]
+        [HttpGet(Name = "get-courses")]
         public IEnumerable<Course> GetCourses()
         {
+            
             return _context.Courses;
         }
 
         // GET: api/Courses/5
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "get-course")]
         public async Task<IActionResult> GetCourse([FromRoute] int id)
         {
             if (!ModelState.IsValid)
@@ -48,7 +50,7 @@ namespace Project_OLP_Rest.Controllers
         }
 
         // PUT: api/Courses/5
-        [HttpPut("{id}")]
+        [HttpPut("{id}", Name ="update-course")]
         public async Task<IActionResult> PutCourse([FromRoute] int id, [FromBody] Course course)
         {
             if (!ModelState.IsValid)
@@ -83,7 +85,7 @@ namespace Project_OLP_Rest.Controllers
         }
 
         // POST: api/Courses
-        [HttpPost]
+        [HttpPost(Name = "create-course")]
         public async Task<IActionResult> PostCourse([FromBody] Course course)
         {
             if (!ModelState.IsValid)
@@ -98,7 +100,7 @@ namespace Project_OLP_Rest.Controllers
         }
 
         // DELETE: api/Courses/5
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}", Name = "delete-course")]
         public async Task<IActionResult> DeleteCourse([FromRoute] int id)
         {
             if (!ModelState.IsValid)

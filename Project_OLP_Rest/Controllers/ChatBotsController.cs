@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Project_OLP_Rest.Data;
 using Project_OLP_Rest.Data.Interfaces;
 using Project_OLP_Rest.Domain;
+using RiskFirst.Hateoas;
 
 namespace Project_OLP_Rest.Controllers
 {
@@ -16,6 +17,7 @@ namespace Project_OLP_Rest.Controllers
     public class ChatBotsController : Controller
     {
         private readonly IChatBotService _chatBotService;
+        private readonly ILinksService linksService;
 
         public ChatBotsController(IChatBotService chatBotService)
         {
@@ -23,7 +25,7 @@ namespace Project_OLP_Rest.Controllers
         }
 
         // GET: api/ChatBots
-        [HttpGet]
+        [HttpGet (Name = "get-chatbots")]
         public IEnumerable<ChatBot> GetChatBots()
         {
             return _chatBotService.GetAll();
