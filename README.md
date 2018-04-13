@@ -13,5 +13,7 @@
   - [Daniel Žeimo](https://github.com/Saigoshiki)
   - [Airidas Amšiejus](https://github.com/Xeriaz)
   - [Lukas Velička](https://github.com/MiniBig)
+  - [Tomas Rimkus](https://github.com/tomrimk)
+  - [Julius Šabūnas](https://github.com/julius1223)
 
 - **License:** Finally, include a section for the license of your project. For more information on choosing a license, check out GitHub’s licensing guide!
