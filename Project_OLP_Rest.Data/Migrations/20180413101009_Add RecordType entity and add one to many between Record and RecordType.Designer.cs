@@ -11,7 +11,7 @@ using System;
 
 namespace Project_OLP_Rest.Data.Migrations
 {
-    [DbContext(typeof(OLP_Context))]
+    [DbContext(typeof(OlpContext))]
     [Migration("20180413101009_Add RecordType entity and add one to many between Record and RecordType")]
     partial class AddRecordTypeentityandaddonetomanybetweenRecordandRecordType
     {

@@ -11,7 +11,7 @@ using System;
 
 namespace Project_OLP_Rest.Data.Migrations
 {
-    [DbContext(typeof(OLP_Context))]
+    [DbContext(typeof(OlpContext))]
     [Migration("20180413124550_Remove RecordType model")]
     partial class RemoveRecordTypemodel
     {
