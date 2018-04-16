@@ -23,7 +23,7 @@ namespace Project_OLP_Rest.Data.Services
         {
             return await _entities
                 .Include(module => module.Records)
-                .SingleAsync();
+                .SingleAsync(predicate);
         }
     }
 }
