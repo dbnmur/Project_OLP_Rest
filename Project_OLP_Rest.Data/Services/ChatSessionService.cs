@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Project_OLP_Rest.Data.Interfaces;
 using Project_OLP_Rest.Domain;
 
@@ -9,9 +11,9 @@ namespace Project_OLP_Rest.Data.Services
     {
         public ChatSessionService(OLP_Context context) : base(context) { }
 
-        public IEnumerable<ChatSession> GetAll()
+        public async Task<IEnumerable<ChatSession>> GetAll()
         {
-            return _entities.ToList();
+            return await _entities.ToListAsync();
         }
     }
 }

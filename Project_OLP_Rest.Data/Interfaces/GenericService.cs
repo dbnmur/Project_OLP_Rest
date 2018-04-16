@@ -1,8 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Project_OLP_Rest.Data.Services;
 using Project_OLP_Rest.Domain;
 using System;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace Project_OLP_Rest.Data.Interfaces
 {
@@ -16,33 +18,33 @@ namespace Project_OLP_Rest.Data.Interfaces
             _entities = context.Set<T>();
         }
 
-        public virtual T Create(T entity)
+        public virtual async Task<T> Create(T entity)
         {
-            T addedEntity = _entities.Add(entity).Entity;
+            EntityEntry entityEntry = await _entities.AddAsync(entity);
             _context.SaveChanges();
-            return addedEntity;
+            return (T)entityEntry.Entity;
         }
 
-        public virtual void Delete(T entity)
+        public virtual async Task Delete(T entity)
         {
             _entities.Remove(entity);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public virtual T FindBy(Expression<Func<T, bool>> predicate)
+        public virtual async Task<T> FindBy(Expression<Func<T, bool>> predicate)
         {
-            return _entities.SingleAsync(predicate).Result;
+            return await _entities.SingleAsync(predicate);
         }
 
-        public virtual void Update(T entity)
+        public virtual async Task Update(T entity)
         {
-            _entities.Update(entity);
-            _context.SaveChanges();
+            _context.Entry<T>(entity).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
         }
 
-        public virtual bool Exists(Expression<Func<T, bool>> predicate)
+        public virtual Task<bool> Exists(Expression<Func<T, bool>> predicate)
         {
-            return _entities.AnyAsync(predicate).Result;
+            return _entities.AnyAsync(predicate);
         }
     }
 }

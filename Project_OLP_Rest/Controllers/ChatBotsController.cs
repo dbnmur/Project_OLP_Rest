@@ -24,9 +24,9 @@ namespace Project_OLP_Rest.Controllers
 
         // GET: api/ChatBots
         [HttpGet]
-        public IEnumerable<ChatBot> GetChatBots()
+        public async Task<IEnumerable<ChatBot>> GetChatBots()
         {
-            return _chatBotService.GetAll();
+            return await _chatBotService.GetAllAsync();
         }
 
         // GET: api/ChatBots/5
@@ -38,7 +38,7 @@ namespace Project_OLP_Rest.Controllers
                 return BadRequest(ModelState);
             }
 
-            var chatBot = _chatBotService.FindBy(m => m.ChatBotId == id);
+            var chatBot = await _chatBotService.FindBy(m => m.ChatBotId == id);
 
             if (chatBot == null)
             {
@@ -64,11 +64,11 @@ namespace Project_OLP_Rest.Controllers
 
             try
             {
-                _chatBotService.Update(chatBot);
+                await _chatBotService.Update(chatBot);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ChatBotExists(id))
+                if (!(await ChatBotExists(id)))
                 {
                     return NotFound();
                 }
@@ -90,7 +90,7 @@ namespace Project_OLP_Rest.Controllers
                 return BadRequest(ModelState);
             }
 
-            _chatBotService.Create(chatBot);
+            await _chatBotService.Create(chatBot);
 
             return CreatedAtAction("GetChatBot", new { id = chatBot.ChatBotId }, chatBot);
         }
@@ -104,20 +104,20 @@ namespace Project_OLP_Rest.Controllers
                 return BadRequest(ModelState);
             }
 
-            var chatBot = _chatBotService.FindBy(m => m.ChatBotId == id);
+            var chatBot = await _chatBotService.FindBy(m => m.ChatBotId == id);
             if (chatBot == null)
             {
                 return NotFound();
             }
 
-            _chatBotService.Delete(chatBot);
+            await _chatBotService.Delete(chatBot);
 
             return Ok(chatBot);
         }
 
-        private bool ChatBotExists(int id)
+        private async Task<bool> ChatBotExists(int id)
         {
-            return _chatBotService.Exists(e => e.ChatBotId == id);
+            return await _chatBotService.Exists(e => e.ChatBotId == id);
         }
     }
 }

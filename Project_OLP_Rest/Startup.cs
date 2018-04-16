@@ -51,7 +51,10 @@ namespace Project_OLP_Rest
                 options.Audience = Configuration["Auth0:Audience"];
             });
 
-            services.AddMvc();
+            services.AddMvc()
+                .AddJsonOptions(
+                    options => options.SerializerSettings.ReferenceLoopHandling
+                        = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             services.AddDbContext<OLP_Context>(
                 options => options.UseSqlServer(

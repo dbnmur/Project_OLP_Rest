@@ -24,9 +24,9 @@ namespace Project_OLP_Rest.Controllers
 
         // GET: api/Records
         [HttpGet]
-        public IEnumerable<Record> GetRecords()
+        public async Task<IEnumerable<Record>> GetRecords()
         {
-            return _recordService.GetAll();
+            return await _recordService.GetAll();
         }
 
         // GET: api/Records/5
@@ -38,7 +38,7 @@ namespace Project_OLP_Rest.Controllers
                 return BadRequest(ModelState);
             }
 
-            var record = _recordService.FindBy(m => m.RecordId == id);
+            var record = await _recordService.FindBy(m => m.RecordId == id);
 
             if (record == null)
             {
@@ -64,11 +64,11 @@ namespace Project_OLP_Rest.Controllers
 
             try
             {
-                _recordService.Update(record);
+                await _recordService.Update(record);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!RecordExists(id))
+                if (!(await RecordExists(id)))
                 {
                     return NotFound();
                 }
@@ -90,7 +90,7 @@ namespace Project_OLP_Rest.Controllers
                 return BadRequest(ModelState);
             }
 
-            _recordService.Create(record);
+            await _recordService.Create(record);
 
             return CreatedAtAction("GetRecord", new { id = record.RecordId }, record);
         }
@@ -104,20 +104,20 @@ namespace Project_OLP_Rest.Controllers
                 return BadRequest(ModelState);
             }
 
-            var record = _recordService.FindBy(m => m.RecordId == id);
+            var record = await _recordService.FindBy(m => m.RecordId == id);
             if (record == null)
             {
                 return NotFound();
             }
 
-            _recordService.Delete(record);
+            await _recordService.Delete(record);
 
             return Ok(record);
         }
 
-        private bool RecordExists(int id)
+        private async Task<bool> RecordExists(int id)
         {
-            return _recordService.Exists(e => e.RecordId == id);
+            return await _recordService.Exists(e => e.RecordId == id);
         }
     }
 }

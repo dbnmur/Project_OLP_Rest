@@ -15,7 +15,7 @@ namespace Project_OLP_Rest.Test
     public class GroupTest
     {
         [TestMethod]
-        public void GroupAddTest()
+        public async Task GroupAddTestAsync()
         {
             var options = new DbContextOptionsBuilder<OLP_Context>()
             .UseInMemoryDatabase(databaseName: "Add_writes_to_database_ADD")
@@ -30,9 +30,9 @@ namespace Project_OLP_Rest.Test
                 };
 
                 var service = new GroupService(context);
-                service.Create(group);
+                await service.Create(group);
 
-                Domain.Group fecthedGroup = service.FindBy(x => x.Name == group.Name);
+                Domain.Group fecthedGroup = await service.FindBy(x => x.Name == group.Name);
                 Assert.AreEqual(fecthedGroup.Name, group.Name);
                 Console.Write("Group was : " + group.Name + " successfully added");
             }

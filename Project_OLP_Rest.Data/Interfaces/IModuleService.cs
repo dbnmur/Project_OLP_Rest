@@ -1,5 +1,6 @@
 ﻿using Project_OLP_Rest.Domain;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Project_OLP_Rest.Data.Interfaces
 {
@@ -10,7 +11,6 @@ namespace Project_OLP_Rest.Data.Interfaces
         /// </summary>
         /// <param name="courseId"></param>
         /// <returns></returns>
-        IEnumerable<Module> GetRecords(int moduleId);
-        IEnumerable<Module> GetAll();
+        Task<IEnumerable<Module>> GetAll();
     }
 }

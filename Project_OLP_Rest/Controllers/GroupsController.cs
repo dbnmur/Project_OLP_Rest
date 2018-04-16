@@ -26,9 +26,9 @@ namespace Project_OLP_Rest.Controllers
 
         // GET: api/Groups
         [HttpGet]
-        public IEnumerable<Group> GetGroups()
+        public async Task<IEnumerable<Group>> GetGroupsAsync()
         {
-            return _groupService.GetAll();
+            return await _groupService.GetAll();
         }
 
         // GET: api/Groups/5

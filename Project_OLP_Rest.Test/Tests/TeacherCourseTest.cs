@@ -11,7 +11,7 @@ namespace Project_OLP_Rest.Test.Tests
     public class TeacherCourseTest
     {
         [TestMethod]
-        public void AddTeacher_ToCourse_Test()
+        public async System.Threading.Tasks.Task AddTeacher_ToCourse_TestAsync()
         {
             var options = new DbContextOptionsBuilder<OLP_Context>()
             .UseInMemoryDatabase(databaseName: "Add_writes_to_database_TeacherCourses")
@@ -27,9 +27,9 @@ namespace Project_OLP_Rest.Test.Tests
                 };
 
                 var teacherService = new TeacherService(context);
-                teacherService.Create(teacher);
+                await teacherService.Create(teacher);
 
-                Teacher fecthedTeacher = teacherService.FindBy(x => x.FirstName == teacher.FirstName);
+                Teacher fecthedTeacher = await teacherService.FindBy(x => x.FirstName == teacher.FirstName);
 
                 Assert.AreEqual(fecthedTeacher.FirstName, teacher.FirstName);
 
@@ -40,9 +40,9 @@ namespace Project_OLP_Rest.Test.Tests
                 };
 
                 var courseService = new CourseService(context);
-                courseService.Create(course);
+                await courseService.Create(course);
 
-                Course fecthedCourse = courseService.FindBy(x => x.Name == course.Name);
+                Course fecthedCourse = await courseService.FindBy(x => x.Name == course.Name);
 
                 Assert.AreEqual(fecthedCourse.Name, course.Name);
 
@@ -61,7 +61,7 @@ namespace Project_OLP_Rest.Test.Tests
 
                 Assert.AreEqual(fecthedTeacherCourse.Teacher.UserId, teacher.UserId);
 
-                fecthedCourse = courseService.FindBy(x => x.Name == course.Name);
+                fecthedCourse = await courseService.FindBy(x => x.Name == course.Name);
 
                 Assert.AreEqual(fecthedCourse.TeacherCourses.Count, 1);
 

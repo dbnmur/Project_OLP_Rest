@@ -24,9 +24,9 @@ namespace Project_OLP_Rest.Controllers
 
         // GET: api/Modules
         [HttpGet]
-        public IEnumerable<Module> GetModules()
+        public async Task<IEnumerable<Module>> GetModules()
         {
-            return _moduleService.GetAll();
+            return await _moduleService.GetAll();
         }
 
         // GET: api/Modules/5
@@ -38,7 +38,7 @@ namespace Project_OLP_Rest.Controllers
                 return BadRequest(ModelState);
             }
 
-            var module = _moduleService.FindBy(m => m.ModuleId == id);
+            var module = await _moduleService.FindBy(m => m.ModuleId == id);
 
             if (module == null)
             {
@@ -64,11 +64,11 @@ namespace Project_OLP_Rest.Controllers
 
             try
             {
-                _moduleService.Update(module);
+                await _moduleService.Update(module);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ModuleExists(id))
+                if (!ModuleExists(id).Result)
                 {
                     return NotFound();
                 }
@@ -90,7 +90,7 @@ namespace Project_OLP_Rest.Controllers
                 return BadRequest(ModelState);
             }
 
-            _moduleService.Create(module);
+            await _moduleService.Create(module);
 
             return CreatedAtAction("GetModule", new { id = @module.ModuleId }, @module);
         }
@@ -104,20 +104,20 @@ namespace Project_OLP_Rest.Controllers
                 return BadRequest(ModelState);
             }
 
-            var module = _moduleService.FindBy(m => m.ModuleId == id);
+            var module = await _moduleService.FindBy(m => m.ModuleId == id);
             if (module == null)
             {
                 return NotFound();
             }
 
-            _moduleService.Delete(module);
+            await _moduleService.Delete(module);
 
             return Ok(@module);
         }
 
-        private bool ModuleExists(int id)
+        private async Task<bool> ModuleExists(int id)
         {
-            return _moduleService.Exists(module => module.ModuleId == id);
+            return await _moduleService.Exists(module => module.ModuleId == id);
         }
     }
 }
