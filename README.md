@@ -6,17 +6,17 @@ A description of your project follows. A good description is clear, short, and t
 
 ## Table of Contents 
 
-- [Getting Started](#Getting-Started)
-  - [Prerequisites](#Prerequisites)
-- [Installation](#Installation)
-- [Running the tests](#Running-the-tests)
-  - [Break down into end to end tests](#Break-down-into-end-to-end-tests)
-  - [And coding style tests](#And-coding-style-tests)
-- [Deployement](#Deployement)
-- [Built With](#Built-With)
-- [Usage](#Usage)
-- [Credits](#Credits)
-- [License](#License)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Running the tests](#running-the-tests)
+  - [Break down into end to end tests](#break-down-into-end-to-end-tests)
+  - [And coding style tests](#and-coding-style-tests)
+- [Deployement](#deployement)
+- [Built With](#built-with)
+- [Usage](#usage)
+- [Credits](#credits)
+- [License](#license)
 
 ## Getting Started
 
