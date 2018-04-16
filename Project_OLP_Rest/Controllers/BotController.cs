@@ -14,6 +14,9 @@ using QXS.ChatBot.Rulesets;
 
 namespace Project_OLP_Rest.Controllers
 {
+    //[Produces("application/json")]
+    //[Route("api/")]
+
     [Produces("application/json")]
     [Route("api/Bot")]
     public partial class BotController : Controller
