@@ -6,7 +6,17 @@ A description of your project follows. A good description is clear, short, and t
 
 ## Table of Contents 
 
-Optionally, include a table of contents in order to allow other people to quickly navigate especially long or detailed READMEs.
+- [Getting Started](#Getting-Started)
+  - [Prerequisites](#Prerequisites)
+- [Installation](#Installation)
+- [Running the tests](#Running-the-tests)
+  - [Break down into end to end tests](#Break-down-into-end-to-end-tests)
+  - [And coding style tests](#And-coding-style-tests)
+- [Deployement](#Deployement)
+- [Built With](#Built-With)
+- [Usage](#Usage)
+- [Credits](#Credits)
+- [License](#License)
 
 ## Getting Started
 
