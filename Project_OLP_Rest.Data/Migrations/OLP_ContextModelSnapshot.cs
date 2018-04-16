@@ -11,7 +11,7 @@ using System;
 
 namespace Project_OLP_Rest.Data.Migrations
 {
-    [DbContext(typeof(OlpContext))]
+    [DbContext(typeof(OLP_Context))]
     partial class OLP_ContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

@@ -6,7 +6,7 @@ using Project_OLP_Rest.Domain;
 
 namespace Project_OLP_Rest.Data
 {
-    public class OlpContext : DbContext
+    public class OLP_Context : DbContext
     {
         public OLP_Context() { }
 

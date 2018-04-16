@@ -11,7 +11,7 @@ using System;
 
 namespace Project_OLP_Rest.Data.Migrations
 {
-    [DbContext(typeof(OlpContext))]
+    [DbContext(typeof(OLP_Context))]
     [Migration("20180409100802_Initial migration")]
     partial class Initialmigration
     {
