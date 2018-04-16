@@ -24,9 +24,9 @@ namespace Project_OLP_Rest.Controllers
 
         // GET: api/ChatSessions
         [HttpGet]
-        public IEnumerable<ChatSession> GetChatSessions()
+        public async Task<IEnumerable<ChatSession>> GetChatSessions()
         {
-            return _chatSessionService.GetAll();
+            return await _chatSessionService.GetAll();
         }
 
         // GET: api/ChatSessions/5
@@ -38,7 +38,7 @@ namespace Project_OLP_Rest.Controllers
                 return BadRequest(ModelState);
             }
 
-            var chatSession = _chatSessionService.FindBy(m => m.ChatSessionId == id);
+            var chatSession = await _chatSessionService.FindBy(m => m.ChatSessionId == id);
 
             if (chatSession == null)
             {
@@ -64,11 +64,11 @@ namespace Project_OLP_Rest.Controllers
 
             try
             {
-                _chatSessionService.Update(chatSession);
+                await _chatSessionService.Update(chatSession);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ChatSessionExists(id))
+                if (!(await ChatSessionExists(id)))
                 {
                     return NotFound();
                 }
@@ -90,7 +90,7 @@ namespace Project_OLP_Rest.Controllers
                 return BadRequest(ModelState);
             }
 
-            _chatSessionService.Create(chatSession);
+            await _chatSessionService.Create(chatSession);
 
             return CreatedAtAction("GetChatSession", new { id = chatSession.ChatSessionId }, chatSession);
         }
@@ -104,20 +104,20 @@ namespace Project_OLP_Rest.Controllers
                 return BadRequest(ModelState);
             }
 
-            var chatSession = _chatSessionService.FindBy(m => m.ChatSessionId == id);
+            var chatSession = await _chatSessionService.FindBy(m => m.ChatSessionId == id);
             if (chatSession == null)
             {
                 return NotFound();
             }
 
-            _chatSessionService.Delete(chatSession);
+            await _chatSessionService.Delete(chatSession);
 
             return Ok(chatSession);
         }
 
-        private bool ChatSessionExists(int id)
+        private async Task<bool> ChatSessionExists(int id)
         {
-            return _chatSessionService.Exists(e => e.ChatSessionId == id);
+            return await _chatSessionService.Exists(e => e.ChatSessionId == id);
         }
     }
 }

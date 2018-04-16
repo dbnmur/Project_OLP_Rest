@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Project_OLP_Rest.Data.Interfaces
 {
@@ -11,6 +12,6 @@ namespace Project_OLP_Rest.Data.Interfaces
         /// Fetches all available groups
         /// </summary>
         /// <returns></returns>
-        IEnumerable<Group> GetAll();
+        Task<IEnumerable<Group>> GetAll();
     }
 }

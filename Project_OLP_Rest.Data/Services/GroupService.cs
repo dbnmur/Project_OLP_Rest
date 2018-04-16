@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Project_OLP_Rest.Data.Services
 {
@@ -11,9 +13,9 @@ namespace Project_OLP_Rest.Data.Services
     {
         public GroupService(OLP_Context context) : base(context) { }
 
-        public IEnumerable<Group> GetAll()
+        public async Task<IEnumerable<Group>> GetAll()
         {
-            return _entities.ToList();
+            return await _entities.ToListAsync();
         }
     }
 }

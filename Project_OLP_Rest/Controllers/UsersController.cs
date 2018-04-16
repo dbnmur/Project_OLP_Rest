@@ -62,7 +62,6 @@ namespace Project_OLP_Rest.Controllers
             }
 
             _context.Entry(user).State = EntityState.Modified;
-
             try
             {
                 await _context.SaveChangesAsync();

@@ -1,6 +1,7 @@
 ﻿using Project_OLP_Rest.Domain;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Project_OLP_Rest.Data.Interfaces
 {
@@ -10,6 +11,6 @@ namespace Project_OLP_Rest.Data.Interfaces
         /// Fetches all courses
         /// </summary>
         /// <returns></returns>
-        IEnumerable<Course> GetAll();
+        Task<IEnumerable<Course>> GetAll();
     }
 }

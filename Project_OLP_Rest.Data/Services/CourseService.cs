@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Project_OLP_Rest.Data.Services
 {
@@ -13,16 +14,16 @@ namespace Project_OLP_Rest.Data.Services
     {
         public CourseService(OLP_Context context) : base(context) { }
 
-        public IEnumerable<Course> GetAll()
+        public async Task<IEnumerable<Course>> GetAll()
         {
-            return _entities.ToList();
+            return await _entities.ToListAsync();
         }
 
-        public override Course FindBy(Expression<Func<Course, bool>> predicate)
+        public override async Task<Course> FindBy(Expression<Func<Course, bool>> predicate)
         {
-            return _entities
+            return await _entities
                 .Include(course => course.Modules)
-                .Single(predicate);
+                .SingleAsync(predicate);
         }
     }
 }

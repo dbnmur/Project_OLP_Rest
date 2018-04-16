@@ -43,22 +43,22 @@ namespace Project_OLP_Rest.Controllers
         }
 
         [HttpPost]
-        public JsonResult Chat([FromBody]ChatRequestBody body, [FromHeader]string sessionId)
+        public async Task<JsonResult> ChatAsync([FromBody]ChatRequestBody body, [FromHeader]string sessionId)
         {
             IRestChatSession currentChatSession = null;
-            Domain.ChatBot chatBot = GetChatBot();
+            Domain.ChatBot chatBot = await GetChatBotAsync();
             Domain.ChatSession chatSession = null;
             if (String.IsNullOrEmpty(sessionId))
             {
-                chatSession = _chatSessionService.Create(new Domain.ChatSession() { ChatBotId = chatBot.ChatBotId });
+                chatSession = await _chatSessionService.Create(new Domain.ChatSession() { ChatBotId = chatBot.ChatBotId });
                 currentChatSession = new RestChatSession();
             }
             else
             {
-                if (_chatSessionService.Exists(session => session.ChatSessionId == Int32.Parse(sessionId)))
-                    chatSession = _chatSessionService.FindBy(session => session.ChatSessionId == Int32.Parse(sessionId));
+                if (await _chatSessionService.Exists(session => session.ChatSessionId == Int32.Parse(sessionId)))
+                    chatSession = await _chatSessionService.FindBy(session => session.ChatSessionId == Int32.Parse(sessionId));
                 else
-                    chatSession = _chatSessionService.Create(new Domain.ChatSession() { ChatBotId = chatBot.ChatBotId });
+                    chatSession = await _chatSessionService.Create(new Domain.ChatSession() { ChatBotId = chatBot.ChatBotId });
 
                 Dictionary<string, string> sessionData = null;
                 if (String.IsNullOrEmpty(chatSession.Data))
@@ -69,20 +69,20 @@ namespace Project_OLP_Rest.Controllers
                 currentChatSession = new RestChatSession(chatSession.ChatSessionId, sessionData);
             }
             string chatbotResponse = _chatBot.FindAnswer(currentChatSession, body.Message);
-            SaveSessionData(currentChatSession);
+            await SaveSessionDataAsync(currentChatSession);
 
             sessionId = chatSession.ChatSessionId.ToString();
 
             return Json(new { sessionId = sessionId, chatbotResponse = chatbotResponse });
         }
 
-        private void SaveSessionData(IRestChatSession session)
+        private async Task SaveSessionDataAsync(IRestChatSession session)
         {
-            if (_chatSessionService.Exists(s => s.ChatSessionId == session.Id))
+            if (await _chatSessionService.Exists(s => s.ChatSessionId == session.Id))
             {
-                Domain.ChatSession dbChatSession = _chatSessionService.FindBy(s => s.ChatSessionId == session.Id);
+                Domain.ChatSession dbChatSession = await _chatSessionService.FindBy(s => s.ChatSessionId == session.Id);
                 dbChatSession.Data = JsonConvert.SerializeObject(session.SessionStorage.Values);
-                _chatSessionService.Update(dbChatSession);
+                await _chatSessionService.Update(dbChatSession);
             }
         }
 
@@ -90,13 +90,13 @@ namespace Project_OLP_Rest.Controllers
         /// Fetches chatbot or creates if it doesn't exist
         /// </summary>
         /// <returns></returns>
-        private Domain.ChatBot GetChatBot()
+        private async Task<Domain.ChatBot> GetChatBotAsync()
         {
             Domain.ChatBot chatBotModel = null;
-            if (_chatBotService.Exists(cb => cb.Name == this._chatBotName))
-                chatBotModel = _chatBotService.FindBy(cb => cb.Name == this._chatBotName);
+            if (await _chatBotService.Exists(cb => cb.Name == this._chatBotName))
+                chatBotModel = await _chatBotService.FindBy(cb => cb.Name == this._chatBotName);
             else
-                chatBotModel = _chatBotService.Create(new Domain.ChatBot { Name = this._chatBotName });
+                chatBotModel = await _chatBotService.Create(new Domain.ChatBot { Name = this._chatBotName });
 
             return chatBotModel;
         }

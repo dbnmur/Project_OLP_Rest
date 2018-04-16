@@ -19,4 +19,8 @@
     <ProjectReference Include="..\Project_OLP_Rest\Project_OLP_Rest.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ControllerTests\" />
+  </ItemGroup>
+
 </Project>

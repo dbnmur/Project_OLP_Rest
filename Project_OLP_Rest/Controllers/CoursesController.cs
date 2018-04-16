@@ -24,9 +24,9 @@ namespace Project_OLP_Rest.Controllers
 
         // GET: api/Courses
         [HttpGet]
-        public IEnumerable<Course> GetCourses()
+        public async Task<IEnumerable<Course>> GetCourses()
         {
-            return _courseService.GetAll();
+            return await _courseService.GetAll();
         }
 
         // GET: api/Courses/5
@@ -38,7 +38,7 @@ namespace Project_OLP_Rest.Controllers
                 return BadRequest(ModelState);
             }
 
-            var course = _courseService.FindBy(m => m.CourseId == id);
+            var course = await _courseService.FindBy(m => m.CourseId == id);
 
             if (course == null)
             {
@@ -64,11 +64,11 @@ namespace Project_OLP_Rest.Controllers
 
             try
             {
-                _courseService.Update(course);
+                await _courseService.Update(course);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CourseExists(id))
+                if (!(await CourseExists(id)))
                 {
                     return NotFound();
                 }
@@ -90,7 +90,7 @@ namespace Project_OLP_Rest.Controllers
                 return BadRequest(ModelState);
             }
 
-            _courseService.Create(course);
+            await _courseService.Create(course);
 
             return CreatedAtAction("GetCourse", new { id = course.CourseId }, course);
         }
@@ -104,20 +104,20 @@ namespace Project_OLP_Rest.Controllers
                 return BadRequest(ModelState);
             }
 
-            var course = _courseService.FindBy(c => c.CourseId == id);
+            var course = await _courseService.FindBy(c => c.CourseId == id);
             if (course == null)
             {
                 return NotFound();
             }
 
-            _courseService.Delete(course);
+            await _courseService.Delete(course);
 
             return Ok(course);
         }
 
-        private bool CourseExists(int id)
+        private async Task<bool> CourseExists(int id)
         {
-            return _courseService.Exists(e => e.CourseId == id);
+            return await _courseService.Exists(e => e.CourseId == id);
         }
     }
 }
