@@ -19,7 +19,7 @@ namespace Project_OLP_Rest.Controllers
 
     [Produces("application/json")]
     [Route("api/Bot")]
-    public partial class BotController : Controller
+    public class BotController : Controller
     {
         private readonly IChatBotService _chatBotService;
         private readonly IChatSessionService _chatSessionService;
