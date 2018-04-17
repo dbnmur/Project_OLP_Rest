@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Project_OLP_Rest.Data.Interfaces;
 using QXS.ChatBot;
 using QXS.ChatBot.Rules;
+using QXS.ChatBot.RuleSet;
 
 namespace Project_OLP_Rest.Controllers.ChatbotControllers
 {
@@ -39,7 +40,7 @@ namespace Project_OLP_Rest.Controllers.ChatbotControllers
 
         protected override void SetUpBot()
         {
-            PHPCourseRule ruleSet = new PHPCourseRule();
+            PHPCourseRuleSet ruleSet = new PHPCourseRuleSet();
 
 
             _chatBotName = "PhpChatBot";

@@ -64,7 +64,6 @@ namespace Project_OLP_Rest.Test.Tests
             answer = chatBot.FindAnswer(session, Message);
 
             Assert.AreEqual(answer, "sorry what ?");
-
         }
 
         [TestMethod]
@@ -111,7 +110,5 @@ namespace Project_OLP_Rest.Test.Tests
             Console.WriteLine(answer);
             Assert.IsTrue(jokes.Contains(answer));
         }
-
-
     }
 }

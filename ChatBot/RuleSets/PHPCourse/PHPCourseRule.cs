@@ -1,15 +1,18 @@
-﻿using System;
+﻿using QXS.ChatBot.RulesSets;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace QXS.ChatBot.Rules
+namespace QXS.ChatBot.RuleSet
 {
-    public class PHPCourseRule
+    public class PHPCourseRuleSet : IRuleSet
     {
-        public List<BotRule> CourseRule = new List<BotRule>()
+        public IEnumerable<BotRule> Rules { get { return _courseRule; } }
+
+        public List<BotRule> _courseRule = new List<BotRule>()
         {
             new BotRule(
                 Name: "setcoursename",

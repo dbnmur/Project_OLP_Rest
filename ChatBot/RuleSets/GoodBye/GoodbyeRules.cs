@@ -24,8 +24,6 @@ namespace QXS.ChatBot.RuleSet
                     {
                         answer += " " + session.SessionStorage.Values["UserName"];
                     }
-
-
                     return answer;
                 }
             ),
