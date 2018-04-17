@@ -1,33 +1,33 @@
 # PHP Course Rules
 
-## Rules
+## Rules 
 
-- Set course name
-- Get course name
-- Show excersices
-  - Select `Hello World` 
-  - Select `Baby steps`
-  - Select `My first IO`
-  - Select `Filter ls`
-  - Select `Concerned about separation`
-  - Select `Array We Go`
-  - Select `Exceptional coding`
-  - Select `Database Read`
-  - Select `Time server`
-  - Select `HTTP JSON API`
-  - Select `Dependency Heaven`
+- [Set course name](#set-course-name)
+- [Get course name](#get-course-name)
+- [Show excersices](#show-excersices)
+  - [Select `Hello World`](#select-hello-world)
+  - [Select `Baby steps`](#select-baby-steps)
+  - [Select `My first IO`](#select-my-first-io)
+  - [Select `Filter ls`](#select-filter-ls)
+  - [Select `Concerned about separation`](#select-concerned-about-separation)
+  - [Select `Array We Go`](#select-array-we-go)
+  - [Select `Exceptional coding`](#select-exceptional-coding)
+  - [Select `Database Read`](#select-database-read)
+  - [Select `Time server`](#select-time-server)
+  - [Select `HTTP JSON API`](#select-http-json-api)
+  - [Select `Dependency Heaven`](#select-dependency-heaven)
 - Show hints
-    - Get `Hello World` hint
-    - Get `Baby steps` hint
-    - Get `My first IO` hint
-    - Get `Filter ls` hint
-    - Get `Concerned about separation` hint
-    - Get `Array We Go` hint
-    - Get `Exceptional coding` hint
-    - Get `Database Read` hint
-    - Get `Time server` hint
-    - Get `HTTP JSON API` hint
-    - Get `Dependency Heaven` hint
+    - [Get `Hello World` hint](#hello-world-hint)
+    - [Get `Baby steps` hint](#baby-steps-hint)
+    - [Get `My first IO` hint](#my-first-io-hint)
+    - [Get `Filter ls` hint](#filter-ls-hint)
+    - [Get `Concerned about separation` hint](#concerned-about-separation-hint)
+    - [Get `Array We Go` hint](#array-we-go-hint)
+    - [Get `Exceptional coding` hint](#exceptional-coding-hint)
+    - [Get `Database Read` hint](#database-read-hint)
+    - [Get `Time server` hint](#time-server-hint)
+    - [Get `HTTP JSON API` hint](#http-json-api-hint)
+    - [Get `Dependency Heaven` hint](#dependency-heaven-hint)
 
 ## Regex
 #### Set course name
