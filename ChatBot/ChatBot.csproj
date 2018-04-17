@@ -87,7 +87,7 @@
     <Compile Include="Rules\BotRuleContainer.cs" />
     <Compile Include="Rules\ConditionBotRule.cs" />
     <Compile Include="RuleSets\ErrorRules.cs" />
-    <Compile Include="Rules\GoodbyeRules.cs" />
+    <Compile Include="RuleSets\GoodbyeRules.cs" />
     <Compile Include="RuleSets\GreetingsRules.cs" />
     <Compile Include="Rules\IRuleSet.cs" />
     <Compile Include="Rules\JavaCourseRules.cs" />

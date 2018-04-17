@@ -6,7 +6,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace QXS.ChatBot.RuleSets
+namespace QXS.ChatBot.RuleSet
 {
     public class GreetingsRules : IRuleSet
     {

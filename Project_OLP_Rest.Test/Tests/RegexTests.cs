@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QXS.ChatBot;
 using QXS.ChatBot.ChatSessions;
 using QXS.ChatBot.Rules;
-using QXS.ChatBot.RuleSets;
+using QXS.ChatBot.RuleSet;
 
 namespace Project_OLP_Rest.Test.Tests
 {
@@ -13,7 +13,7 @@ namespace Project_OLP_Rest.Test.Tests
     public class RegexTests
     {
         private IEnumerable<BotRule> GreetingBotRules = new GreetingsRules().Rules;
-        private List<BotRule> GoodByeBotRules = GoodbyeRules.rules;
+        private IEnumerable<BotRule> _goodByeBotRules;
         private IEnumerable<BotRule> _errorBotRules;
         private List<BotRule> JokeBotRules = JokeRules.rules;
 
@@ -21,6 +21,7 @@ namespace Project_OLP_Rest.Test.Tests
 
         public RegexTests()
         {
+            _goodByeBotRules = new GoodbyeRuleSet().Rules;
             _errorBotRules = new ErrorRuleSet().Rules;
         }
 
@@ -69,7 +70,7 @@ namespace Project_OLP_Rest.Test.Tests
         [TestMethod]
         public void BotTest_Goodbye()
         {
-            chatBot = new RestChatBot(GoodByeBotRules);
+            chatBot = new RestChatBot(_goodByeBotRules);
             string Message = "ate";
 
             ChatSessionInterface session = new RestChatSession();
