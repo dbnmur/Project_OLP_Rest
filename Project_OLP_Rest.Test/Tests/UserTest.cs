@@ -30,7 +30,7 @@ namespace Project_OLP_Rest.Test
                 };
 
                 var service = new UserService(context);
-                service.Create(student);
+                await service.Create(student);
 
                 Domain.User fetchedUser = await service.FindBy(x => x.FirstName == student.FirstName);
                 Assert.AreEqual(fetchedUser.FirstName, student.FirstName);
