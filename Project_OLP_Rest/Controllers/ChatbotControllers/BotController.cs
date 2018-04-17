@@ -27,7 +27,7 @@ namespace Project_OLP_Rest.Controllers
         private static RestChatBot _chatBot;
 
         /// <summary>
-        /// Chatbot name IMPORTANT
+        /// Required ChatBot name
         /// </summary>
         private string _chatBotName = "TestChatBot";
 

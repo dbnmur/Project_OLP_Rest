@@ -7,13 +7,16 @@ using System.Threading.Tasks;
 
 namespace QXS.ChatBot
 {
+    /// <summary>
+    /// Minimalistic Chat Bot class for REST services
+    /// </summary>
     public class RestChatBot
     {
         protected Stack<string> _commandHistory = new Stack<string>();
         protected SortedList<int, List<BotRule>> _botRules = new SortedList<int, List<BotRule>>(new DescComparer<int>());
 
         public Func<string, string> DefaultAnswer;
-
+        
         public RestChatBot(IEnumerable<BotRule> Rules)
         {
             Dictionary<string, bool> ruleNames = new Dictionary<string, bool>();
