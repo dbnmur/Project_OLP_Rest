@@ -17,6 +17,8 @@ namespace Project_OLP_Rest.Controllers.ChatbotControllers
 
         private RestChatBot _chatBot;
 
+
+
         protected string _chatBotName = null;
 
         public GenericBotController(IChatBotService chatBotService, IChatSessionService chatSessionService)
@@ -39,8 +41,9 @@ namespace Project_OLP_Rest.Controllers.ChatbotControllers
         {
             PHPCourseRule ruleSet = new PHPCourseRule();
 
-            _chatBotName = "PhpChatBot";
 
+            _chatBotName = "PhpChatBot";
         }
+
     }
 }

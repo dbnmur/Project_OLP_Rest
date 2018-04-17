@@ -5,21 +5,25 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QXS.ChatBot;
 using QXS.ChatBot.ChatSessions;
 using QXS.ChatBot.Rules;
+using QXS.ChatBot.RuleSets;
 
 namespace Project_OLP_Rest.Test.Tests
 {
     [TestClass]
     public class RegexTests
     {
-        private List<BotRule> GreetingBotRules = GreetingsRules.rules;
+        private IEnumerable<BotRule> GreetingBotRules = new GreetingsRules().Rules;
         private List<BotRule> GoodByeBotRules = GoodbyeRules.rules;
-        private List<BotRule> ErrorBotRules = ErrorRules.rules;
+        private IEnumerable<BotRule> _errorBotRules;
         private List<BotRule> JokeBotRules = JokeRules.rules;
-
 
         private RestChatBot chatBot;
 
-        
+        public RegexTests()
+        {
+            _errorBotRules = new ErrorRuleSet().Rules;
+        }
+
         [TestMethod]
         public void BotTest_Greeting()
         {
@@ -78,7 +82,7 @@ namespace Project_OLP_Rest.Test.Tests
         [TestMethod]
         public void BotTest_HaveError()
         {
-            chatBot = new RestChatBot(ErrorBotRules);
+            chatBot = new RestChatBot(_errorBotRules);
             string Message = "I have exception";
             ChatSessionInterface session = new RestChatSession();
             string answer = chatBot.FindAnswer(session, Message);
@@ -88,7 +92,7 @@ namespace Project_OLP_Rest.Test.Tests
         [TestMethod]
         public void BotTest_FindSolutionForError()
         {
-            chatBot = new RestChatBot(ErrorBotRules);
+            chatBot = new RestChatBot(_errorBotRules);
             string Message = "find the solution to this error";
             ChatSessionInterface session = new RestChatSession();
             string answer = chatBot.FindAnswer(session, Message);
