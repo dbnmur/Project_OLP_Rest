@@ -30,153 +30,153 @@
     - [Get `Dependency Heaven` hint](#dependency-heaven-hint)
 
 ## Regex
-#### Set course name
+### Set course name
 ```Regex("(course name is|course is) (now )?(.*)")```
-#### Usage 
+### Usage 
  ```Course name is PHP```
 ***
-#### Get course name
+### Get course name
  ```Regex("(what course name|(what is|say) course name)")```
-#### Usage 
+### Usage 
  ```What is course name```
 ***
-#### Show excersices
+### Show excersices
 ```Regex("(show excersices|(teach me|give me tasks) php)")```
-#### Usage 
+### Usage 
 ```teach me php```
 ***
-#### Select `Hello World`
+### Select `Hello World`
 ```Regex("(hello world|(give me hello world|hw) task)")```
-#### Usage 
+### Usage 
 ```hello world```,
 ```give me hello world task```,
 ```hw task```
 ***
 
-#### `Hello World` hint
+### `Hello World` hint
 ```Regex("(hello world hint|(give me hello world|hw) hint)")```
-#### Usage 
+### Usage 
 ```hello world hint```,
 ```give me hello world hint```,
 ```hw hint```
 ***
 
-#### Select `Baby steps`
+### Select `Baby steps`
 ```Regex("(baby-steps|baby steps|(give me baby steps|bs|give me baby-steps) task)")```
-#### Usage 
+### Usage 
 ```baby-steps```, ```baby steps```
 ***
 
-#### `Baby steps` hint
+### `Baby steps` hint
 ```Regex("(baby-steps hint|baby steps hint|(give me baby steps|bs|give me baby-steps) hint)")```
-#### Usage 
+### Usage 
 ```baby-steps hint```, ```baby steps hint```
 ***
 
-#### Select `My first IO`
+### Select `My first IO`
 ```Regex("(my-first-io|my first io|(give me my first io|mfio|give me my-first-io) task)")```
-#### Usage 
+### Usage 
 ```my-first-io```, ```mfio task```
 ***
 
-#### `My first IO` hint
+### `My first IO` hint
 ```Regex("(my-first-io hint|my first io hint|(give me my first io|mfio|give me my-first-io) hint)")```
-#### Usage 
+### Usage 
 ```my-first-io hint```, ```mfio hint```
 ***
 
-#### Select `Filter ls`
+### Select `Filter ls`
 ```Regex("(filter-ls|filter ls|(give me filter ls|fls|give me filter-ls) task)")```
-#### Usage 
+### Usage 
 ```filter-ls```, ```fls task```
 ***
 
-#### `Filter ls` hint
+### `Filter ls` hint
 ```Regex("(filter-ls hint|filter ls hint|(give me filter ls|fls|give me filter-ls) hint)")```
-#### Usage 
+### Usage 
 ```filter-ls hint```, ```fls hint```
 ***
 
-#### Select `Concerned about separation`
+### Select `Concerned about separation`
 ```Regex("(concerned-about-separation|concerned about separation|(give me concerned about separation|cas|give me concerned-about-separation) task)")```
-#### Usage 
+### Usage 
 ```concerned-about-separation```, ```cas task```
 ***
 
-#### `Concerned about separation` hint
+### `Concerned about separation` hint
 ```Regex("(concernedconcerned-about-separation hint|concerned about separation hint|(give me concerned about separation|cas|give me concerned-about-separation) hint)")```
-#### Usage 
+### Usage 
 ```concerned-about-separation hint```, ```cas hint```
 ***
 
-#### Select `Array We Go`
+### Select `Array We Go`
 ```Regex("(array-we-go|array we go|(give me array we go|awg|give me array-we-go) task)")```
-#### Usage 
+### Usage 
 ```array we go```, ```awg task```
 ***
 
-#### `Array We Go` hint
+### `Array We Go` hint
 ```Regex("(array-we-go hint|array we go hint|(give me array we go|awg|give me array-we-go) hint)")```
-#### Usage 
+### Usage 
 ```array we go hint```, ```awg hint```
 ***
 
-#### Select `Exceptional coding`
+### Select `Exceptional coding`
 ```Regex("(exceptional-coding|exceptional coding|(give me exceptional coding|ec|give me exceptional-coding) task)")```
-#### Usage 
+### Usage 
 ```exceptional-coding```, ```ec task```
 ***
 
-#### `Exceptional coding` hint
+### `Exceptional coding` hint
 ```Regex("(exceptional-coding hint|exceptional coding hint|(give me exceptional coding|ec|give me exceptional-coding) hint)")```
-#### Usage 
+### Usage 
 ```exceptional-coding hint```, ```ec hint```
 ***
 
-#### Select `Database Read`
+### Select `Database Read`
 ```Regex("(database-read|database read|db read|db-read|(give me database read|dbr|give me database-read) task)")```
-#### Usage 
+### Usage 
 ```database-read```, ```dbr task```
 ***
 
-#### `Database Read` hint
+### `Database Read` hint
 ```Regex("(database-read hint|database read hint|db read hint|db-read hint|(give me database read|dbr|give me database-read) hint)")```
-#### Usage 
+### Usage 
 ```database-read hint```, ```dbr hint```
 ***
 
-#### Select `Time server`
+### Select `Time server`
 ```Regex("(time-server|time server|(give me time server|ts|give me time-server) task)")```
-#### Usage 
+### Usage 
 ```time-server```, ```ts task```
 ***
 
-#### `Time server` hint
+### `Time server` hint
 ```Regex("(time-server hint|time server hint|(give me time server|ts|give me time-server) hint)")```
-#### Usage 
+### Usage 
 ```time-server hint```, ```ts hint```
 ***
 
-#### Select `HTTP JSON API`
+### Select `HTTP JSON API`
 ```Regex("(http-json-api|http json api|(give me http json api|hja|give me http-json-api) task)")```
-#### Usage 
+### Usage 
 ```http-json-api```, ```hja task```
 ***
 
-#### `HTTP JSON API` hint
+### `HTTP JSON API` hint
 ```Regex("(http-json-api hint|http json api hint|(give me http json api|hja|give me http-json-api) hint)")```
-#### Usage 
+### Usage 
 ```http-json-api hint```, ```hja hint```
 ***
 
-#### Select `Dependency Heaven`
+### Select `Dependency Heaven`
 ```Regex("(dependency-heaven|dependency heaven|(give me dependency heaven|dh|give me dependency-heaven) task)")```
-#### Usage 
+### Usage 
 ```dependency-heaven```, ```dh task```
 ***
 
-#### `Dependency Heaven` hint
+### `Dependency Heaven` hint
 ```Regex("(dependency-heaven hint|dependency heaven hint|(give me dependency heaven|dh|give me dependency-heaven) hint)")```
-#### Usage 
+### Usage 
 ```dependency-heaven hint```, ```dh hint```
 ***
