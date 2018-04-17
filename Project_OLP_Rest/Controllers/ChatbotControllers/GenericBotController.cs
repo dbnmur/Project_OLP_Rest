@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Project_OLP_Rest.Data.Interfaces;
 using QXS.ChatBot;
-using QXS.ChatBot.Rules;
 using QXS.ChatBot.RuleSet;
 
 namespace Project_OLP_Rest.Controllers.ChatbotControllers

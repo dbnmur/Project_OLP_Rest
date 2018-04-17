@@ -4,7 +4,6 @@ using System.Text.RegularExpressions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QXS.ChatBot;
 using QXS.ChatBot.ChatSessions;
-using QXS.ChatBot.Rules;
 using QXS.ChatBot.RuleSet;
 
 namespace Project_OLP_Rest.Test.Tests

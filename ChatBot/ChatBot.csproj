@@ -90,7 +90,7 @@
     <Compile Include="RuleSets\GoodBye\GoodbyeRules.cs" />
     <Compile Include="RuleSets\Greeting\GreetingsRules.cs" />
     <Compile Include="Rules\IRuleSet.cs" />
-    <Compile Include="Rules\JavaCourseRules.cs" />
+    <Compile Include="RuleSets\JavaCourse\JavaCourseRules.cs" />
     <Compile Include="RuleSets\Joke\JokeRules.cs" />
     <Compile Include="RuleSets\PHPCourse\PHPCourseRule.cs" />
     <Compile Include="Rules\PowershellBotRule.cs" />
