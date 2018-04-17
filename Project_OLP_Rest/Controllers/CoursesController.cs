@@ -11,14 +11,18 @@ using RiskFirst.Hateoas;
 
 namespace Project_OLP_Rest.Controllers
 {
-    [Produces("application/json")]
+    //[Produces("application/json")]
+    [Produces("application/json+hateoas")]
     [Route("api/Courses")]
     public class CoursesController : Controller
     {
+        private readonly ILinksService linksService;
         private readonly OLP_Context _context;
 
-        public CoursesController(OLP_Context context)
+        public CoursesController(OLP_Context context, ILinksService linksService)
         {
+            this.linksService = linksService;
+
             _context = context;
         }
 
@@ -26,7 +30,7 @@ namespace Project_OLP_Rest.Controllers
         [HttpGet(Name = "get-courses")]
         public IEnumerable<Course> GetCourses()
         {
-            
+
             return _context.Courses;
         }
 
@@ -50,7 +54,7 @@ namespace Project_OLP_Rest.Controllers
         }
 
         // PUT: api/Courses/5
-        [HttpPut("{id}", Name ="update-course")]
+        [HttpPut("{id}", Name ="edit-course")]
         public async Task<IActionResult> PutCourse([FromRoute] int id, [FromBody] Course course)
         {
             if (!ModelState.IsValid)

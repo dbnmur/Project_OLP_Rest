@@ -10,7 +10,8 @@ using Project_OLP_Rest.Domain;
 
 namespace Project_OLP_Rest.Controllers
 {
-    [Produces("application/json")]
+    //[Produces("application/json")]
+    [Produces("application/json+hateoas")]
     [Route("api/Modules")]
     public class ModulesController : Controller
     {
@@ -22,14 +23,14 @@ namespace Project_OLP_Rest.Controllers
         }
 
         // GET: api/Modules
-        [HttpGet]
+        [HttpGet(Name = "get-modules")]
         public IEnumerable<Module> GetModules()
         {
             return _context.Modules;
         }
 
         // GET: api/Modules/5
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "get-module")]
         public async Task<IActionResult> GetModule([FromRoute] int id)
         {
             if (!ModelState.IsValid)
@@ -48,7 +49,7 @@ namespace Project_OLP_Rest.Controllers
         }
 
         // PUT: api/Modules/5
-        [HttpPut("{id}")]
+        [HttpPut("{id}", Name = "edit-modules")]
         public async Task<IActionResult> PutModule([FromRoute] int id, [FromBody] Module @module)
         {
             if (!ModelState.IsValid)
@@ -83,7 +84,7 @@ namespace Project_OLP_Rest.Controllers
         }
 
         // POST: api/Modules
-        [HttpPost]
+        [HttpPost(Name = "add-modules")]
         public async Task<IActionResult> PostModule([FromBody] Module @module)
         {
             if (!ModelState.IsValid)
@@ -98,7 +99,7 @@ namespace Project_OLP_Rest.Controllers
         }
 
         // DELETE: api/Modules/5
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}", Name = "delete-modules")]
         public async Task<IActionResult> DeleteModule([FromRoute] int id)
         {
             if (!ModelState.IsValid)

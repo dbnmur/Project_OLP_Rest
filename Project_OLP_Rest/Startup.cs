@@ -31,15 +31,10 @@ namespace Project_OLP_Rest
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddLinks(config =>
-            {
-                config.AddPolicy<Course>(policy => {
-                    policy.RequireSelfLink()
-                          .RequireRoutedLink("all", "get-chatbots");
-                        //  .RequireRoutedLink("delete", "DeleteCourselRoute", x => new { id = x.Id });
-                });
+            
 
-                services.AddSwaggerGen(c =>
+
+            services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info
                 {
@@ -51,45 +46,65 @@ namespace Project_OLP_Rest
                 });
             });
 
-            services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(options => 
-            {
-                options.Authority = Configuration["Auth0:Authority"];
-                options.Audience = Configuration["Auth0:Audience"];
-            });
+                services.AddAuthentication(options =>
+                {
+                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                }).AddJwtBearer(options =>
+                {
+                    options.Authority = Configuration["Auth0:Authority"];
+                    options.Audience = Configuration["Auth0:Audience"];
+                });
 
-            services.AddMvc();
+            services
+                .AddMvc()
+                .AddHateoas(options =>
+                {
+                    options
+                    //Courses
+                        .AddLink<Course>("get-course", p => new { id = p.CourseId })
+                        .AddLink<List<Course>>("create-course")
+                        .AddLink<Course>("update-course", p => new { id = p.CourseId })
+                        .AddLink<Course>("delete-course", p => new { id = p.CourseId })
+                    //ChatBots
+                        .AddLink<ChatBot>("getChatBots", p => new { id = p.ChatBotId })
+                        .AddLink<ChatBot>("getChatBot", p => new { id = p.ChatBotId })
+                    //Groups
+                        .AddLink<Group>("getGroups", p => new { id = p.GroupId })
+                        .AddLink<Group>("getGroup", p => new { id = p.GroupId })
+                        .AddLink<List<Group>>("addGroup")
+                        .AddLink<Group>("deleteGroup", p => new { id = p.GroupId });
+                });    
 
-            services.AddDbContext<OLP_Context>(
-                options => options.UseSqlServer(
-                     Configuration.GetConnectionString("OLPConnection")));
+                services.AddDbContext<OLP_Context>(
+                    options => options.UseSqlServer(
+                         Configuration.GetConnectionString("OLPConnection")));
 
-            services.AddTransient<IGroupService, GroupService>();
-            services.AddTransient<ICourseService, CourseService>();
-            services.AddTransient<IModuleService, ModuleService>();
-            services.AddTransient<IChatBotService, ChatBotService>();
-            services.AddTransient<IChatSessionService, ChatSessionService>();
-        }
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-        {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
+                services.AddTransient<IGroupService, GroupService>();
+                services.AddTransient<ICourseService, CourseService>();
+                services.AddTransient<IModuleService, ModuleService>();
+                services.AddTransient<IChatBotService, ChatBotService>();
+                services.AddTransient<IChatSessionService, ChatSessionService>();
             }
 
-            app.UseAuthentication();
-            
-            app.UseMvc();
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>
+            // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+            public void Configure(IApplicationBuilder app, IHostingEnvironment env)
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-            });
+                if (env.IsDevelopment())
+                {
+                    app.UseDeveloperExceptionPage();
+                }
+
+                app.UseAuthentication();
+
+                app.UseMvc();
+                app.UseSwagger();
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                });
+            }
         }
     }
-}
+
+
