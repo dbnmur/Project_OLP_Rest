@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QXS.ChatBot;
 using QXS.ChatBot.ChatSessions;
-using QXS.ChatBot.Rules;
+using QXS.ChatBot.RuleSet;
 
 namespace Project_OLP_Rest.Test.Tests
 {
@@ -16,7 +16,7 @@ namespace Project_OLP_Rest.Test.Tests
         JavaCourseRules javaCourseRules = new JavaCourseRules();
 
         [TestMethod]
-        public void CreateJavaBot() => javaChatBot = new RestChatBot(javaCourseRules.createJavaCourseRules);
+        public void CreateJavaBot() => javaChatBot = new RestChatBot(javaCourseRules.Rules);
 
 
         [TestMethod]
