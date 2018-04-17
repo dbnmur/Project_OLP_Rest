@@ -12,7 +12,7 @@ namespace QXS.ChatBot.RuleSet
     {
         public IEnumerable<BotRule> Rules { get { return _courseRule; } }
 
-        public List<BotRule> _courseRule = new List<BotRule>()
+        private IEnumerable<BotRule> _courseRule = new List<BotRule>()
         {
             new BotRule(
                 Name: "setcoursename",

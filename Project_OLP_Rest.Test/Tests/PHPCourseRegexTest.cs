@@ -17,7 +17,7 @@ namespace Project_OLP_Rest.Test.Tests
         PHPCourseRuleSet phpCourseRule = new PHPCourseRuleSet();
 
         [TestMethod]
-        public void CreatePHPBot() => PHPChatBot = new RestChatBot(phpCourseRule._courseRule);
+        public void CreatePHPBot() => PHPChatBot = new RestChatBot(phpCourseRule.Rules);
 
         [TestMethod]
         public void PHPCourseNameTest()

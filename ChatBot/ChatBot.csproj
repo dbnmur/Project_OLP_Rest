@@ -91,7 +91,7 @@
     <Compile Include="RuleSets\Greeting\GreetingsRules.cs" />
     <Compile Include="Rules\IRuleSet.cs" />
     <Compile Include="Rules\JavaCourseRules.cs" />
-    <Compile Include="Rules\JokeRules.cs" />
+    <Compile Include="RuleSets\Joke\JokeRules.cs" />
     <Compile Include="RuleSets\PHPCourse\PHPCourseRule.cs" />
     <Compile Include="Rules\PowershellBotRule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
