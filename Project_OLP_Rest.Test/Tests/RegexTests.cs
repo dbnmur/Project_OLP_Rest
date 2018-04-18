@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using ChatBot.Rest;
+using ChatBot.Rest.ChatSessions;
+using ChatBot.Rest.RuleSets;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QXS.ChatBot;
 using QXS.ChatBot.ChatSessions;
-using QXS.ChatBot.Rules;
-using QXS.ChatBot.RuleSet;
-using QXS.ChatBot.RuleSets;
 
 namespace Project_OLP_Rest.Test.Tests
 {
@@ -22,10 +22,10 @@ namespace Project_OLP_Rest.Test.Tests
 
         public RegexTests()
         {
-            _greetingBotRules = new GreetingsRules().Rules;
+            _greetingBotRules = new GreetingsRuleSet().Rules;
             _goodByeBotRules = new GoodbyeRuleSet().Rules;
             _errorBotRules = new ErrorRuleSet().Rules;
-            _jokeBotRules = new JokeRulesSet().Rules;
+            _jokeBotRules = new JokeRuleSet().Rules;
         }
 
         [TestMethod]
@@ -107,7 +107,7 @@ namespace Project_OLP_Rest.Test.Tests
         {
             chatBot = new RestChatBot(_jokeBotRules);
             string Message = "tell me a joke";
-            List<string> jokes = JokeRulesSet.jokeList;
+            List<string> jokes = JokeRuleSet.jokeList;
             ChatSessionInterface session = new RestChatSession();
             string answer = chatBot.FindAnswer(session, Message);
             Console.WriteLine(answer);

@@ -1,10 +1,11 @@
-﻿using System;
+﻿using QXS.ChatBot;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QXS.ChatBot.ChatSessions
+namespace ChatBot.Rest.ChatSessions
 {
     public class RestChatSession : IRestChatSession
     {

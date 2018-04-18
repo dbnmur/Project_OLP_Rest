@@ -2,16 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ChatBot.Rest;
+using ChatBot.Rest.ChatSessions;
+using ChatBot.Rest.RuleSets;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Project_OLP_Rest.Data.Interfaces;
 using Project_OLP_Rest.RequestModels;
-using QXS.ChatBot;
-using QXS.ChatBot.ChatSessions;
-using QXS.ChatBot.Rules;
-using QXS.ChatBot.RuleSet;
-using QXS.ChatBot.RulesSets;
 
 namespace Project_OLP_Rest.Controllers.ChatbotControllers
 {
@@ -98,7 +96,7 @@ namespace Project_OLP_Rest.Controllers.ChatbotControllers
         }
 
         /// <summary>
-        /// Requires: bot name, ruleset
+        /// Requires: bot name
         /// </summary>
         protected abstract void OnBotCreate();
     }

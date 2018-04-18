@@ -1,4 +1,4 @@
-﻿using QXS.ChatBot.RulesSets;
+﻿using QXS.ChatBot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,9 +6,9 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace QXS.ChatBot.RuleSet
+namespace ChatBot.Rest.RuleSets
 {
-    public class PHPCourseRuleSet : IRuleSet
+    public class PhpCourseRuleSet : IRuleSet
     {
         public IEnumerable<BotRule> Rules { get { return _courseRule; } }
 
@@ -23,7 +23,6 @@ namespace QXS.ChatBot.RuleSet
                     return "Course name now is " + session.SessionStorage.Values["CourseName"];
                 }
             ),
-
             new BotRule(
                 Name: "getcoursename",
                 Weight: 10,

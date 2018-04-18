@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using ChatBot.Rest;
+using ChatBot.Rest.ChatSessions;
+using ChatBot.Rest.RuleSets;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QXS.ChatBot;
 using QXS.ChatBot.ChatSessions;
-using QXS.ChatBot.RuleSet;
 
 namespace Project_OLP_Rest.Test.Tests
 {
@@ -13,7 +15,7 @@ namespace Project_OLP_Rest.Test.Tests
     {
         private RestChatBot PHPChatBot;
 
-        PHPCourseRuleSet phpCourseRule = new PHPCourseRuleSet();
+        PhpCourseRuleSet phpCourseRule = new PhpCourseRuleSet();
 
         [TestMethod]
         public void CreatePHPBot() => PHPChatBot = new RestChatBot(phpCourseRule.Rules);

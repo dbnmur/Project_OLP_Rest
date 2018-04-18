@@ -1,11 +1,12 @@
-﻿using System;
+﻿using QXS.ChatBot;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace QXS.ChatBot
+namespace ChatBot.Rest
 {
     /// <summary>
     /// Minimalistic Chat Bot class for REST services

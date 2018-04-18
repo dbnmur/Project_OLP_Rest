@@ -70,12 +70,9 @@
   <ItemGroup>
     <Compile Include="BotResponse.cs" />
     <Compile Include="ChatSessions\ConsoleSpeechChatSession.cs" />
-    <Compile Include="ChatSessions\IRestChatSession.cs" />
-    <Compile Include="ChatSessions\RestChatSession.cs" />
     <Compile Include="ChatSessions\TimeOutConsoleChatSession.cs" />
     <Compile Include="Generators\BotRuleCodeCompiler.cs" />
     <Compile Include="MethodExtensions\ChatBotXmlNodeExtensions.cs" />
-    <Compile Include="RestChatBot.cs" />
     <Compile Include="Rules\GenericBotRuleset.cs" />
     <Compile Include="Rules\BotRule.cs" />
     <Compile Include="ChatBot.cs" />
@@ -86,13 +83,6 @@
     <Compile Include="ChatSessions\LyncChatSession.cs" />
     <Compile Include="Rules\BotRuleContainer.cs" />
     <Compile Include="Rules\ConditionBotRule.cs" />
-    <Compile Include="RuleSets\Error\ErrorRules.cs" />
-    <Compile Include="RuleSets\GoodBye\GoodbyeRules.cs" />
-    <Compile Include="RuleSets\Greeting\GreetingsRules.cs" />
-    <Compile Include="Rules\IRuleSet.cs" />
-    <Compile Include="RuleSets\JavaCourse\JavaCourseRules.cs" />
-    <Compile Include="RuleSets\Joke\JokeRules.cs" />
-    <Compile Include="RuleSets\PHPCourse\PHPCourseRule.cs" />
     <Compile Include="Rules\PowershellBotRule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rules\RandomAnswersBotRule.cs" />
@@ -109,7 +99,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

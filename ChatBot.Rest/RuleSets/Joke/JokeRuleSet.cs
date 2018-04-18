@@ -1,4 +1,4 @@
-﻿using QXS.ChatBot.RulesSets;
+﻿using QXS.ChatBot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,9 +6,9 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace QXS.ChatBot.RuleSet
+namespace ChatBot.Rest.RuleSets
 {
-    public class JokeRulesSet : IRuleSet
+    public class JokeRuleSet : IRuleSet
     {
         public IEnumerable<BotRule> Rules { get { return _rules; } }
 

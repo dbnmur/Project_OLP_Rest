@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace QXS.ChatBot
 {
-    internal class DescComparer<T> : IComparer<T>
+    public class DescComparer<T> : IComparer<T>
     {
         public int Compare(T x, T y)
         {
