@@ -65,7 +65,13 @@ namespace Project_OLP_Rest
                         .AddLink<Group>("get-group", p => new { id = p.GroupId })
                         .AddLink<List<Group>>("add-group")
                         .AddLink<Group>("edit-group", p => new { id = p.GroupId })
-                        .AddLink<Group>("delete-group", p => new { id = p.GroupId });
+                        .AddLink<Group>("delete-group", p => new { id = p.GroupId })
+                        //ChatBots 
+                        .AddLink<ChatBot>("get-chatbots", p => new { id = p.ChatBotId })
+                        .AddLink<ChatBot>("get-chatbot", p => new { id = p.ChatBotId })
+                        .AddLink<List<ChatBot>>("add-chatbot")
+                        .AddLink<ChatBot>("edit-chatbot", p => new { id = p.ChatBotId })
+                        .AddLink<ChatBot>("delete-chatbot", p => new { id = p.ChatBotId });
 
                  });
                      
