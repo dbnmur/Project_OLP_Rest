@@ -1,4 +1,7 @@
-﻿using QXS.ChatBot;
+﻿using ChatBot.Rest.Rules;
+using Project_OLP_Rest.Data.Interfaces;
+using Project_OLP_Rest.Domain;
+using QXS.ChatBot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +17,16 @@ namespace ChatBot.Rest.RuleSets
 
         private IEnumerable<BotRule> _courseRule = new List<BotRule>()
         {
+            new ExerciseBotRule(
+                Name: "exercise",
+                Weight: 100,
+                MessagePattern: new Regex("test test php test"),
+                Process: delegate (Match match, ChatSessionInterface session, IExerciseService exerciseService)
+                {
+                    Exercise exercise = exerciseService.GetAll().Result.First();
+                    return exercise.Name;
+                }
+            ),
             new BotRule(
                 Name: "setcoursename",
                 Weight: 10,

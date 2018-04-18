@@ -98,17 +98,19 @@ namespace Project_OLP_Rest.Controllers.ChatbotControllers
         /// <summary>
         /// Requires: bot name
         /// </summary>
-        protected abstract void OnBotCreate();
+        protected virtual void OnBotCreate() { }
     }
 
     [Route("api/php-bot")]
-    public class PhpBotController : GenericBotController<RestChatBot, ErrorRuleSet>
+    public class PhpBotController : GenericBotController<RestChatBot, PhpCourseRuleSet>
     {
-        public PhpBotController(IChatBotService chatBotService, IChatSessionService chatSessionService) : base(chatBotService, chatSessionService) { }
+        private readonly IExerciseService _exerciseService;
 
-        protected override void OnBotCreate()
+        public PhpBotController(IChatBotService chatBotService, IChatSessionService chatSessionService, IExerciseService exerciseService) : base(chatBotService, chatSessionService)
         {
             _chatBotName = "PhpChatBot";
+            _exerciseService = exerciseService;
+            _chatBot.AddExerciseService(_exerciseService);
         }
     }
 }

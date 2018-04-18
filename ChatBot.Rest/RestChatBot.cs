@@ -1,4 +1,6 @@
-﻿using QXS.ChatBot;
+﻿using ChatBot.Rest.Rules;
+using Project_OLP_Rest.Data.Interfaces;
+using QXS.ChatBot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,15 +11,17 @@ using System.Threading.Tasks;
 namespace ChatBot.Rest
 {
     /// <summary>
-    /// Minimalistic Chat Bot class for REST services
+    /// ChatBot class for REST services
     /// </summary>
     public class RestChatBot
     {
+        private IExerciseService _exerciseService;
+
         protected Stack<string> _commandHistory = new Stack<string>();
         protected SortedList<int, List<BotRule>> _botRules = new SortedList<int, List<BotRule>>(new DescComparer<int>());
 
         public Func<string, string> DefaultAnswer;
-        
+
         public RestChatBot(IEnumerable<BotRule> Rules)
         {
             Dictionary<string, bool> ruleNames = new Dictionary<string, bool>();
@@ -25,7 +29,17 @@ namespace ChatBot.Rest
             {
                 if (rule.Process == null)
                 {
-                    throw new ArgumentException("Process is null.", "Rules");
+                    if (rule.GetType() == typeof(ExerciseBotRule))
+                    {
+                        if ((rule as ExerciseBotRule).ProcessSpecial == null)
+                        {
+                            throw new ArgumentException("Process is null.", "Rules");
+                        }
+                    }
+                    else
+                    {
+                        throw new ArgumentException("Process is null.", "Rules");
+                    }
                 }
                 if (rule.MessagePattern == null)
                 {
@@ -44,6 +58,16 @@ namespace ChatBot.Rest
             }
         }
 
+        public RestChatBot(IEnumerable<BotRule> Rules, IExerciseService exerciseService) : this(Rules)
+        {
+            _exerciseService = exerciseService;
+        }
+
+        public void AddExerciseService(IExerciseService exerciseService)
+        {
+            _exerciseService = exerciseService;
+        }
+
         public string FindAnswer(ChatSessionInterface session, string messageIn)
         {
             foreach (List<BotRule> rules in this._botRules.Values)
@@ -53,7 +77,17 @@ namespace ChatBot.Rest
                     Match match = rule.MessagePattern.Match(messageIn);
                     if (match.Success)
                     {
-                        string msg = rule.Process(match, session);
+                        string msg = null;
+                        if (rule.GetType() == typeof(ExerciseBotRule))
+                        {
+                            ExerciseBotRule exerciseBotRule = rule as ExerciseBotRule;
+                            msg = exerciseBotRule.ProcessSpecial(match, session, _exerciseService);
+                        }
+                        else
+                        {
+                            msg = rule.Process(match, session);
+                        }
+
                         if (msg != null)
                         {
                             session.AddResponseToHistory(new BotResponse(rule.Name, messageIn, msg));

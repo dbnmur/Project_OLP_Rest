@@ -9,8 +9,4 @@
     <ProjectReference Include="..\Project_OLP_Rest.Data\Project_OLP_Rest.Data.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Rules\" />
-  </ItemGroup>
-
 </Project>

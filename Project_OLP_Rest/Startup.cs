@@ -66,6 +66,7 @@ namespace Project_OLP_Rest
             services.AddTransient<IChatBotService, ChatBotService>();
             services.AddTransient<IChatSessionService, ChatSessionService>();
             services.AddTransient<IRecordService, RecordService>();
+            services.AddTransient<IExerciseService, ExerciseService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
