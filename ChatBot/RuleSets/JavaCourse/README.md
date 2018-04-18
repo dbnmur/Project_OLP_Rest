@@ -5,8 +5,9 @@
 - [Set course name](#set-course-name)
 - [Get course name](#get-course-name)
 - [Show excersices](#show-excersices)
-  - [Select `Hello World`](#select-hello-world)
-
+- [Get task](#get-task)
+- [Learning material](#learning-material)
+- [Java fact](#java-fact)
 
 ## Regex
 ### Set course name
