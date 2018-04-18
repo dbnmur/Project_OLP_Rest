@@ -9,7 +9,6 @@ using Project_OLP_Rest.Data.Interfaces;
 using Project_OLP_Rest.RequestModels;
 using QXS.ChatBot;
 using QXS.ChatBot.ChatSessions;
-using QXS.ChatBot.Rules;
 using QXS.ChatBot.RuleSet;
 using QXS.ChatBot.RulesSets;
 
