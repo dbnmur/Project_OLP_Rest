@@ -1,17 +1,12 @@
-﻿using QXS.ChatBot.RulesSets;
-using System;
+﻿using QXS.ChatBot;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
-namespace QXS.ChatBot.RuleSet
+namespace ChatBot.Rest.RuleSets
 {
-    public class JavaCourseRules : IRuleSet
+    public class JavaCourseRuleSet : IRuleSet
     {
         public IEnumerable<BotRule> Rules { get { return _createJavaCourseRules; } }
-
         private IEnumerable<BotRule> _createJavaCourseRules = new List<BotRule>()
         {
             new BotRule(
