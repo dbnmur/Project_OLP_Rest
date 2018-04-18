@@ -89,8 +89,13 @@ namespace Project_OLP_Rest
                         .AddLink<Record>("get-record", p => new { id = p.RecordId })
                         .AddLink<List<Record>>("add-record")
                         .AddLink<Record>("edit-record", p => new { id = p.RecordId })
-                        .AddLink<Record>("delete-record", p => new { id = p.RecordId });
-                        
+                        .AddLink<Record>("delete-record", p => new { id = p.RecordId })
+                        //ChatSession
+                        .AddLink<ChatSession>("get-sessions", p => new { id = p.ChatSessionId })
+                        .AddLink<ChatSession>("get-session", p => new { id = p.ChatSessionId })
+                        .AddLink<List<ChatSession>>("add-session")
+                        .AddLink<ChatSession>("edit-session", p => new { id = p.ChatSessionId })
+                        .AddLink<ChatSession>("delete-session", p => new { id = p.ChatSessionId });
 
                  });
                      

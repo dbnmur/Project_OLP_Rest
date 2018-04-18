@@ -11,7 +11,8 @@ using Project_OLP_Rest.Domain;
 
 namespace Project_OLP_Rest.Controllers
 {
-    [Produces("application/json")]
+    //[Produces("application/json")]
+    [Produces("application/json+hateoas")]
     [Route("api/ChatSessions")]
     public class ChatSessionsController : Controller
     {
@@ -23,14 +24,14 @@ namespace Project_OLP_Rest.Controllers
         }
 
         // GET: api/ChatSessions
-        [HttpGet]
+        [HttpGet(Name = "get-sessions")]
         public async Task<IEnumerable<ChatSession>> GetChatSessions()
         {
             return await _chatSessionService.GetAll();
         }
 
         // GET: api/ChatSessions/5
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "get-session")]
         public async Task<IActionResult> GetChatSession([FromRoute] int id)
         {
             if (!ModelState.IsValid)
@@ -49,7 +50,7 @@ namespace Project_OLP_Rest.Controllers
         }
 
         // PUT: api/ChatSessions/5
-        [HttpPut("{id}")]
+        [HttpPut("{id}",Name ="edit-session")]
         public async Task<IActionResult> PutChatSession([FromRoute] int id, [FromBody] ChatSession chatSession)
         {
             if (!ModelState.IsValid)
@@ -82,7 +83,7 @@ namespace Project_OLP_Rest.Controllers
         }
 
         // POST: api/ChatSessions
-        [HttpPost]
+        [HttpPost(Name = "add-session")]
         public async Task<IActionResult> PostChatSession([FromBody] ChatSession chatSession)
         {
             if (!ModelState.IsValid)
@@ -96,7 +97,7 @@ namespace Project_OLP_Rest.Controllers
         }
 
         // DELETE: api/ChatSessions/5
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}",Name = "delete-session")]
         public async Task<IActionResult> DeleteChatSession([FromRoute] int id)
         {
             if (!ModelState.IsValid)
