@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project_OLP_Rest.Core.Tests
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Cucumber", "Test.Cucumber\Test.Cucumber.csproj", "{53093D24-3966-4E5E-A248-47D2F3AE69BF}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCore.Hateoas", "Project_OLP_Rest.Hateoas\AspNetCore.Hateoas.csproj", "{670A1634-C41C-4FA8-9C6C-7FC10D4E301C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +83,14 @@ Global
 		{53093D24-3966-4E5E-A248-47D2F3AE69BF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{53093D24-3966-4E5E-A248-47D2F3AE69BF}.ReleaseWithoutLync|Any CPU.ActiveCfg = Release|Any CPU
 		{53093D24-3966-4E5E-A248-47D2F3AE69BF}.ReleaseWithoutLync|Any CPU.Build.0 = Release|Any CPU
+		{670A1634-C41C-4FA8-9C6C-7FC10D4E301C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{670A1634-C41C-4FA8-9C6C-7FC10D4E301C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{670A1634-C41C-4FA8-9C6C-7FC10D4E301C}.DebugWithoutLync|Any CPU.ActiveCfg = Debug|Any CPU
+		{670A1634-C41C-4FA8-9C6C-7FC10D4E301C}.DebugWithoutLync|Any CPU.Build.0 = Debug|Any CPU
+		{670A1634-C41C-4FA8-9C6C-7FC10D4E301C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{670A1634-C41C-4FA8-9C6C-7FC10D4E301C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{670A1634-C41C-4FA8-9C6C-7FC10D4E301C}.ReleaseWithoutLync|Any CPU.ActiveCfg = Release|Any CPU
+		{670A1634-C41C-4FA8-9C6C-7FC10D4E301C}.ReleaseWithoutLync|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

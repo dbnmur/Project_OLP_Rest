@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using Project_OLP_Rest.Data.Interfaces;
 using Project_OLP_Rest.Data.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Project_OLP_Rest.Domain;
 
 namespace Project_OLP_Rest
 {
@@ -51,10 +52,23 @@ namespace Project_OLP_Rest
                 options.Audience = Configuration["Auth0:Audience"];
             });
 
-            services.AddMvc()
+            services
+                .AddMvc()
                 .AddJsonOptions(
                     options => options.SerializerSettings.ReferenceLoopHandling
-                        = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+                        = Newtonsoft.Json.ReferenceLoopHandling.Ignore)
+                .AddHateoas(options =>
+                 {
+                     options
+                        //Groups
+                        .AddLink<Group>("get-groups", p => new { id = p.GroupId })
+                        .AddLink<Group>("get-group", p => new { id = p.GroupId })
+                        .AddLink<List<Group>>("add-group")
+                        .AddLink<Group>("edit-group", p => new { id = p.GroupId })
+                        .AddLink<Group>("delete-group", p => new { id = p.GroupId });
+
+                 });
+                     
 
             services.AddDbContext<OLP_Context>(
                 options => options.UseSqlServer(
