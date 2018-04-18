@@ -77,7 +77,13 @@ namespace Project_OLP_Rest
                         .AddLink<Course>("get-course", p => new { id = p.CourseId })
                         .AddLink<List<Course>>("add-course")
                         .AddLink<Course>("edit-course", p => new { id = p.CourseId })
-                        .AddLink<Course>("delete-course", p => new { id = p.CourseId });
+                        .AddLink<Course>("delete-course", p => new { id = p.CourseId })
+                        //Modules
+                        .AddLink<Module>("get-modules", p => new { id = p.ModuleId })
+                        .AddLink<Module>("get-module", p => new { id = p.ModuleId })
+                        .AddLink<List<Module>>("add-module")
+                        .AddLink<Module>("edit-module", p => new { id = p.ModuleId })
+                        .AddLink<Module>("delete-module", p => new { id = p.ModuleId });
                         
 
                  });
