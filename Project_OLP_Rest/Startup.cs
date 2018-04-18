@@ -71,7 +71,14 @@ namespace Project_OLP_Rest
                         .AddLink<ChatBot>("get-chatbot", p => new { id = p.ChatBotId })
                         .AddLink<List<ChatBot>>("add-chatbot")
                         .AddLink<ChatBot>("edit-chatbot", p => new { id = p.ChatBotId })
-                        .AddLink<ChatBot>("delete-chatbot", p => new { id = p.ChatBotId });
+                        .AddLink<ChatBot>("delete-chatbot", p => new { id = p.ChatBotId })
+                        //Courses
+                        .AddLink<Course>("get-courses", p => new { id = p.CourseId })
+                        .AddLink<Course>("get-course", p => new { id = p.CourseId })
+                        .AddLink<List<Course>>("add-course")
+                        .AddLink<Course>("edit-course", p => new { id = p.CourseId })
+                        .AddLink<Course>("delete-course", p => new { id = p.CourseId });
+                        
 
                  });
                      
