@@ -11,8 +11,7 @@ using Project_OLP_Rest.Domain;
 
 namespace Project_OLP_Rest.Controllers
 {
-    //[Produces("application/json")]
-    [Produces("application/json+hateoas")]
+    [Produces("application/json")]
     [Route("api/Groups")]
     public class GroupsController : Controller
     {
@@ -26,14 +25,14 @@ namespace Project_OLP_Rest.Controllers
         }
 
         // GET: api/Groups
-        [HttpGet(Name = "get-groups")]
+        [HttpGet]
         public IEnumerable<Group> GetGroups()
         {
             return _groupService.GetAll();
         }
 
         // GET: api/Groups/5
-        [HttpGet("{id}",Name = "get-group")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetGroup([FromRoute] int id)
         {
             if (!ModelState.IsValid)
@@ -52,7 +51,7 @@ namespace Project_OLP_Rest.Controllers
         }
 
         // PUT: api/Groups/5
-        [HttpPut("{id}", Name = "edit-group")]
+        [HttpPut("{id}")]
         public async Task<IActionResult> PutGroup([FromRoute] int id, [FromBody] Group @group)
         {
             if (!ModelState.IsValid)
@@ -87,7 +86,7 @@ namespace Project_OLP_Rest.Controllers
         }
 
         // POST: api/Groups
-        [HttpPost(Name = "add-group")]
+        [HttpPost]
         public async Task<IActionResult> PostGroup([FromBody] Group @group)
         {
             if (!ModelState.IsValid)
@@ -102,7 +101,7 @@ namespace Project_OLP_Rest.Controllers
         }
 
         // DELETE: api/Groups/5
-        [HttpDelete("{id}", Name = "delete-group")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteGroup([FromRoute] int id)
         {
             if (!ModelState.IsValid)

@@ -25,7 +25,6 @@
     <ProjectReference Include="..\ChatBot\ChatBot.csproj" />
     <ProjectReference Include="..\Project_OLP_Rest.Data\Project_OLP_Rest.Data.csproj" />
     <ProjectReference Include="..\Project_OLP_Rest.Domain\Project_OLP_Rest.Domain.csproj" />
-    <ProjectReference Include="..\Project_OLP_Rest.Hateoas\AspNetCore.Hateoas.csproj" />
   </ItemGroup>
 
 </Project>

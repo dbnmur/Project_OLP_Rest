@@ -18,6 +18,7 @@ namespace Project_OLP_Rest.Controllers
     public class ChatBotsController : Controller
     {
         private readonly IChatBotService _chatBotService;
+        private readonly ILinksService linksService;
 
         public ChatBotsController(IChatBotService chatBotService)
         {
@@ -36,7 +37,7 @@ namespace Project_OLP_Rest.Controllers
         public async Task<IActionResult> GetChatBot([FromRoute] int id)
         {
             if (!ModelState.IsValid)
-            { 
+            {
                 return BadRequest(ModelState);
             }
 
@@ -46,11 +47,12 @@ namespace Project_OLP_Rest.Controllers
             {
                 return NotFound();
             }
+
             return Ok(chatBot);
         }
 
         // PUT: api/ChatBots/5
-        [HttpPut("{id}", Name = "edit-chatBot")]
+        [HttpPut("{id}")]
         public async Task<IActionResult> PutChatBot([FromRoute] int id, [FromBody] ChatBot chatBot)
         {
             if (!ModelState.IsValid)
@@ -83,7 +85,7 @@ namespace Project_OLP_Rest.Controllers
         }
 
         // POST: api/ChatBots
-        [HttpPost(Name = "add-chatBot")]
+        [HttpPost]
         public async Task<IActionResult> PostChatBot([FromBody] ChatBot chatBot)
         {
             if (!ModelState.IsValid)
@@ -97,7 +99,7 @@ namespace Project_OLP_Rest.Controllers
         }
 
         // DELETE: api/ChatBots/5
-        [HttpDelete("{id}", Name = "delete-chatBot")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteChatBot([FromRoute] int id)
         {
             if (!ModelState.IsValid)

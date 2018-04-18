@@ -10,8 +10,7 @@ using Project_OLP_Rest.Domain;
 
 namespace Project_OLP_Rest.Controllers
 {
-    //[Produces("application/json")]
-    [Produces("application/json+hateoas")]
+    [Produces("application/json")]
     [Route("api/Modules")]
     public class ModulesController : Controller
     {
@@ -23,14 +22,14 @@ namespace Project_OLP_Rest.Controllers
         }
 
         // GET: api/Modules
-        [HttpGet(Name = "get-modules")]
+        [HttpGet]
         public IEnumerable<Module> GetModules()
         {
             return _context.Modules;
         }
 
         // GET: api/Modules/5
-        [HttpGet("{id}", Name = "get-module")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetModule([FromRoute] int id)
         {
             if (!ModelState.IsValid)
