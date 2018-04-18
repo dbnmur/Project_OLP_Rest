@@ -89,7 +89,7 @@ namespace Project_OLP_Rest.Controllers
         }
 
         // POST: api/Courses
-        [HttpPost(Name = "create-course")]
+        [HttpPost(Name = "add-course")]
         public async Task<IActionResult> PostCourse([FromBody] Course course)
         {
             if (!ModelState.IsValid)

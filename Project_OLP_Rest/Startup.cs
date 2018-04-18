@@ -61,19 +61,42 @@ namespace Project_OLP_Rest
                 .AddHateoas(options =>
                 {
                     options
-                    //Courses
-                        .AddLink<Course>("get-course", p => new { id = p.CourseId })
-                        .AddLink<List<Course>>("create-course")
-                        .AddLink<Course>("update-course", p => new { id = p.CourseId })
-                        .AddLink<Course>("delete-course", p => new { id = p.CourseId })
-                    //ChatBots
-                        .AddLink<ChatBot>("getChatBots", p => new { id = p.ChatBotId })
-                        .AddLink<ChatBot>("getChatBot", p => new { id = p.ChatBotId })
-                    //Groups
-                        .AddLink<Group>("getGroups", p => new { id = p.GroupId })
-                        .AddLink<Group>("getGroup", p => new { id = p.GroupId })
-                        .AddLink<List<Group>>("addGroup")
-                        .AddLink<Group>("deleteGroup", p => new { id = p.GroupId });
+                        //Courses
+                        //  .AddLink<Course>("get-courses", p => new { id = p.CourseId })
+                        .AddLink<Course>("get-course", c => new { id = c.CourseId })
+                        .AddLink<List<Course>>("add-course")
+                        .AddLink<Course>("update-course", c => new { id = c.CourseId })
+                        .AddLink<Course>("delete-course", c => new { id = c.CourseId })
+                        //ChatBots
+                        // .AddLink<ChatBot>("getchatBots", p => new { id = p.ChatBotId })
+                        .AddLink<ChatBot>("getchatBot", ch => new { id = ch.ChatBotId })
+                        .AddLink<List<ChatBot>>("add-chatBot")
+                        .AddLink<ChatBot>("update-chatBot", ch => new { id = ch.ChatBotId })
+                        .AddLink<ChatBot>("delete-chatBot", ch => new { id = ch.ChatBotId })
+                        //Groups
+                       // .AddLink<Group>("get-groups", p => new { id = p.GroupId })
+                        .AddLink<Group>("get-group", g => new { id = g.GroupId })
+                        .AddLink<List<Group>>("add-group")
+                        .AddLink<Group>("update-group", g => new { id = g.GroupId })
+                        .AddLink<Group>("delete-group", g => new { id = g.GroupId })
+                        //Modules
+                        //  .AddLink<Module>("get-modules", p => new { id = p.ModuleId })
+                        .AddLink<Module>("get-module", m => new { id = m.ModuleId })
+                        .AddLink<List<Module>>("add-module")
+                        .AddLink<Module>("update-module", m => new { id = m.ModuleId })
+                        .AddLink<Module>("delete-module", m => new { id = m.ModuleId })
+                        //ChatSession
+                        //  .AddLink<ChatSession>("get-chatSessions", p => new { id = p.ChatSessionId })
+                        .AddLink<ChatSession>("get-chatSession", s => new { id = s.ChatSessionId })
+                        .AddLink<List<ChatSession>>("add-chatSession")
+                        .AddLink<ChatSession>("update-chatSession", s => new { id = s.ChatSessionId })
+                        .AddLink<ChatSession>("delete-chatSession", s => new { id = s.ChatSessionId })
+                        //Records
+                        //  .AddLink<Record>("get-records", p => new { id = p.RecordId })
+                        .AddLink<Record>("get-record", r => new { id = r.RecordId })
+                        .AddLink<List<Record>>("add-record")
+                        .AddLink<Record>("update-record", r => new { id = r.RecordId })
+                        .AddLink<Record>("delete-record", r => new { id = r.RecordId });
                 });    
 
                 services.AddDbContext<OLP_Context>(
@@ -94,7 +117,7 @@ namespace Project_OLP_Rest
                 {
                     app.UseDeveloperExceptionPage();
                 }
-
+                
                 app.UseAuthentication();
 
                 app.UseMvc();

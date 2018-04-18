@@ -12,9 +12,9 @@ using RiskFirst.Hateoas;
 
 namespace Project_OLP_Rest.Controllers
 {
-    //[Produces("application/json")]
-      [Produces("application/json+hateoas")]
+
     [Route("api/ChatBots")]
+    [Produces("application/json+hateoas")]
     public class ChatBotsController : Controller
     {
         private readonly IChatBotService _chatBotService;
@@ -25,14 +25,14 @@ namespace Project_OLP_Rest.Controllers
         }
 
         // GET: api/ChatBots
-        [HttpGet (Name = "get-chatbots")]
+        [HttpGet]
         public IEnumerable<ChatBot> GetChatBots()
         {
             return _chatBotService.GetAll();
         }
 
         // GET: api/ChatBots/5
-        [HttpGet("{id}", Name = "get-chatBot")]
+        [HttpGet("{id}", Name = "getchatBot")]
         public async Task<IActionResult> GetChatBot([FromRoute] int id)
         {
             if (!ModelState.IsValid)

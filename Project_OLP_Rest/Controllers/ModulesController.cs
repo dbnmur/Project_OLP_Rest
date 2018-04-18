@@ -49,7 +49,7 @@ namespace Project_OLP_Rest.Controllers
         }
 
         // PUT: api/Modules/5
-        [HttpPut("{id}", Name = "edit-modules")]
+        [HttpPut("{id}", Name = "edit-module")]
         public async Task<IActionResult> PutModule([FromRoute] int id, [FromBody] Module @module)
         {
             if (!ModelState.IsValid)
@@ -84,7 +84,7 @@ namespace Project_OLP_Rest.Controllers
         }
 
         // POST: api/Modules
-        [HttpPost(Name = "add-modules")]
+        [HttpPost(Name = "add-module")]
         public async Task<IActionResult> PostModule([FromBody] Module @module)
         {
             if (!ModelState.IsValid)
@@ -99,7 +99,7 @@ namespace Project_OLP_Rest.Controllers
         }
 
         // DELETE: api/Modules/5
-        [HttpDelete("{id}", Name = "delete-modules")]
+        [HttpDelete("{id}", Name = "delete-module")]
         public async Task<IActionResult> DeleteModule([FromRoute] int id)
         {
             if (!ModelState.IsValid)
