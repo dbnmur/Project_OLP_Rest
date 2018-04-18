@@ -11,7 +11,8 @@ using Project_OLP_Rest.Domain;
 
 namespace Project_OLP_Rest.Controllers
 {
-    [Produces("application/json")]
+    //[Produces("application/json")]
+    [Produces("application/json+hateoas")]
     [Route("api/Records")]
     public class RecordsController : Controller
     {
@@ -23,14 +24,14 @@ namespace Project_OLP_Rest.Controllers
         }
 
         // GET: api/Records
-        [HttpGet]
+        [HttpGet(Name = "get-records")]
         public async Task<IEnumerable<Record>> GetRecords()
         {
             return await _recordService.GetAll();
         }
 
         // GET: api/Records/5
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "get-record")]
         public async Task<IActionResult> GetRecord([FromRoute] int id)
         {
             if (!ModelState.IsValid)
@@ -49,7 +50,7 @@ namespace Project_OLP_Rest.Controllers
         }
 
         // PUT: api/Records/5
-        [HttpPut("{id}")]
+        [HttpPut("{id}", Name = "edit-record")]
         public async Task<IActionResult> PutRecord([FromRoute] int id, [FromBody] Record record)
         {
             if (!ModelState.IsValid)
@@ -82,7 +83,7 @@ namespace Project_OLP_Rest.Controllers
         }
 
         // POST: api/Records
-        [HttpPost]
+        [HttpPost(Name = "add-record")]
         public async Task<IActionResult> PostRecord([FromBody] Record record)
         {
             if (!ModelState.IsValid)
@@ -96,7 +97,7 @@ namespace Project_OLP_Rest.Controllers
         }
 
         // DELETE: api/Records/5
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}", Name = "delete-record")]
         public async Task<IActionResult> DeleteRecord([FromRoute] int id)
         {
             if (!ModelState.IsValid)

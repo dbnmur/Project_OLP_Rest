@@ -83,7 +83,13 @@ namespace Project_OLP_Rest
                         .AddLink<Module>("get-module", p => new { id = p.ModuleId })
                         .AddLink<List<Module>>("add-module")
                         .AddLink<Module>("edit-module", p => new { id = p.ModuleId })
-                        .AddLink<Module>("delete-module", p => new { id = p.ModuleId });
+                        .AddLink<Module>("delete-module", p => new { id = p.ModuleId })
+                        //Records
+                        .AddLink<Record>("get-records", p => new { id = p.RecordId })
+                        .AddLink<Record>("get-record", p => new { id = p.RecordId })
+                        .AddLink<List<Record>>("add-record")
+                        .AddLink<Record>("edit-record", p => new { id = p.RecordId })
+                        .AddLink<Record>("delete-record", p => new { id = p.RecordId });
                         
 
                  });
