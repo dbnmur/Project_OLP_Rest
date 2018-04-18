@@ -10,7 +10,6 @@
 - [Greet](#greet)
 - [Default](#default)
 
-
 ## Regex
 
 ### Get feeling
