@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Project_OLP_Rest.Data;
+using Project_OLP_Rest.Data.Interfaces;
 using Project_OLP_Rest.Domain;
 
 namespace Project_OLP_Rest.Controllers.ModelControllers
@@ -14,18 +15,18 @@ namespace Project_OLP_Rest.Controllers.ModelControllers
     [Route("api/Exercises")]
     public class ExercisesController : Controller
     {
-        private readonly OLP_Context _context;
+        private readonly IExerciseService _exerciseService;
 
-        public ExercisesController(OLP_Context context)
+        public ExercisesController(IExerciseService exerciseService)
         {
-            _context = context;
+            _exerciseService = exerciseService;
         }
 
         // GET: api/Exercises
         [HttpGet]
-        public IEnumerable<Exercise> GetExercises()
+        public async Task<IEnumerable<Exercise>> GetExercises()
         {
-            return _context.Exercises;
+            return await _exerciseService.GetAll();
         }
 
         // GET: api/Exercises/5
@@ -37,7 +38,7 @@ namespace Project_OLP_Rest.Controllers.ModelControllers
                 return BadRequest(ModelState);
             }
 
-            var exercise = await _context.Exercises.SingleOrDefaultAsync(m => m.RecordId == id);
+            var exercise = await _exerciseService.FindBy(m => m.RecordId == id);
 
             if (exercise == null)
             {
@@ -61,15 +62,13 @@ namespace Project_OLP_Rest.Controllers.ModelControllers
                 return BadRequest();
             }
 
-            _context.Entry(exercise).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                await _exerciseService.Update(exercise);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ExerciseExists(id))
+                if (!(await ExerciseExists(id)))
                 {
                     return NotFound();
                 }
@@ -91,8 +90,7 @@ namespace Project_OLP_Rest.Controllers.ModelControllers
                 return BadRequest(ModelState);
             }
 
-            _context.Exercises.Add(exercise);
-            await _context.SaveChangesAsync();
+            await _exerciseService.Create(exercise);
 
             return CreatedAtAction("GetExercise", new { id = exercise.RecordId }, exercise);
         }
@@ -106,21 +104,20 @@ namespace Project_OLP_Rest.Controllers.ModelControllers
                 return BadRequest(ModelState);
             }
 
-            var exercise = await _context.Exercises.SingleOrDefaultAsync(m => m.RecordId == id);
+            var exercise = await _exerciseService.FindBy(m => m.RecordId == id);
             if (exercise == null)
             {
                 return NotFound();
             }
 
-            _context.Exercises.Remove(exercise);
-            await _context.SaveChangesAsync();
+            await _exerciseService.Delete(exercise);
 
             return Ok(exercise);
         }
 
-        private bool ExerciseExists(int id)
+        private async Task<bool> ExerciseExists(int id)
         {
-            return _context.Exercises.Any(e => e.RecordId == id);
+            return await _exerciseService.Exists(ex => ex.RecordId == id);
         }
     }
 }
