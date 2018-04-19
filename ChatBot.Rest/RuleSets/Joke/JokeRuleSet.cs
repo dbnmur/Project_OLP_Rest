@@ -10,16 +10,16 @@ namespace ChatBot.Rest.RuleSets
 {
     public class JokeRuleSet : IRuleSet
     {
-        public IEnumerable<BotRule> Rules { get { return _rules; } }
+        public IEnumerable<BotRule> Rules { get { return _rules; } set { _rules = value; } }
 
         public static List<string> jokeList;
 
         private IEnumerable<BotRule> _rules = new List<BotRule>()
         {
-            new RandomAnswersBotRule("getjoke", 40, new Regex("tell me (.*) |(joke|jokes)|(more jokes)|(I want (.*) (hilarous|funny|silly) joke)|(joke)", RegexOptions.IgnoreCase),  getJokeList()),
+            new RandomAnswersBotRule("getjoke", 40, new Regex("tell me (.*) |(joke|jokes)|(more jokes)|(I want (.*) (hilarous|funny|silly) joke)|(joke)", RegexOptions.IgnoreCase),  GetJokeList()),
         };
 
-        private static string[] getJokeList()
+        private static string[] GetJokeList()
         {
             string[] jokes = new string[]{
                 "Lightning doesn't mean to shock people, it just doesn't know how to conduct itself.",

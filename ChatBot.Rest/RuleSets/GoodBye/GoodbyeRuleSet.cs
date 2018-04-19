@@ -10,7 +10,7 @@ namespace ChatBot.Rest.RuleSets
 {
     public class GoodbyeRuleSet : IRuleSet
     {
-        public IEnumerable<BotRule> Rules { get { return _rules; } }
+        public IEnumerable<BotRule> Rules { get { return _rules; } set { _rules = value; } }
         private IEnumerable<BotRule> _rules = new List<BotRule>()
         {
             new BotRule(
@@ -24,21 +24,6 @@ namespace ChatBot.Rest.RuleSets
                     {
                         answer += " " + session.SessionStorage.Values["UserName"];
                     }
-                    return answer;
-                }
-            ),
-            new BotRule(
-                Name: "default",
-                Weight: 1,
-                MessagePattern: new Regex(".*", RegexOptions.IgnoreCase),
-                Process: delegate (Match match, ChatSessionInterface session) {
-                    string answer = "well, i have to think about that";
-
-                    if (session.SessionStorage.Values.ContainsKey("UserName"))
-                    {
-                        answer += ", " + session.SessionStorage.Values["UserName"];
-                    }
-
                     return answer;
                 }
             )

@@ -10,7 +10,7 @@ namespace ChatBot.Rest.RuleSets
 {
     public class GreetingsRuleSet : IRuleSet
     {
-        public IEnumerable<BotRule> Rules { get { return _rules; } }
+        public IEnumerable<BotRule> Rules { get { return _rules; } set { _rules = value; } }
         private IEnumerable<BotRule> _rules = new List<BotRule>()
         {
             // reports your feelings

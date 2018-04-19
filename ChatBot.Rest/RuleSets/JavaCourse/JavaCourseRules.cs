@@ -6,8 +6,8 @@ namespace ChatBot.Rest.RuleSets
 {
     public class JavaCourseRuleSet : IRuleSet
     {
-        public IEnumerable<BotRule> Rules { get { return _createJavaCourseRules; } }
-        private IEnumerable<BotRule> _createJavaCourseRules = new List<BotRule>()
+        public IEnumerable<BotRule> Rules { get { return _rules; } set { _rules = value; } }
+        private IEnumerable<BotRule> _rules = new List<BotRule>()
         {
             new BotRule(
                 Name: "setcoursename",

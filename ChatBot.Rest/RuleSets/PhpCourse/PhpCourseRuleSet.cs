@@ -15,14 +15,13 @@ namespace ChatBot.Rest.RuleSets
 {
     public class PhpCourseRuleSet : IRuleSet
     {
-        public IEnumerable<BotRule> Rules { get { return _courseRule; } }
-
-        private IEnumerable<BotRule> _courseRule = new List<BotRule>()
+        public IEnumerable<BotRule> Rules { get { return _rules; } set { _rules = value; } }
+        private IEnumerable<BotRule> _rules = new List<BotRule>()
         {
             new ExerciseBotRule(
                 Name: "give-exercise",
                 Weight: 100,
-                MessagePattern: new Regex("(give (me )?(a )?(random )?exercise)"),
+                MessagePattern: new Regex("(give (me )?(a|an )?(random )?(exercise|task|job))"),
                 Process: delegate (Match match, ChatSessionInterface session, IExerciseService exerciseService)
                 {
                     Exercise exercise = exerciseService.FindBy(ex => !ex.IsCompleted).Result;
@@ -40,7 +39,7 @@ namespace ChatBot.Rest.RuleSets
             new ExerciseBotRule(
                 Name: "try-complete-exercise",
                 Weight: 100,
-                MessagePattern: new Regex("((the )?answer (to )?(exercise|task) ([0-9]+) (is )?(.*))"),
+                MessagePattern: new Regex("((the )?answer (to )?(exercise|task|job) ([0-9]+) (is )?(.*))"),
                 Process: delegate (Match match, ChatSessionInterface session, IExerciseService exerciseService)
                 {
                     Exercise exercise = exerciseService.FindBy(ex => ex.RecordId == Int32.Parse(match.Groups[5].Value)).Result;

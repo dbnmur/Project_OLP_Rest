@@ -10,12 +10,12 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Project_OLP_Rest.Data.Interfaces;
 using Project_OLP_Rest.RequestModels;
+using QXS.ChatBot;
 
 namespace Project_OLP_Rest.Controllers.ChatbotControllers
 {
-    public abstract class GenericBotController<TRestChatBot, TRuleSet> : Controller
+    public abstract class GenericBotController<TRestChatBot> : Controller
         where TRestChatBot : RestChatBot
-        where TRuleSet : IRuleSet
     {
         protected readonly IChatBotService _chatBotService;
         protected readonly IChatSessionService _chatSessionService;
@@ -61,7 +61,7 @@ namespace Project_OLP_Rest.Controllers.ChatbotControllers
 
             sessionId = chatSession.ChatSessionId.ToString();
 
-            if (responseObject.GetType() == typeof(ExerciseResponse))
+            if (responseObject != null && responseObject.GetType() == typeof(ExerciseResponse))
                 return Json(new { sessionId = sessionId, chatbotResponse = messageResponse, exercise = responseObject });
             else
                 return Json(new { sessionId = sessionId, chatbotResponse = messageResponse });
@@ -69,9 +69,6 @@ namespace Project_OLP_Rest.Controllers.ChatbotControllers
 
         public GenericBotController(IChatBotService chatBotService, IChatSessionService chatSessionService)
         {
-            _ruleSet = (IRuleSet)Activator.CreateInstance(typeof(TRuleSet));
-            _chatBot = (RestChatBot)Activator.CreateInstance(typeof(TRestChatBot), new object[] { _ruleSet.Rules });
-
             _chatBotService = chatBotService;
             _chatSessionService = chatSessionService;
 
@@ -107,35 +104,13 @@ namespace Project_OLP_Rest.Controllers.ChatbotControllers
         /// Requires: bot name
         /// </summary>
         protected virtual void OnBotCreate() { }
-    }
 
-    [Route("api/php-bot")]
-    public class PhpBotController : GenericBotController<RestChatBot, PhpCourseRuleSet>
-    {
-        private readonly IExerciseService _exerciseService;
-
-        public PhpBotController(IChatBotService chatBotService, IChatSessionService chatSessionService, IExerciseService exerciseService) : base(chatBotService, chatSessionService)
+        protected void AddRuleSet(IRuleSet ruleSet)
         {
-            _chatBotName = "PhpChatBot";
-            _relativeRoute = "/api/php-bot";
-            _exerciseService = exerciseService;
-            _chatBot.AddExerciseService(_exerciseService);
-        }
-
-        /// <summary>
-        /// Fetches chatbot or creates if it doesn't exist
-        /// </summary>
-        /// <returns></returns>
-        protected override async Task<Domain.ChatBot> GetChatBotAsync()
-        {
-            Domain.ChatBot chatBot = await base.GetChatBotAsync();
-            if (String.IsNullOrEmpty(chatBot.Link) || chatBot.Link != _relativeRoute)
-            {
-                chatBot.Link = _relativeRoute;
-                await _chatBotService.Update(chatBot);
-            }
-
-            return chatBot;
+            List<BotRule> botRules = new List<BotRule>(_ruleSet.Rules);
+            foreach (var rule in ruleSet.Rules)
+                botRules.Add(rule);
+            _ruleSet.Rules = botRules;
         }
     }
 }

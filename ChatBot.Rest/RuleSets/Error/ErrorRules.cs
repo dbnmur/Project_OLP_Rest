@@ -10,7 +10,7 @@ namespace ChatBot.Rest.RuleSets
 {
     public class ErrorRuleSet : IRuleSet
     {
-        public IEnumerable<BotRule> Rules { get { return _rules; } }
+        public IEnumerable<BotRule> Rules { get { return _rules; } set { _rules = value; } }
         private IEnumerable<BotRule> _rules = new List<BotRule>()
         {
             new RandomAnswersBotRule("geterror", 40, new Regex("i have (error|exception)", RegexOptions.IgnoreCase), new string[] {"what kind of error ?", "whats wrong pal ?", "whats seems to be a problem ?"}),

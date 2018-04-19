@@ -9,6 +9,6 @@ namespace ChatBot.Rest.RuleSets
 {
     public interface IRuleSet
     {
-        IEnumerable<BotRule> Rules { get; }
+        IEnumerable<BotRule> Rules { get; set; }
     }
 }
