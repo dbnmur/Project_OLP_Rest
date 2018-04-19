@@ -79,9 +79,15 @@
       <DependentUpon>Calculator.feature</DependentUpon>
     </Compile>
     <Compile Include="CalculatorSteps.cs" />
+    <Compile Include="Steps\GetCoursesSteps.cs" />
     <Compile Include="Models\Calculator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Steps\NavigationSteps.cs" />
+    <Compile Include="Tests\GetCourses.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GetCourses.feature</DependentUpon>
+    </Compile>
     <Compile Include="Tests\Navigation.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -104,6 +110,10 @@
     </None>
     <None Include="SpecRunTestProfile_2011_09.xsd">
       <SubType>Designer</SubType>
+    </None>
+    <None Include="Tests\GetCourses.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>GetCourses.feature.cs</LastGenOutput>
     </None>
     <None Include="Tests\Navigation.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
