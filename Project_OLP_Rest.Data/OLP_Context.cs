@@ -18,9 +18,9 @@ namespace Project_OLP_Rest.Data
         public DbSet<Group> Groups { get; set; }
         public DbSet<Record> Records { get; set; }
         public DbSet<TeacherCourse> TeacherCourses { get; set; }
-
         public DbSet<ChatBot> ChatBots { get; set; }
         public DbSet<ChatSession> ChatSessions { get; set; }
+        public DbSet<Exercise> Exercises { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
