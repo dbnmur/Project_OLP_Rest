@@ -16,7 +16,7 @@ namespace ChatBot.Rest.RuleSets
 
         private IEnumerable<BotRule> _rules = new List<BotRule>()
         {
-            new RandomAnswersBotRule("getjoke", 40, new Regex("tell me (.*) |(joke|jokes)|(more jokes)|(I want (.*) (hilarous|funny|silly) joke)|(joke)", RegexOptions.IgnoreCase),  GetJokeList()),
+            new RandomAnswersBotRule("getjoke", 40, new Regex("((tell|say|give) (me )?(a )?joke)", RegexOptions.IgnoreCase),  GetJokeList()),
         };
 
         private static string[] GetJokeList()

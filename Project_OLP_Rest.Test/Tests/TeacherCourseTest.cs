@@ -11,6 +11,7 @@ namespace Project_OLP_Rest.Test.Tests
     public class TeacherCourseTest
     {
         [TestMethod]
+        [Ignore]
         public async System.Threading.Tasks.Task AddTeacher_ToCourse_TestAsync()
         {
             var options = new DbContextOptionsBuilder<OLP_Context>()

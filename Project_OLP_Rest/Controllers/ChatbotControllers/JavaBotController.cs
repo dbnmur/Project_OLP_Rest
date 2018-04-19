@@ -41,10 +41,7 @@ namespace Project_OLP_Rest.Controllers.ChatbotControllers
                 chatBot.Link = _relativeRoute;
                 await _chatBotService.Update(chatBot);
             }
-
             return chatBot;
         }
-
-
     }
 }
