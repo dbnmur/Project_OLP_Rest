@@ -12,8 +12,8 @@ using System;
 namespace Project_OLP_Rest.Data.Migrations
 {
     [DbContext(typeof(OLP_Context))]
-    [Migration("20180409100802_Initial migration")]
-    partial class Initialmigration
+    [Migration("20180419162353_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,6 +26,8 @@ namespace Project_OLP_Rest.Data.Migrations
                 {
                     b.Property<int>("ChatBotId")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Link");
 
                     b.Property<string>("Name");
 
@@ -121,6 +123,9 @@ namespace Project_OLP_Rest.Data.Migrations
 
                     b.Property<string>("Description");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
+
                     b.Property<int>("ModuleId");
 
                     b.Property<string>("Name");
@@ -132,6 +137,8 @@ namespace Project_OLP_Rest.Data.Migrations
                     b.HasIndex("ModuleId");
 
                     b.ToTable("Records");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Record");
                 });
 
             modelBuilder.Entity("Project_OLP_Rest.Domain.TeacherCourse", b =>
@@ -166,6 +173,19 @@ namespace Project_OLP_Rest.Data.Migrations
                     b.ToTable("Users");
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("User");
+                });
+
+            modelBuilder.Entity("Project_OLP_Rest.Domain.Exercise", b =>
+                {
+                    b.HasBaseType("Project_OLP_Rest.Domain.Record");
+
+                    b.Property<string>("AnswerRegex");
+
+                    b.Property<bool>("IsCompleted");
+
+                    b.ToTable("Exercise");
+
+                    b.HasDiscriminator().HasValue("Exercise");
                 });
 
             modelBuilder.Entity("Project_OLP_Rest.Domain.Student", b =>

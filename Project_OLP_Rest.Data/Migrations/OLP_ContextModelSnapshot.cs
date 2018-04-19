@@ -26,9 +26,9 @@ namespace Project_OLP_Rest.Data.Migrations
                     b.Property<int>("ChatBotId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(255);
+                    b.Property<string>("Link");
+
+                    b.Property<string>("Name");
 
                     b.HasKey("ChatBotId");
 
@@ -129,31 +129,15 @@ namespace Project_OLP_Rest.Data.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<int>("RecordTypeId");
-
                     b.Property<string>("Url");
 
                     b.HasKey("RecordId");
 
                     b.HasIndex("ModuleId");
 
-                    b.HasIndex("RecordTypeId");
-
                     b.ToTable("Records");
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("Record");
-                });
-
-            modelBuilder.Entity("Project_OLP_Rest.Domain.RecordType", b =>
-                {
-                    b.Property<int>("RecordTypeId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("RecordTypeId");
-
-                    b.ToTable("RecordType");
                 });
 
             modelBuilder.Entity("Project_OLP_Rest.Domain.TeacherCourse", b =>
@@ -268,11 +252,6 @@ namespace Project_OLP_Rest.Data.Migrations
                     b.HasOne("Project_OLP_Rest.Domain.Module", "Module")
                         .WithMany("Records")
                         .HasForeignKey("ModuleId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Project_OLP_Rest.Domain.RecordType", "RecordType")
-                        .WithMany("Records")
-                        .HasForeignKey("RecordTypeId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

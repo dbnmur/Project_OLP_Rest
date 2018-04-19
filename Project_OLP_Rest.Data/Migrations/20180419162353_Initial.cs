@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Project_OLP_Rest.Data.Migrations
 {
-    public partial class Initialmigration : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,6 +15,7 @@ namespace Project_OLP_Rest.Data.Migrations
                 {
                     ChatBotId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Link = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -173,9 +174,12 @@ namespace Project_OLP_Rest.Data.Migrations
                 name: "Records",
                 columns: table => new
                 {
+                    AnswerRegex = table.Column<string>(nullable: true),
+                    IsCompleted = table.Column<bool>(nullable: true),
                     RecordId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Description = table.Column<string>(nullable: true),
+                    Discriminator = table.Column<string>(nullable: false),
                     ModuleId = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     Url = table.Column<string>(nullable: true)
