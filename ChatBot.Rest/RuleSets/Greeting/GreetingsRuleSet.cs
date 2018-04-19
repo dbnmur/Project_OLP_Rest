@@ -13,27 +13,9 @@ namespace ChatBot.Rest.RuleSets
         public IEnumerable<BotRule> Rules { get { return _rules; } }
         private IEnumerable<BotRule> _rules = new List<BotRule>()
         {
-            new PowershellBotRule("pstest", 10, new Regex("powershell"), @" ( ""Hi from PowerShell "" + $PSVersionTable.PSVersion) "),
-            // chatbot specific behaviour
-            new ConditionBotRule(
-                "conditionBot",
-                50,
-                new Tuple<string, ConditionBotRule.Operator, string>[] {
-                    new Tuple<string, ConditionBotRule.Operator, string>("BotName", ConditionBotRule.Operator.EqualIgnoreCase, "chatbot")
-                },
-                new BotRule[] {
-                    // chatbot just knows positive feelings...
-                    new RandomAnswersBotRule("getfeeling2", 40, new Regex("how (are you|do you feel)", RegexOptions.IgnoreCase), new string[] {"i feel super", "i feel perfect", "i feel happy"}),
-                }
-            ),
-            // repet the last known sentence
-            new ReplacementBotRule("repeatLast", 41, new Regex("(please )?repeat the last sentence", RegexOptions.IgnoreCase), new string[] { "i repeat your last sentence:$s$sentence$", "$s$BotName$ repeats your last sentence:$s$sentence$"}),
-            // repet a sentence
-            new ReplacementBotRule("repeat", 40, new Regex("(please )?repeat(?<sentence> .*)", RegexOptions.IgnoreCase), new string[] { "i repeat your sentence:$r$sentence$", "$s$BotName$ repeats your sentence:$r$sentence$"}, new Dictionary<string, string>() { {"sentence", "$r$sentence$"} }),
             // reports your feelings
             new RandomAnswersBotRule("getfeeling", 40, new Regex("how (are you|do you feel)", RegexOptions.IgnoreCase), new string[] {"i feel great", "i feel tired", "i feel bored"}),
 
-             
             // show the bot's name
             new BotRule(
                 Name: "getbotname",
@@ -102,7 +84,7 @@ namespace ChatBot.Rest.RuleSets
                 Weight: 1,
                 MessagePattern: new Regex(".*", RegexOptions.IgnoreCase),
                 Process: delegate (Match match, ChatSessionInterface session) {
-                    string answer = "sorry what ?";
+                    string answer = "I don't understand, could you try repeating that?";
 
                     if (session.SessionStorage.Values.ContainsKey("UserName"))
                     {
@@ -111,7 +93,6 @@ namespace ChatBot.Rest.RuleSets
 
                     return answer;
                 }
-
             )
         };
     }

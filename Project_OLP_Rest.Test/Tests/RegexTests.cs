@@ -37,7 +37,7 @@ namespace Project_OLP_Rest.Test.Tests
             ChatSessionInterface session = new RestChatSession();
             var answer = chatBot.FindAnswer(session, Message);
            
-            Assert.AreEqual(answer,"Hi!");
+            Assert.AreEqual(answer.Item1,"Hi!");
 
             //#2
             Message = "hello";
@@ -45,28 +45,28 @@ namespace Project_OLP_Rest.Test.Tests
             session = new RestChatSession();
             answer = chatBot.FindAnswer(session, Message);
 
-            Assert.AreEqual(answer, "Hi!");
+            Assert.AreEqual(answer.Item1, "Hi!");
             //#3
             Message = "labas";
 
             session = new RestChatSession();
             answer = chatBot.FindAnswer(session, Message);
 
-            Assert.AreEqual(answer, "Hi!");
+            Assert.AreEqual(answer.Item1, "Hi!");
             //#4
             Message = "sveikas";
 
             session = new RestChatSession();
             answer = chatBot.FindAnswer(session, Message);
 
-            Assert.AreEqual(answer, "Hi!");
+            Assert.AreEqual(answer.Item1, "Hi!");
             //#5
             Message = "jfdbkfdkjldf";
 
             session = new RestChatSession();
             answer = chatBot.FindAnswer(session, Message);
 
-            Assert.AreEqual(answer.Item1, "sorry what ?");
+            Assert.AreEqual(answer.Item1, "I don't understand, could you try repeating that?");
         }
 
         [TestMethod]
@@ -110,7 +110,7 @@ namespace Project_OLP_Rest.Test.Tests
             List<string> jokes = JokeRuleSet.jokeList;
             ChatSessionInterface session = new RestChatSession();
             var answer = chatBot.FindAnswer(session, Message);
-            Console.WriteLine(answer);
+            Console.WriteLine(answer.Item1);
             Assert.IsTrue(jokes.Contains(answer.Item1));
         }
     }

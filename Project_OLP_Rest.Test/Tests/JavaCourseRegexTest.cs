@@ -13,7 +13,6 @@ namespace Project_OLP_Rest.Test.Tests
     [TestClass]
     public class JavaCourseRegexTest
     {
-       
         private RestChatBot javaChatBot;
         JavaCourseRuleSet javaCourseRules = new JavaCourseRuleSet();
 
@@ -28,10 +27,7 @@ namespace Project_OLP_Rest.Test.Tests
             string Message = "What course name";
 
             ChatSessionInterface session = new RestChatSession();
-            Assert.AreEqual(javaChatBot.FindAnswer(session, Message), "I do not know course name");
-
-            Console.WriteLine(javaChatBot.FindAnswer(session, Message));
-
+            Assert.AreEqual(javaChatBot.FindAnswer(session, Message).Item1, "I do not know course name");
         }
 
 
@@ -42,9 +38,9 @@ namespace Project_OLP_Rest.Test.Tests
             string Message = "Course name is Java Course";
 
             ChatSessionInterface session = new RestChatSession();
-            Assert.AreEqual(javaChatBot.FindAnswer(session, Message), "Course name now is Java Course");
+            Assert.AreEqual(javaChatBot.FindAnswer(session, Message).Item1, "Course name now is Java Course");
 
-            Console.WriteLine(javaChatBot.FindAnswer(session, Message));
+            Console.WriteLine(javaChatBot.FindAnswer(session, Message).Item1);
 
         }
         [TestMethod]
@@ -53,7 +49,7 @@ namespace Project_OLP_Rest.Test.Tests
             CreateJavaBot();
             string Message = "give me task";
             ChatSessionInterface session = new RestChatSession();
-            Console.WriteLine(javaChatBot.FindAnswer(session, Message));
+            Console.WriteLine(javaChatBot.FindAnswer(session, Message).Item1);
 
 
         }
@@ -63,7 +59,7 @@ namespace Project_OLP_Rest.Test.Tests
             CreateJavaBot();
             string Message = "show me tasks";
             ChatSessionInterface session = new RestChatSession();
-            Console.WriteLine(javaChatBot.FindAnswer(session, Message));
+            Console.WriteLine(javaChatBot.FindAnswer(session, Message).Item1);
         }
         [TestMethod]
         public void JavaLearning()
@@ -71,7 +67,7 @@ namespace Project_OLP_Rest.Test.Tests
             CreateJavaBot();
             string Message = "suggest me java learning sites";
             ChatSessionInterface session = new RestChatSession();
-            Console.WriteLine(javaChatBot.FindAnswer(session, Message));
+            Console.WriteLine(javaChatBot.FindAnswer(session, Message).Item1);
         }
         [TestMethod]
         public void JavaFact()
@@ -79,8 +75,7 @@ namespace Project_OLP_Rest.Test.Tests
             CreateJavaBot();
             string Message = "tell me interesting fact about java";
             ChatSessionInterface session = new RestChatSession();
-            Console.WriteLine(javaChatBot.FindAnswer(session, Message));
+            Console.WriteLine(javaChatBot.FindAnswer(session, Message).Item1);
         }
-
     }
 }
