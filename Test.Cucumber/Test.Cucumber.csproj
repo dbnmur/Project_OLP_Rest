@@ -73,6 +73,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Steps\AddRecordSteps.cs" />
     <Compile Include="Calculator.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -83,6 +84,11 @@
     <Compile Include="Models\Calculator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Steps\NavigationSteps.cs" />
+    <Compile Include="Tests\AddRecord.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AddRecord.feature</DependentUpon>
+    </Compile>
     <Compile Include="Tests\GetCourses.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -110,6 +116,10 @@
     </None>
     <None Include="SpecRunTestProfile_2011_09.xsd">
       <SubType>Designer</SubType>
+    </None>
+    <None Include="Tests\AddRecord.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>AddRecord.feature.cs</LastGenOutput>
     </None>
     <None Include="Tests\GetCourses.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
