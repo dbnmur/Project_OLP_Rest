@@ -13,7 +13,7 @@
 ### Set course name
 ```Regex("(course name is|course is) (now )?(.*)")```
 ### Usage 
- ```Course name is PHP```
+ ```Course name is Java```
 ***
 ### Get course name
  ```Regex("(what course name|(what is|say) course name)")```
