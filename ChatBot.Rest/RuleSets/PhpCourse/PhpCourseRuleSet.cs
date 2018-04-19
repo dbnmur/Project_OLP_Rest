@@ -1,4 +1,6 @@
-﻿using ChatBot.Rest.Rules;
+﻿using ChatBot.Rest.ResponseModels;
+using ChatBot.Rest.Rules;
+using Newtonsoft.Json;
 using Project_OLP_Rest.Data.Interfaces;
 using Project_OLP_Rest.Domain;
 using QXS.ChatBot;
@@ -20,11 +22,18 @@ namespace ChatBot.Rest.RuleSets
             new ExerciseBotRule(
                 Name: "exercise",
                 Weight: 100,
-                MessagePattern: new Regex("test test php test"),
+                MessagePattern: new Regex("(give (me )?(a )?(random )?exercise)"),
                 Process: delegate (Match match, ChatSessionInterface session, IExerciseService exerciseService)
                 {
-                    Exercise exercise = exerciseService.GetAll().Result.First();
-                    return exercise.Name;
+                    Exercise exercise = exerciseService.FindBy(ex => !ex.IsCompleted).Result;
+                    ExerciseResponse response = new ExerciseResponse()
+                    {
+                        ExerciseId = exercise.RecordId,
+                        MarkDone = false,
+                        Show = true
+                    };
+
+                    return "{exercise:" + JsonConvert.SerializeObject(response) + "}";
                 }
             ),
             new BotRule(

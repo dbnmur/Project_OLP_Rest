@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatBot", "ChatBot\ChatBot.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Cucumber", "Test.Cucumber\Test.Cucumber.csproj", "{53093D24-3966-4E5E-A248-47D2F3AE69BF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatBot.Rest", "ChatBot.Rest\ChatBot.Rest.csproj", "{8962A22C-E312-4DCC-A30E-C71E15EC632A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatBot.Rest", "ChatBot.Rest\ChatBot.Rest.csproj", "{8962A22C-E312-4DCC-A30E-C71E15EC632A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

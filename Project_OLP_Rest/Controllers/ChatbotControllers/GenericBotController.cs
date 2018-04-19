@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using ChatBot.Rest;
 using ChatBot.Rest.ChatSessions;
 using ChatBot.Rest.RuleSets;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Project_OLP_Rest.Data.Interfaces;
