@@ -11,8 +11,7 @@ using Project_OLP_Rest.Domain;
 
 namespace Project_OLP_Rest.Controllers
 {
-    //[Produces("application/json")]
-    [Produces("application/json+hateoas")]
+    [Produces("application/json", new string[]{ "application/json+hateoas" })]
     [Route("api/ChatBots")]
     public class ChatBotsController : Controller
     {
