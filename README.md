@@ -89,5 +89,4 @@ The next section is usage, in which you instruct other people on how to use your
   - [Julius Šabūnas](https://github.com/julius1223)
 
 ### License
----
-Finally, include a section for the license of your project. For more information on choosing a license, check out GitHub’s licensing guide!
+[Link to our license](https://github.com/dbnmur/Project_OLP_Rest/blob/master/LICENSE)
