@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using ChatBot.Rest;
 using ChatBot.Rest.ChatSessions;
+using ChatBot.Rest.ResponseModels;
 using ChatBot.Rest.RuleSets;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -49,12 +51,19 @@ namespace Project_OLP_Rest.Controllers.ChatbotControllers
 
                 currentChatSession = new RestChatSession(chatSession.ChatSessionId, sessionData);
             }
-            string chatbotResponse = _chatBot.FindAnswer(currentChatSession, body.Message);
+            Tuple<string, object> chatBotResponse = _chatBot.FindAnswer(currentChatSession, body.Message);
+
+            string messageResponse = chatBotResponse.Item1;
+            object responseObject = chatBotResponse.Item2;
+
             await SaveSessionDataAsync(currentChatSession);
 
             sessionId = chatSession.ChatSessionId.ToString();
 
-            return Json(new { sessionId = sessionId, chatbotResponse = chatbotResponse });
+            if (responseObject.GetType() == typeof(ExerciseResponse))
+                return Json(new { sessionId = sessionId, chatbotResponse = messageResponse, exercise = responseObject });
+            else
+                return Json(new { sessionId = sessionId, chatbotResponse = messageResponse });
         }
 
         public GenericBotController(IChatBotService chatBotService, IChatSessionService chatSessionService)

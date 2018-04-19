@@ -20,22 +20,41 @@ namespace ChatBot.Rest.RuleSets
         private IEnumerable<BotRule> _courseRule = new List<BotRule>()
         {
             new ExerciseBotRule(
-                Name: "exercise",
+                Name: "give-exercise",
                 Weight: 100,
                 MessagePattern: new Regex("(give (me )?(a )?(random )?exercise)"),
                 Process: delegate (Match match, ChatSessionInterface session, IExerciseService exerciseService)
                 {
                     Exercise exercise = exerciseService.FindBy(ex => !ex.IsCompleted).Result;
+                    string responseText = "I have found an exercise";
                     ExerciseResponse response = new ExerciseResponse()
                     {
                         ExerciseId = exercise.RecordId,
-                        MarkDone = false,
-                        Show = true
+                        Show = true,
+                        MarkDone = false
                     };
 
-                    return "{exercise:" + JsonConvert.SerializeObject(response) + "}";
+                    return new Tuple<string, object>(responseText, response);
                 }
             ),
+            //new ExerciseBotRule(
+            //    Name: "try-complete-exercise",
+            //    Weight: 100,
+            //    MessagePattern: new Regex("(give (me )?(a )?(random )?exercise)"),
+            //    Process: delegate (Match match, ChatSessionInterface session, IExerciseService exerciseService)
+            //    {
+            //        Exercise exercise = exerciseService.FindBy(ex => !ex.IsCompleted).Result;
+            //        string responseText = "I have found an exercise";
+            //        ExerciseResponse response = new ExerciseResponse()
+            //        {
+            //            ExerciseId = exercise.RecordId,
+            //            Show = true,
+            //            MarkDone = false
+            //        };
+
+            //        return new Tuple<string, object>(responseText, response);
+            //    }
+            //),
             new BotRule(
                 Name: "setcoursename",
                 Weight: 10,

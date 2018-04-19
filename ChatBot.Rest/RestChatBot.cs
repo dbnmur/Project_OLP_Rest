@@ -68,7 +68,7 @@ namespace ChatBot.Rest
             _exerciseService = exerciseService;
         }
 
-        public string FindAnswer(ChatSessionInterface session, string messageIn)
+        public Tuple<string, object> FindAnswer(ChatSessionInterface session, string messageIn)
         {
             foreach (List<BotRule> rules in this._botRules.Values)
             {
@@ -77,21 +77,22 @@ namespace ChatBot.Rest
                     Match match = rule.MessagePattern.Match(messageIn);
                     if (match.Success)
                     {
+                        Tuple<string, object> res;
                         string msg = null;
                         if (rule.GetType() == typeof(ExerciseBotRule))
                         {
                             ExerciseBotRule exerciseBotRule = rule as ExerciseBotRule;
-                            msg = exerciseBotRule.ProcessSpecial(match, session, _exerciseService);
+                            res = exerciseBotRule.ProcessSpecial(match, session, _exerciseService);
                         }
                         else
                         {
-                            msg = rule.Process(match, session);
+                            res = new Tuple<string, object>(rule.Process(match, session), null);
                         }
 
-                        if (msg != null)
+                        if (res != null)
                         {
-                            session.AddResponseToHistory(new BotResponse(rule.Name, messageIn, msg));
-                            return msg;
+                            //session.AddResponseToHistory(new BotResponse(rule.Name, messageIn, msg));
+                            return res;
                         }
                     }
                 }
