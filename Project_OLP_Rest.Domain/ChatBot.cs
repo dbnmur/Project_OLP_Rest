@@ -7,6 +7,7 @@ namespace Project_OLP_Rest.Domain
     {
         public int ChatBotId { get; set; }
         public string Name { get; set; }
+        public string Link { get; set; }
 
         public List<ChatSession> ChatSessions { get; set; }
 

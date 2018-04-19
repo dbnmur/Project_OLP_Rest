@@ -17,12 +17,13 @@ namespace Project_OLP_Rest.Controllers.ChatbotControllers
         where TRestChatBot : RestChatBot
         where TRuleSet : IRuleSet
     {
-        private readonly IChatBotService _chatBotService;
-        private readonly IChatSessionService _chatSessionService;
+        protected readonly IChatBotService _chatBotService;
+        protected readonly IChatSessionService _chatSessionService;
 
         protected RestChatBot _chatBot;
         protected IRuleSet _ruleSet;
 
+        protected string _relativeRoute = "";
         protected string _chatBotName = null;
 
         [HttpPost]
@@ -91,7 +92,7 @@ namespace Project_OLP_Rest.Controllers.ChatbotControllers
         /// Fetches chatbot or creates if it doesn't exist
         /// </summary>
         /// <returns></returns>
-        private async Task<Domain.ChatBot> GetChatBotAsync()
+        protected virtual async Task<Domain.ChatBot> GetChatBotAsync()
         {
             Domain.ChatBot chatBotModel = null;
             if (await _chatBotService.Exists(cb => cb.Name == this._chatBotName))
@@ -116,8 +117,25 @@ namespace Project_OLP_Rest.Controllers.ChatbotControllers
         public PhpBotController(IChatBotService chatBotService, IChatSessionService chatSessionService, IExerciseService exerciseService) : base(chatBotService, chatSessionService)
         {
             _chatBotName = "PhpChatBot";
+            _relativeRoute = "/api/php-bot";
             _exerciseService = exerciseService;
             _chatBot.AddExerciseService(_exerciseService);
+        }
+
+        /// <summary>
+        /// Fetches chatbot or creates if it doesn't exist
+        /// </summary>
+        /// <returns></returns>
+        protected override async Task<Domain.ChatBot> GetChatBotAsync()
+        {
+            Domain.ChatBot chatBot = await base.GetChatBotAsync();
+            if (String.IsNullOrEmpty(chatBot.Link) || chatBot.Link != _relativeRoute)
+            {
+                chatBot.Link = _relativeRoute;
+                await _chatBotService.Update(chatBot);
+            }
+
+            return chatBot;
         }
     }
 }

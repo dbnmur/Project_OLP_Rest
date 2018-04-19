@@ -33,7 +33,7 @@ namespace Project_OLP_Rest.Data.Interfaces
 
         public virtual async Task<T> FindBy(Expression<Func<T, bool>> predicate)
         {
-            return await _entities.SingleAsync(predicate);
+            return await _entities.FirstOrDefaultAsync(predicate);
         }
 
         public virtual async Task Update(T entity)
