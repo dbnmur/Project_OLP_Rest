@@ -1,4 +1,6 @@
-﻿namespace QXS.ChatBot
+﻿using QXS.ChatBot;
+
+namespace ChatBot.Rest.ChatSessions
 {
     public interface IRestChatSession : ChatSessionInterface
     {

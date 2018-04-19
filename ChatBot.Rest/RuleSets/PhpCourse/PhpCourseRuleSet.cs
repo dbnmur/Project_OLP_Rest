@@ -1,16 +1,71 @@
-﻿using System;
+﻿using ChatBot.Rest.ResponseModels;
+using ChatBot.Rest.Rules;
+using Newtonsoft.Json;
+using Project_OLP_Rest.Data.Interfaces;
+using Project_OLP_Rest.Domain;
+using QXS.ChatBot;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace QXS.ChatBot.Rules
+namespace ChatBot.Rest.RuleSets
 {
-    public class PHPCourseRule
+    public class PhpCourseRuleSet : IRuleSet
     {
-        public List<BotRule> CourseRule = new List<BotRule>()
+        public IEnumerable<BotRule> Rules { get { return _courseRule; } }
+
+        private IEnumerable<BotRule> _courseRule = new List<BotRule>()
         {
+            new ExerciseBotRule(
+                Name: "give-exercise",
+                Weight: 100,
+                MessagePattern: new Regex("(give (me )?(a )?(random )?exercise)"),
+                Process: delegate (Match match, ChatSessionInterface session, IExerciseService exerciseService)
+                {
+                    Exercise exercise = exerciseService.FindBy(ex => !ex.IsCompleted).Result;
+                    string responseText = "I have found an exercise";
+                    ExerciseResponse response = new ExerciseResponse()
+                    {
+                        ExerciseId = exercise.RecordId,
+                        Show = true,
+                        MarkDone = false
+                    };
+
+                    return new Tuple<string, object>(responseText, response);
+                }
+            ),
+            new ExerciseBotRule(
+                Name: "try-complete-exercise",
+                Weight: 100,
+                MessagePattern: new Regex("((the )?answer (to )?(exercise|task) ([0-9]+) (is )?(.*))"),
+                Process: delegate (Match match, ChatSessionInterface session, IExerciseService exerciseService)
+                {
+                    Exercise exercise = exerciseService.FindBy(ex => ex.RecordId == Int32.Parse(match.Groups[5].Value)).Result;
+                    string responseText = "I have found an exercise";
+                    if (exercise.IsCompleted)
+                        responseText = "The exercise is already completed.";
+                    else if (!(new Regex(exercise.AnswerRegex, RegexOptions.IgnoreCase).IsMatch(match.Groups[7].Value)))
+                        responseText = "Incorrect answer. Try again.";
+                    else
+                    {
+                        responseText = "Answer correct!";
+                        exercise.IsCompleted = true;
+                        exerciseService.Update(exercise);
+                    }
+
+                    ExerciseResponse response = new ExerciseResponse()
+                    {
+                        ExerciseId = exercise.RecordId,
+                        Show = true,
+                        MarkDone = true
+                    };
+
+                    return new Tuple<string, object>(responseText, response);
+                }
+            ),
             new BotRule(
                 Name: "setcoursename",
                 Weight: 10,
@@ -20,7 +75,6 @@ namespace QXS.ChatBot.Rules
                     return "Course name now is " + session.SessionStorage.Values["CourseName"];
                 }
             ),
-
             new BotRule(
                 Name: "getcoursename",
                 Weight: 10,

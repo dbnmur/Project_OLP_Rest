@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using ChatBot.Rest;
+using ChatBot.Rest.ChatSessions;
+using ChatBot.Rest.RuleSets;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QXS.ChatBot;
 using QXS.ChatBot.ChatSessions;
-using QXS.ChatBot.Rules;
 
 namespace Project_OLP_Rest.Test.Tests
 {
@@ -13,10 +15,10 @@ namespace Project_OLP_Rest.Test.Tests
     {
        
         private RestChatBot javaChatBot;
-        JavaCourseRules javaCourseRules = new JavaCourseRules();
+        JavaCourseRuleSet javaCourseRules = new JavaCourseRuleSet();
 
         [TestMethod]
-        public void CreateJavaBot() => javaChatBot = new RestChatBot(javaCourseRules.createJavaCourseRules);
+        public void CreateJavaBot() => javaChatBot = new RestChatBot(javaCourseRules.Rules);
 
 
         [TestMethod]

@@ -130,6 +130,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ChatBot.Rest\ChatBot.Rest.csproj">
+      <Project>{8962A22C-E312-4DCC-A30E-C71E15EC632A}</Project>
+      <Name>ChatBot.Rest</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ChatBot\ChatBot.csproj">
       <Project>{9CE1C326-A14C-4CAC-864A-9465B904C3E2}</Project>
       <Name>ChatBot</Name>

@@ -1,29 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using ChatBot.Rest;
+using ChatBot.Rest.ChatSessions;
+using ChatBot.Rest.RuleSets;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QXS.ChatBot;
 using QXS.ChatBot.ChatSessions;
-using QXS.ChatBot.Rules;
 
 namespace Project_OLP_Rest.Test.Tests
 {
     [TestClass]
     public class RegexTests
     {
-        private List<BotRule> GreetingBotRules = GreetingsRules.rules;
-        private List<BotRule> GoodByeBotRules = GoodbyeRules.rules;
-        private List<BotRule> ErrorBotRules = ErrorRules.rules;
-        private List<BotRule> JokeBotRules = JokeRules.rules;
-
+        private IEnumerable<BotRule> _greetingBotRules;
+        private IEnumerable<BotRule> _goodByeBotRules;
+        private IEnumerable<BotRule> _errorBotRules;
+        private IEnumerable<BotRule> _jokeBotRules;
 
         private RestChatBot chatBot;
 
-        
+        public RegexTests()
+        {
+            _greetingBotRules = new GreetingsRuleSet().Rules;
+            _goodByeBotRules = new GoodbyeRuleSet().Rules;
+            _errorBotRules = new ErrorRuleSet().Rules;
+            _jokeBotRules = new JokeRuleSet().Rules;
+        }
+
         [TestMethod]
         public void BotTest_Greeting()
         {
-            chatBot = new RestChatBot(GreetingBotRules);
+            chatBot = new RestChatBot(_greetingBotRules);
             string Message = "hi";
             
             ChatSessionInterface session = new RestChatSession();
@@ -59,13 +67,12 @@ namespace Project_OLP_Rest.Test.Tests
             answer = chatBot.FindAnswer(session, Message);
 
             Assert.AreEqual(answer, "sorry what ?");
-
         }
 
         [TestMethod]
         public void BotTest_Goodbye()
         {
-            chatBot = new RestChatBot(GoodByeBotRules);
+            chatBot = new RestChatBot(_goodByeBotRules);
             string Message = "ate";
 
             ChatSessionInterface session = new RestChatSession();
@@ -78,7 +85,7 @@ namespace Project_OLP_Rest.Test.Tests
         [TestMethod]
         public void BotTest_HaveError()
         {
-            chatBot = new RestChatBot(ErrorBotRules);
+            chatBot = new RestChatBot(_errorBotRules);
             string Message = "I have exception";
             ChatSessionInterface session = new RestChatSession();
             string answer = chatBot.FindAnswer(session, Message);
@@ -88,7 +95,7 @@ namespace Project_OLP_Rest.Test.Tests
         [TestMethod]
         public void BotTest_FindSolutionForError()
         {
-            chatBot = new RestChatBot(ErrorBotRules);
+            chatBot = new RestChatBot(_errorBotRules);
             string Message = "find the solution to this error";
             ChatSessionInterface session = new RestChatSession();
             string answer = chatBot.FindAnswer(session, Message);
@@ -98,15 +105,13 @@ namespace Project_OLP_Rest.Test.Tests
         [TestMethod]
         public void BotTest_GetJoke()
         {
-            chatBot = new RestChatBot(JokeBotRules);
+            chatBot = new RestChatBot(_jokeBotRules);
             string Message = "tell me a joke";
-            List<string> jokes = JokeRules.jokeList;
+            List<string> jokes = JokeRuleSet.jokeList;
             ChatSessionInterface session = new RestChatSession();
             string answer = chatBot.FindAnswer(session, Message);
             Console.WriteLine(answer);
             Assert.IsTrue(jokes.Contains(answer));
         }
-
-
     }
 }
