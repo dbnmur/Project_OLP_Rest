@@ -26,20 +26,20 @@ namespace Test.Cucumber.Steps
         [Given(@"I am on the home page")]
         public void GivenIAmOnTheHomePage()
         {
-            webDriver.Navigate().GoToUrl("");
+            webDriver.Navigate().GoToUrl("http://localhost:3000/");
         }
         
-        [When(@"I click on a '(.*)' in navigation bar")]
-        public void WhenIClickOnAInNavigationBar(string p0)
+        [When(@"I click on a button in navigation bar")]
+        public void WhenIClickOnAInNavigationBar()
         {
-            webDriver.FindElement(By.LinkText("Content"));
+            webDriver.FindElement(By.ClassName("loginForm")).FindElement(By.TagName("a")).Click();
         }
         
-        [Then(@"I should land on '(.*)' page")]
-        public void ThenIShouldLandOnPage(string p0)
+        [Then(@"I should land on dashboard page")]
+        public void ThenIShouldLandOnPage()
         {
-            var title = webDriver.Title;
-            Check.That(title).Equals("");
+            var title = webDriver.Url;
+            Check.That(title).Equals("http://localhost:3000/dashboard");
 
         }
     }
