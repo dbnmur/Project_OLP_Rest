@@ -89,4 +89,4 @@ The next section is usage, in which you instruct other people on how to use your
   - [Julius Šabūnas](https://github.com/julius1223)
 
 ### License
-[Link to our license](https://github.com/dbnmur/Project_OLP_Rest/blob/master/LICENSE)
+[GNU General Public License v3.0](https://github.com/dbnmur/Project_OLP_Rest/blob/master/LICENSE)
