@@ -11,7 +11,7 @@ using Project_OLP_Rest.Domain;
 
 namespace Project_OLP_Rest.Controllers
 {
-    [Produces("application/json")]
+    [Produces("application/json", new string[]{ "application/json+hateoas" })]
     [Route("api/ChatBots")]
     public class ChatBotsController : Controller
     {
@@ -23,14 +23,14 @@ namespace Project_OLP_Rest.Controllers
         }
 
         // GET: api/ChatBots
-        [HttpGet]
-        public async Task<IEnumerable<Domain.ChatBot>> GetChatBots()
+        [HttpGet(Name = "get-chatbots")]
+        public async Task<IEnumerable<ChatBot>> GetChatBots()
         {
             return await _chatBotService.GetAllAsync();
         }
 
         // GET: api/ChatBots/5
-        [HttpGet("{id}")]
+        [HttpGet("{id}",Name = "get-chatbot")]
         public async Task<IActionResult> GetChatBot([FromRoute] int id)
         {
             if (!ModelState.IsValid)
@@ -49,8 +49,8 @@ namespace Project_OLP_Rest.Controllers
         }
 
         // PUT: api/ChatBots/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutChatBot([FromRoute] int id, [FromBody] Domain.ChatBot chatBot)
+        [HttpPut("{id}", Name = "edit-chatbot")]
+        public async Task<IActionResult> PutChatBot([FromRoute] int id, [FromBody] ChatBot chatBot)
         {
             if (!ModelState.IsValid)
             {
@@ -82,8 +82,8 @@ namespace Project_OLP_Rest.Controllers
         }
 
         // POST: api/ChatBots
-        [HttpPost]
-        public async Task<IActionResult> PostChatBot([FromBody] Domain.ChatBot chatBot)
+        [HttpPost(Name = "add-chatbot")]
+        public async Task<IActionResult> PostChatBot([FromBody] ChatBot chatBot)
         {
             if (!ModelState.IsValid)
             {
@@ -96,7 +96,7 @@ namespace Project_OLP_Rest.Controllers
         }
 
         // DELETE: api/ChatBots/5
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}", Name = "delete-chatbot")]
         public async Task<IActionResult> DeleteChatBot([FromRoute] int id)
         {
             if (!ModelState.IsValid)

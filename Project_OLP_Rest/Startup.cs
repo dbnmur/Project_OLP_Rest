@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using Project_OLP_Rest.Data.Interfaces;
 using Project_OLP_Rest.Data.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Project_OLP_Rest.Domain;
 
 namespace Project_OLP_Rest
 {
@@ -51,10 +52,53 @@ namespace Project_OLP_Rest
                 options.Audience = Configuration["Auth0:Audience"];
             });
 
-            services.AddMvc()
+            services
+                .AddMvc()
                 .AddJsonOptions(
                     options => options.SerializerSettings.ReferenceLoopHandling
-                        = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+                        = Newtonsoft.Json.ReferenceLoopHandling.Ignore)
+                .AddHateoas(options =>
+                 {
+                     options
+                        //Groups
+                        .AddLink<Group>("get-groups", p => new { id = p.GroupId })
+                        .AddLink<Group>("get-group", p => new { id = p.GroupId })
+                        .AddLink<List<Group>>("add-group")
+                        .AddLink<Group>("edit-group", p => new { id = p.GroupId })
+                        .AddLink<Group>("delete-group", p => new { id = p.GroupId })
+                        //ChatBots 
+                        .AddLink<ChatBot>("get-chatbots", p => new { id = p.ChatBotId })
+                        .AddLink<ChatBot>("get-chatbot", p => new { id = p.ChatBotId })
+                        .AddLink<List<ChatBot>>("add-chatbot")
+                        .AddLink<ChatBot>("edit-chatbot", p => new { id = p.ChatBotId })
+                        .AddLink<ChatBot>("delete-chatbot", p => new { id = p.ChatBotId })
+                        //Courses
+                        .AddLink<Course>("get-courses", p => new { id = p.CourseId })
+                        .AddLink<Course>("get-course", p => new { id = p.CourseId })
+                        .AddLink<List<Course>>("add-course")
+                        .AddLink<Course>("edit-course", p => new { id = p.CourseId })
+                        .AddLink<Course>("delete-course", p => new { id = p.CourseId })
+                        //Modules
+                        .AddLink<Module>("get-modules", p => new { id = p.ModuleId })
+                        .AddLink<Module>("get-module", p => new { id = p.ModuleId })
+                        .AddLink<List<Module>>("add-module")
+                        .AddLink<Module>("edit-module", p => new { id = p.ModuleId })
+                        .AddLink<Module>("delete-module", p => new { id = p.ModuleId })
+                        //Records
+                        .AddLink<Record>("get-records", p => new { id = p.RecordId })
+                        .AddLink<Record>("get-record", p => new { id = p.RecordId })
+                        .AddLink<List<Record>>("add-record")
+                        .AddLink<Record>("edit-record", p => new { id = p.RecordId })
+                        .AddLink<Record>("delete-record", p => new { id = p.RecordId })
+                        //ChatSession
+                        .AddLink<ChatSession>("get-sessions", p => new { id = p.ChatSessionId })
+                        .AddLink<ChatSession>("get-session", p => new { id = p.ChatSessionId })
+                        .AddLink<List<ChatSession>>("add-session")
+                        .AddLink<ChatSession>("edit-session", p => new { id = p.ChatSessionId })
+                        .AddLink<ChatSession>("delete-session", p => new { id = p.ChatSessionId });
+
+                 });
+                     
 
             services.AddDbContext<OLP_Context>(
                 options => options.UseSqlServer(

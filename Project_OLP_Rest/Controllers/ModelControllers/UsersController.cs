@@ -10,7 +10,7 @@ using Project_OLP_Rest.Domain;
 
 namespace Project_OLP_Rest.Controllers
 {
-    [Produces("application/json")]
+    [Produces("application/json", new string[] { "application/json+hateoas" })]
     [Route("api/Users")]
     public class UsersController : Controller
     {

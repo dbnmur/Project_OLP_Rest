@@ -11,7 +11,7 @@ using Project_OLP_Rest.Domain;
 
 namespace Project_OLP_Rest.Controllers
 {
-    [Produces("application/json")]
+    [Produces("application/json", new string[] { "application/json+hateoas" })]
     [Route("api/Courses")]
     public class CoursesController : Controller
     {
@@ -23,14 +23,14 @@ namespace Project_OLP_Rest.Controllers
         }
 
         // GET: api/Courses
-        [HttpGet]
+        [HttpGet(Name = "get-courses")]
         public async Task<IEnumerable<Course>> GetCourses()
         {
             return await _courseService.GetAll();
         }
 
         // GET: api/Courses/5
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "get-course")]
         public async Task<IActionResult> GetCourse([FromRoute] int id)
         {
             if (!ModelState.IsValid)
@@ -49,7 +49,7 @@ namespace Project_OLP_Rest.Controllers
         }
 
         // PUT: api/Courses/5
-        [HttpPut("{id}")]
+        [HttpPut("{id}", Name = "edit-course")]
         public async Task<IActionResult> PutCourse([FromRoute] int id, [FromBody] Course course)
         {
             if (!ModelState.IsValid)
@@ -82,7 +82,7 @@ namespace Project_OLP_Rest.Controllers
         }
 
         // POST: api/Courses
-        [HttpPost]
+        [HttpPost(Name = "add-course")]
         public async Task<IActionResult> PostCourse([FromBody] Course course)
         {
             if (!ModelState.IsValid)
@@ -96,7 +96,7 @@ namespace Project_OLP_Rest.Controllers
         }
 
         // DELETE: api/Courses/5
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}", Name = "delete-course")]
         public async Task<IActionResult> DeleteCourse([FromRoute] int id)
         {
             if (!ModelState.IsValid)
