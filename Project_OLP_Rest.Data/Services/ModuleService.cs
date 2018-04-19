@@ -12,7 +12,7 @@ namespace Project_OLP_Rest.Data.Services
 {
     public class ModuleService : GenericService<Module>, IModuleService
     {
-        public ModuleService(OLP_Context context) : base(context) { }
+        public ModuleService(OlpContext context) : base(context) { }
 
         public async Task<IEnumerable<Module>> GetAll()
         {

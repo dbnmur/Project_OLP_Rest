@@ -12,7 +12,7 @@ namespace Project_OLP_Rest.Data.Services
 {
     public class CourseService : GenericService<Course>, ICourseService
     {
-        public CourseService(OLP_Context context) : base(context) { }
+        public CourseService(OlpContext context) : base(context) { }
 
         public async Task<IEnumerable<Course>> GetAll()
         {

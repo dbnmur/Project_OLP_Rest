@@ -11,7 +11,7 @@ namespace Project_OLP_Rest.Data.Services
 {
     public class RecordService : GenericService<Record>, IRecordService
     {
-        public RecordService(OLP_Context context) : base(context) { }
+        public RecordService(OlpContext context) : base(context) { }
 
         public async Task<IEnumerable<Record>> GetAll()
         {

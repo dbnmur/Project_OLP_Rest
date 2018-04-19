@@ -67,11 +67,11 @@ namespace Project_OLP_Rest
                         .AddLink<Group>("edit-group", p => new { id = p.GroupId })
                         .AddLink<Group>("delete-group", p => new { id = p.GroupId })
                         //ChatBots 
-                        .AddLink<ChatBot>("get-chatbots", p => new { id = p.ChatBotId })
-                        .AddLink<ChatBot>("get-chatbot", p => new { id = p.ChatBotId })
-                        .AddLink<List<ChatBot>>("add-chatbot")
-                        .AddLink<ChatBot>("edit-chatbot", p => new { id = p.ChatBotId })
-                        .AddLink<ChatBot>("delete-chatbot", p => new { id = p.ChatBotId })
+                        .AddLink<Domain.ChatBot>("get-chatbots", p => new { id = p.ChatBotId })
+                        .AddLink<Domain.ChatBot>("get-chatbot", p => new { id = p.ChatBotId })
+                        .AddLink<List<Domain.ChatBot>>("add-chatbot")
+                        .AddLink<Domain.ChatBot>("edit-chatbot", p => new { id = p.ChatBotId })
+                        .AddLink<Domain.ChatBot>("delete-chatbot", p => new { id = p.ChatBotId })
                         //Courses
                         .AddLink<Course>("get-courses", p => new { id = p.CourseId })
                         .AddLink<Course>("get-course", p => new { id = p.CourseId })
@@ -100,7 +100,7 @@ namespace Project_OLP_Rest
                  });
                      
 
-            services.AddDbContext<OLP_Context>(
+            services.AddDbContext<OlpContext>(
                 options => options.UseSqlServer(
                      Configuration.GetConnectionString("OLPConnection")));
 

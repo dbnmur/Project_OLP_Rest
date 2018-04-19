@@ -12,7 +12,7 @@ namespace Project_OLP_Rest.Data.Interfaces
     {
         protected DbSet<T> _entities;
 
-        protected GenericService(OLP_Context context) : base(context)
+        protected GenericService(OlpContext context) : base(context)
         {
             _context = context;
             _entities = context.Set<T>();

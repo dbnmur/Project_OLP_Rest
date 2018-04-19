@@ -9,7 +9,7 @@ namespace Project_OLP_Rest.Data.Services
 {
     public class TeacherService : GenericService<Teacher>, ITeacherService
     {
-        public TeacherService(OLP_Context context) : base(context)
+        public TeacherService(OlpContext context) : base(context)
         {
 
         }

@@ -11,7 +11,7 @@ namespace Project_OLP_Rest.Data.Services
 {
     public class GroupService : GenericService<Group>, IGroupService
     {
-        public GroupService(OLP_Context context) : base(context) { }
+        public GroupService(OlpContext context) : base(context) { }
 
         public async Task<IEnumerable<Group>> GetAll()
         {

@@ -7,7 +7,7 @@ namespace Project_OLP_Rest.Data.Seeders
 {
     class CourseSeeder : Seeder<Course>
     {
-        public CourseSeeder(OLP_Context context) : base(context) { }
+        public CourseSeeder(OlpContext context) : base(context) { }
 
         public override void Run()
         {

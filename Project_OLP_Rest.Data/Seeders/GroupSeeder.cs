@@ -7,7 +7,7 @@ namespace Project_OLP_Rest.Data.Seeders
 {
     public class GroupSeeder : Seeder<Group>
     {
-        public GroupSeeder(OLP_Context context) : base(context) { }
+        public GroupSeeder(OlpContext context) : base(context) { }
 
         public override void Run()
         {

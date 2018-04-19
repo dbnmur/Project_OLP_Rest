@@ -11,49 +11,49 @@ using QXS.ChatBot.ChatSessions;
 namespace Project_OLP_Rest.Test.Tests
 {
     [TestClass]
-    public class PHPCourseRegexTest
+    public class PhpCourseRegexTest
     {
-        private RestChatBot PHPChatBot;
+        private RestChatBot PhpChatBot;
 
         PhpCourseRuleSet phpCourseRule = new PhpCourseRuleSet();
 
         [TestMethod]
-        public void CreatePHPBot() => PHPChatBot = new RestChatBot(phpCourseRule.Rules);
+        public void CreatePHPBot() => PhpChatBot = new RestChatBot(phpCourseRule.Rules);
 
         [TestMethod]
-        public void PHPCourseNameTest()
+        public void PhpCourseNameTest()
         {
             CreatePHPBot();
             string Message = "What course name";
 
             ChatSessionInterface session = new RestChatSession();
-            Assert.AreEqual(PHPChatBot.FindAnswer(session, Message).Item1, "I do not know course name");
+            Assert.AreEqual(PhpChatBot.FindAnswer(session, Message).Item1, "I do not know course name");
         }
 
         [TestMethod]
-        public void PHPgetExercisesListTest()
+        public void PhpGetExercisesListTest()
         {
             CreatePHPBot();
             string Message = "show excersices";
 
             ChatSessionInterface session = new RestChatSession();
-            Assert.AreEqual(PHPChatBot.FindAnswer(session, Message).Item1, "PHP EXCERCISES: \n" + "-------------------\n" + "Hello World\n" + "Baby Steps\n" +
+            Assert.AreEqual(PhpChatBot.FindAnswer(session, Message).Item1, "PHP EXCERCISES: \n" + "-------------------\n" + "Hello World\n" + "Baby Steps\n" +
                     "My First IO\n" + "Filtered LS\n" + "Concerned about Separation?\n" + "Array We Go!\n" +
                     "Exceptional Coding\n" + "Database Read\n" + "Time server\n" + "HTTP JSON API\n" +
                     "Dependency Heaven\n"
                 );
 
-            Console.WriteLine(PHPChatBot.FindAnswer(session, Message).Item1);
+            Console.WriteLine(PhpChatBot.FindAnswer(session, Message).Item1);
         }
 
         [TestMethod]
-        public void PHPgetExercisesListWithTeachMePHPMessageTest()
+        public void PhpGetExercisesListWithTeachMePHPMessageTest()
         {
             CreatePHPBot();
             string Message = "teach me php";
 
             ChatSessionInterface session = new RestChatSession();
-            Assert.AreEqual(PHPChatBot.FindAnswer(session, Message).Item1, "Choose excersise from list bellow\n\n" +
+            Assert.AreEqual(PhpChatBot.FindAnswer(session, Message).Item1, "Choose excersise from list bellow\n\n" +
                     "PHP EXCERCISES: \n" + "-------------------\n" + "Hello World\n" + "Baby Steps\n" +
                     "My First IO\n" + "Filtered LS\n" + "Concerned about Separation?\n" + "Array We Go!\n" +
                     "Exceptional Coding\n" + "Database Read\n" + "Time server\n" + "HTTP JSON API\n" +
@@ -64,23 +64,23 @@ namespace Project_OLP_Rest.Test.Tests
         // Hello World
 
         [TestMethod]
-        public void PHPgetHelloWorldTask()
+        public void PhpGetHelloWorldTask()
         {
             CreatePHPBot();
             string Message = "give me hello world task";
 
             ChatSessionInterface session = new RestChatSession();
-            Assert.AreEqual(PHPChatBot.FindAnswer(session, Message).Item1,
+            Assert.AreEqual(PhpChatBot.FindAnswer(session, Message).Item1,
                 "Write a program that prints the text \"Hello World\" to the console (stdout).");
         }
 
         [TestMethod]
-        public void PHPgetHelloWorldTaskHint()
+        public void PhpGetHelloWorldTaskHint()
         {
             CreatePHPBot();
             string Message = "hw hint";
             ChatSessionInterface session = new RestChatSession();
-            Assert.AreEqual(PHPChatBot.FindAnswer(session, Message).Item1, "HINTS:\n" +
+            Assert.AreEqual(PhpChatBot.FindAnswer(session, Message).Item1, "HINTS:\n" +
                     "To make a PHP program, create a new file with a .php extension and start writing PHP! " +
                     "Execute your program by running it with the php command. e.g.:\n" +
                     "\n$ php program.php\n\n" +
@@ -94,25 +94,25 @@ namespace Project_OLP_Rest.Test.Tests
         //Baby-Steps
 
         [TestMethod]
-        public void PHPgetBabyStepsTask()
+        public void PhpGetBabyStepsTask()
         {
             CreatePHPBot();
             string Message = "give me baby steps task";
 
             ChatSessionInterface session = new RestChatSession();
-            Assert.AreEqual(PHPChatBot.FindAnswer(session, Message).Item1,
+            Assert.AreEqual(PhpChatBot.FindAnswer(session, Message).Item1,
                     "Write a program that accepts one or more numbers as command-line arguments " +
                     "and prints the sum of those numbers to the console (stdout)."
                 );
         }
 
         [TestMethod]
-        public void PHPgetBabyStepsTaskHint()
+        public void PhpGetBabyStepsTaskHint()
         {
             CreatePHPBot();
             string Message = "bs hint";
             ChatSessionInterface session = new RestChatSession();
-            Assert.AreEqual(PHPChatBot.FindAnswer(session, Message).Item1, "HINTS:\n" +
+            Assert.AreEqual(PhpChatBot.FindAnswer(session, Message).Item1, "HINTS:\n" +
                     "You can access command-line arguments via the global $argv array.\n" +
                     "To get started, write a program that simply contains:\n" +
                     "\nvar_dump($argv);\n\n" +
@@ -127,13 +127,13 @@ namespace Project_OLP_Rest.Test.Tests
         // My First IO
 
         [TestMethod]
-        public void PHPgetMyFirstIOTask()
+        public void PhpGetMyFirstIOTask()
         {
             CreatePHPBot();
             string Message = "my-first-io";
 
             ChatSessionInterface session = new RestChatSession();
-            Assert.AreEqual(PHPChatBot.FindAnswer(session, Message).Item1,
+            Assert.AreEqual(PhpChatBot.FindAnswer(session, Message).Item1,
                     "Write a program that uses a single filesystem operation to read a file and print the number of newlines (\\n) " +
                     "it contains to the console (stdout), similar to running cat file | wc -l.\n" +
                     "The full path to the file to read will be provided as the first command-line argument. You do not need to make your own test file."
@@ -141,12 +141,12 @@ namespace Project_OLP_Rest.Test.Tests
         }
 
         [TestMethod]
-        public void PHPgetMyFirstiIOTaskHint()
+        public void PhpGetMyFirstiIOTaskHint()
         {
             CreatePHPBot();
             string Message = "mfio hint";
             ChatSessionInterface session = new RestChatSession();
-            Assert.AreEqual(PHPChatBot.FindAnswer(session, Message).Item1, "HINTS:\n" +
+            Assert.AreEqual(PhpChatBot.FindAnswer(session, Message).Item1, "HINTS:\n" +
                     "To perform a filesystem operation you can use the global PHP functions.\n\n" +
                     "To read a file, you'll need to use file_get_contents('/path/to/file'). This method will return" +
                     " a string containing the complete contents of the file.\n\n" +
@@ -160,13 +160,13 @@ namespace Project_OLP_Rest.Test.Tests
         // Filter-ls
 
         [TestMethod]
-        public void PHPgetFilterLSTask()
+        public void PhpGetFilterLSTask()
         {
             CreatePHPBot();
             string Message = "fls task";
 
             ChatSessionInterface session = new RestChatSession();
-            Assert.AreEqual(PHPChatBot.FindAnswer(session, Message).Item1,
+            Assert.AreEqual(PhpChatBot.FindAnswer(session, Message).Item1,
                     "Create a program that prints a list of files in a given directory, filtered by the extension of the files. " +
                     "You will be provided a directory name as the first argument to your program (e.g. '/path/to/dir/') and a file" +
                     " extension to filter by as the second argument.\n\n" +
@@ -177,13 +177,13 @@ namespace Project_OLP_Rest.Test.Tests
         }
 
         [TestMethod]
-        public void PHPgetFilterLSTaskHint()
+        public void PhpGetFilterLSTaskHint()
         {
             CreatePHPBot();
             string Message = "filter ls hint";
 
             ChatSessionInterface session = new RestChatSession();
-            Assert.AreEqual(PHPChatBot.FindAnswer(session, Message).Item1, "HINTS:\n" +
+            Assert.AreEqual(PhpChatBot.FindAnswer(session, Message).Item1, "HINTS:\n" +
                     "The DirectoryIterator class takes a pathname as its first argument." +
                     " Using an iterator in a foreach loop will provide you with a SplFileInfo object for each file.\n\n" +
                     "<?php \n" +
@@ -199,13 +199,13 @@ namespace Project_OLP_Rest.Test.Tests
         // Concerned about separation
 
         [TestMethod]
-        public void PHPgetConcernedAboutSeparationTask()
+        public void PhpGetConcernedAboutSeparationTask()
         {
             CreatePHPBot();
             string Message = "concerned about separation task";
 
             ChatSessionInterface session = new RestChatSession();
-            Assert.AreEqual(PHPChatBot.FindAnswer(session, Message).Item1,
+            Assert.AreEqual(PhpChatBot.FindAnswer(session, Message).Item1,
                     "This problem is the same as the previous but introduces the concept of classes. You will need to create two files to solve this.\n\n" +
                     "Create a program that prints a list of files in a given directory, filtered by the extension of the files. The first argument is the " +
                     "directory name and the second argument is the extension filter. Print the list of files (one file per line) to the console.\n\n" +
@@ -220,13 +220,13 @@ namespace Project_OLP_Rest.Test.Tests
         }
 
         [TestMethod]
-        public void PHPgetConcernedAboutSeparationTaskHint()
+        public void PhpGetConcernedAboutSeparationTaskHint()
         {
             CreatePHPBot();
             string Message = "concerned-about-separation hint";
 
             ChatSessionInterface session = new RestChatSession();
-            Assert.AreEqual(PHPChatBot.FindAnswer(session, Message).Item1, "HINTS:\n" +
+            Assert.AreEqual(PhpChatBot.FindAnswer(session, Message).Item1, "HINTS:\n" +
                    "Create a new class by creating a new file that just contains your directory reading and filtering " +
                     "code in a class method. To define a single method class, use the following syntax:\n\n" +
                     "<?php\n\n class DirectoryFilter \n {\n public function filter($args) {} \n } \n\n" +
@@ -244,13 +244,13 @@ namespace Project_OLP_Rest.Test.Tests
         // Array We Go
 
         [TestMethod]
-        public void PHPgetArrayWeGoTask()
+        public void PhpGetArrayWeGoTask()
         {
             CreatePHPBot();
             string Message = "array we go task";
 
             ChatSessionInterface session = new RestChatSession();
-            Assert.AreEqual(PHPChatBot.FindAnswer(session, Message).Item1,
+            Assert.AreEqual(PhpChatBot.FindAnswer(session, Message).Item1,
                     "Write a program that takes an array of filepaths as arguments, filtering " +
                     "out files that do not exist and mapping existing files to SplFileObject's.\n\n" +
                     "Finally output the basename of the files, each on a new line.\n\n " +
@@ -259,13 +259,13 @@ namespace Project_OLP_Rest.Test.Tests
         }
 
         [TestMethod]
-        public void PHPgetArrayWeGoTaskHint()
+        public void PhpGetArrayWeGoTaskHint()
         {
             CreatePHPBot();
             string Message = "array-we-go hint";
 
             ChatSessionInterface session = new RestChatSession();
-            Assert.AreEqual(PHPChatBot.FindAnswer(session, Message).Item1, "HINTS:\n" +
+            Assert.AreEqual(PhpChatBot.FindAnswer(session, Message).Item1, "HINTS:\n" +
                     "Remember the first argument will be the programs file path and not an argument passed to the program.\n\n" +
                     "You will be expected to make use of core array functions, array_shift, array_filter and array_map.\n\n" +
                     "To check a file exists you will need to use file_exists($filePath). This method will return a boolean true or false.\n\n" +
@@ -276,13 +276,13 @@ namespace Project_OLP_Rest.Test.Tests
         // Exceptional Coding
 
         [TestMethod]
-        public void PHPgetExceptionalCodingTask()
+        public void PhpGetExceptionalCodingTask()
         {
             CreatePHPBot();
             string Message = "exceptional-coding";
 
             ChatSessionInterface session = new RestChatSession();
-            Assert.AreEqual(PHPChatBot.FindAnswer(session, Message).Item1,
+            Assert.AreEqual(PhpChatBot.FindAnswer(session, Message).Item1,
                     "Write a program that takes an array of filepaths as arguments and outputs the basename of each, separated by a new line.\n\n" +
                     "Every file should exist but under exceptional circumstances some files may not. If this occurs, output a message similar to the below.\n\n" +
                     "Unable to open file at path '/file/path'\n\n" +
@@ -291,13 +291,13 @@ namespace Project_OLP_Rest.Test.Tests
         }
 
         [TestMethod]
-        public void PHPgetExceptionalCodingTaskHint()
+        public void PhpGetExceptionalCodingTaskHint()
         {
             CreatePHPBot();
             string Message = "ec hint";
 
             ChatSessionInterface session = new RestChatSession();
-            Assert.AreEqual(PHPChatBot.FindAnswer(session, Message).Item1, "HINTS:\n" +
+            Assert.AreEqual(PhpChatBot.FindAnswer(session, Message).Item1, "HINTS:\n" +
                     "You are urged to use try... catch logic here along with the SplFileObject contruct which " +
                     "throws a RuntimeException when a file does not exist.\n\n" +
                     "Documentation on the SplFileObject class can be found by pointing your browser here:\n http://php.net/manual/en/class.splfileobject.php"
@@ -307,13 +307,13 @@ namespace Project_OLP_Rest.Test.Tests
         // database read
 
         [TestMethod]
-        public void PHPgetDatabaseReadTask()
+        public void PhpGetDatabaseReadTask()
         {
             CreatePHPBot();
             string Message = "db read";
 
             ChatSessionInterface session = new RestChatSession();
-            Assert.AreEqual(PHPChatBot.FindAnswer(session, Message).Item1,
+            Assert.AreEqual(PhpChatBot.FindAnswer(session, Message).Item1,
                     "Write a program that receives a database connection string (DSN). Connect to the database, query it and update some data.\n\n" +
                     "Display the information of all the users in the database table users whose age is over 30. Print out each row on a new line formatted like:" +
                     "\n\nUser: Jim Morrison Age: 27 Sex: male\n\n" +
@@ -323,13 +323,13 @@ namespace Project_OLP_Rest.Test.Tests
         }
 
         [TestMethod]
-        public void PHPgetDatabaseReadTaskHint()
+        public void PhpGetDatabaseReadTaskHint()
         {
             CreatePHPBot();
             string Message = "dbr hint";
 
             ChatSessionInterface session = new RestChatSession();
-            Assert.AreEqual(PHPChatBot.FindAnswer(session, Message).Item1, "HINTS:\n" +
+            Assert.AreEqual(PhpChatBot.FindAnswer(session, Message).Item1, "HINTS:\n" +
                     "This is an exercise introducing databases and PDO. PDO is a powerful abstraction library for dealing with different database " +
                     "vendors in a consistent manner. You can read the PDO manual here:\n\n" +
                     "http://php.net/manual/en/book.pdo.php \n\n A short introduction can be found here: \n\n http://www.phptherightway.com/#pdo_extension \n\n" +
@@ -342,37 +342,33 @@ namespace Project_OLP_Rest.Test.Tests
                     "You should use prepared statements to perform the updating. You should be most interested in the prepare and execute methods.\n\n" +
                     "Remember the first argument will be the program's file path and not an argument passed to the program."
                 );
-
-
         }
 
         // time-server
 
         [TestMethod]
-        public void PHPgetTimeServerTask()
+        public void PhpGetTimeServerTask()
         {
             CreatePHPBot();
             string Message = "time-server";
 
             ChatSessionInterface session = new RestChatSession();
-            Assert.AreEqual(PHPChatBot.FindAnswer(session, Message).Item1,
+            Assert.AreEqual(PhpChatBot.FindAnswer(session, Message).Item1,
                     "Write a TCP time server!\n\n Your server should listen to TCP connections on the IP address provided as the first argument" +
                     " and the port provided by the second argument to your program. For each connection you must write the current date & " +
                     "24 hour time in the format:\n\n \"YYYY-MM-DD hh:mm:ss\"\n\n followed by a newline character. Month, day, hour, minute and " +
                     "second must be zero-filled to 2 integers. For example:\n\n \"2013-07-06 17:42:30\""
                 );
-
-
         }
 
         [TestMethod]
-        public void PHPgetTimeServerTaskHint()
+        public void PhpGetTimeServerTaskHint()
         {
             CreatePHPBot();
             string Message = "ts hint";
 
             ChatSessionInterface session = new RestChatSession();
-            Assert.AreEqual(PHPChatBot.FindAnswer(session, Message).Item1, "HINTS:\n" +
+            Assert.AreEqual(PhpChatBot.FindAnswer(session, Message).Item1, "HINTS:\n" +
                     "For this exercise we'll be creating a raw TCP server. We will be using the core PHP socket_* functions. " +
                     "These functions are a thin wrapper around the C libraries.\n\n To create a server you need to use the functions socket_create," +
                     " socket_bind & socket_listen. Once the socket is listening, you can accept connections from it, which will return a new socket" +
@@ -389,20 +385,18 @@ namespace Project_OLP_Rest.Test.Tests
                     "PHP DateTime object. The various parameters to format() will help you. " +
                     "You can find the documentation here: http://php.net/manual/en/class.datetime.php"
                 );
-
-
         }
 
         // http json api
 
         [TestMethod]
-        public void PHPgetHttpJsonApiTask()
+        public void PhpGetHttpJsonApiTask()
         {
             CreatePHPBot();
             string Message = "http json api";
 
             ChatSessionInterface session = new RestChatSession();
-            Assert.AreEqual(PHPChatBot.FindAnswer(session, Message).Item1,
+            Assert.AreEqual(PhpChatBot.FindAnswer(session, Message).Item1,
                     "Write an HTTP server that serves JSON data when it receives a GET request to the path '/api/parsetime'. " +
                     "Expect the request to contain a query string with a key 'iso' and an ISO-format time as the value.\n\n" +
                     "For example:\n\n /api/parsetime?iso=2015-11-15T20:18:04+0000 \n\n The JSON response should contain only 'hour', " +
@@ -412,18 +406,16 @@ namespace Project_OLP_Rest.Test.Tests
                     "(the number of milliseconds since 1 Jan 1970 00:00:00 UTC) under the property 'unixtime'. \n\n For example: \n\n" +
                     "{ \"unixtime\": 1376136615474 }"
                 );
-
-
         }
 
         [TestMethod]
-        public void PHPgetHttpJsonApiTaskHint()
+        public void PhpGetHttpJsonApiTaskHint()
         {
             CreatePHPBot();
             string Message = "http-json-api hint";
 
             ChatSessionInterface session = new RestChatSession();
-            Assert.AreEqual(PHPChatBot.FindAnswer(session, Message).Item1, "HINTS:\n" +
+            Assert.AreEqual(PhpChatBot.FindAnswer(session, Message).Item1, "HINTS:\n" +
                     "The $_SERVER super global array has a REQUEST_URI property that you will need to use to \"route\" your requests for the two endpoints.\n\n" +
                     "You can parse the URL using the global parse_url function. The result will be an array of helpful properties. " +
                     "You can access the query string properties via the $_GET super global array. \n\n" +
@@ -435,20 +427,18 @@ namespace Project_OLP_Rest.Test.Tests
                     "you pass the string into the \\DateTime constructor. The various parameters to format() will also come in handy. You can find the " +
                     "documentation here: http://php.net/manual/en/class.datetime.php"
                 );
-
-
         }
 
         // dependency heaven
 
         [TestMethod]
-        public void PHPgetDependencyHeavenApiTask()
+        public void PhpGetDependencyHeavenApiTask()
         {
             CreatePHPBot();
             string Message = "dh task";
 
             ChatSessionInterface session = new RestChatSession();
-            Assert.AreEqual(PHPChatBot.FindAnswer(session, Message).Item1,
+            Assert.AreEqual(PhpChatBot.FindAnswer(session, Message).Item1,
                     "Write an HTTP server that serves JSON data when it receives a POST request to /reverse, /swapcase and /titleize.\n" +
                     "The POST data will contain a single parameter data which you will need to manipulate depending on the endpoint.\n\n" +
                     "/reverse \n -------------------\n\n A request with data = \"PHPbot Lessons is awesome!\" should return the response: \n\n" +
@@ -460,18 +450,16 @@ namespace Project_OLP_Rest.Test.Tests
                     "pulling it in as a dependency through Composer. \n\n You will also be required to use danielstjules/stringy to manipulate the " +
                     "data as this correctly handles multibyte characters."
                 );
-
-
         }
 
         [TestMethod]
-        public void PHPgetDependencyHeavenApiTaskHint()
+        public void PhpGetDependencyHeavenApiTaskHint()
         {
             CreatePHPBot();
             string Message = "dh hint";
 
             ChatSessionInterface session = new RestChatSession();
-            Assert.AreEqual(PHPChatBot.FindAnswer(session, Message).Item1, "HINTS:\n" +
+            Assert.AreEqual(PhpChatBot.FindAnswer(session, Message).Item1, "HINTS:\n" +
                     "Point your browser to https://getcomposer.org/doc/00-intro.md which will walk you through Installing Composer if you haven't already!\n\n" +
                     "Use composer init to create your composer.json file with interactive search. \n\n" +
                     "For more details look at the docs for... \n\n" +

@@ -15,10 +15,10 @@ namespace Project_OLP_Rest.Controllers
     [Route("api/Groups")]
     public class GroupsController : Controller
     {
-        private readonly OLP_Context _context;
+        private readonly OlpContext _context;
         private IGroupService _groupService;
 
-        public GroupsController(OLP_Context context, IGroupService groupService)
+        public GroupsController(OlpContext context, IGroupService groupService)
         {
             _context = context;
             _groupService = groupService;

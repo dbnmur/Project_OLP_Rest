@@ -14,11 +14,11 @@ namespace Project_OLP_Rest.Test.Tests
         [Ignore]
         public async System.Threading.Tasks.Task AddTeacher_ToCourse_TestAsync()
         {
-            var options = new DbContextOptionsBuilder<OLP_Context>()
+            var options = new DbContextOptionsBuilder<OlpContext>()
             .UseInMemoryDatabase(databaseName: "Add_writes_to_database_TeacherCourses")
              .Options;
             // Run the test against one instance of the context
-            using (var context = new OLP_Context(options))
+            using (var context = new OlpContext(options))
             {
                 Teacher teacher = new Domain.Teacher()
                 {

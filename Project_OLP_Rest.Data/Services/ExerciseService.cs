@@ -9,7 +9,7 @@ namespace Project_OLP_Rest.Data.Services
 {
     public class ExerciseService : GenericService<Exercise>, IExerciseService
     {
-        public ExerciseService(OLP_Context context) : base(context) { }
+        public ExerciseService(OlpContext context) : base(context) { }
 
         public async Task<IEnumerable<Exercise>> GetAll()
         {

@@ -9,7 +9,7 @@ namespace Project_OLP_Rest.Data.Services
 {
     public class ChatSessionService : GenericService<ChatSession>, IChatSessionService
     {
-        public ChatSessionService(OLP_Context context) : base(context) { }
+        public ChatSessionService(OlpContext context) : base(context) { }
 
         public async Task<IEnumerable<ChatSession>> GetAll()
         {

@@ -8,7 +8,7 @@ namespace Project_OLP_Rest.Data.Services
 {
     public class StudentService : GenericService<Student>, IStudentService
     {
-        public StudentService(OLP_Context context) : base(context)
+        public StudentService(OlpContext context) : base(context)
         {
         }
         public IEnumerable<Course> GetAll()

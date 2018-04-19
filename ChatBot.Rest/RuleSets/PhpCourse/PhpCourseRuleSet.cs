@@ -21,7 +21,7 @@ namespace ChatBot.Rest.RuleSets
             new ExerciseBotRule(
                 Name: "give-exercise",
                 Weight: 100,
-                MessagePattern: new Regex("(give (me )?(a|an )?(random )?(exercise|task|job))"),
+                MessagePattern: new Regex("(give (me )?(a|an)? (random )?(exercise|task|job))"),
                 Process: delegate (Match match, ChatSessionInterface session, IExerciseService exerciseService)
                 {
                     Exercise exercise = exerciseService.FindBy(ex => !ex.IsCompleted).Result;

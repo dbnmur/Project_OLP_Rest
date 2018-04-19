@@ -11,7 +11,7 @@ namespace Project_OLP_Rest.Data.Services
 {
     public class UserService : GenericService<User>, IUserService
     {
-        public UserService(OLP_Context context) : base(context) { }
+        public UserService(OlpContext context) : base(context) { }
 
         public async Task<IEnumerable<User>> GetAll()
         {

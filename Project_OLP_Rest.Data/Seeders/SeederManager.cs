@@ -10,7 +10,7 @@ namespace Project_OLP_Rest.Data.Seeders
         protected List<Entity> _entitiesData;
         private List<Seeder<Entity>> _seeders;
 
-        public SeederManager(OLP_Context context)
+        public SeederManager(OlpContext context)
         {
             // Add all seeders here
             new GroupSeeder(context).Run();

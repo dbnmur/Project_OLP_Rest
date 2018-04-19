@@ -8,10 +8,10 @@ namespace Project_OLP_Rest.Data.Seeders
 {
     public abstract class Seeder<T> where T : Entity
     {
-        protected OLP_Context _context;
+        protected OlpContext _context;
         protected DbSet<T> _entities;
 
-        public Seeder(OLP_Context context)
+        public Seeder(OlpContext context)
         {
             _context = context;
             _entities = context.Set<T>();

@@ -14,9 +14,9 @@ namespace Project_OLP_Rest.Controllers
     [Route("api/Users")]
     public class UsersController : Controller
     {
-        private readonly OLP_Context _context;
+        private readonly OlpContext _context;
 
-        public UsersController(OLP_Context context)
+        public UsersController(OlpContext context)
         {
             _context = context;
         }

@@ -6,9 +6,9 @@ namespace Project_OLP_Rest.Data.Services
 {
     public abstract class Service
     {
-        protected OLP_Context _context;
+        protected OlpContext _context;
 
-        protected Service(OLP_Context context)
+        protected Service(OlpContext context)
         {
             _context = context;
         }

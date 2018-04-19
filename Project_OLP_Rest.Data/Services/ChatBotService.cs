@@ -12,7 +12,7 @@ namespace Project_OLP_Rest.Data.Services
 {
     public class ChatBotService : GenericService<ChatBot>, IChatBotService
     {
-        public ChatBotService(OLP_Context context) : base(context) { }
+        public ChatBotService(OlpContext context) : base(context) { }
 
         public async Task<IEnumerable<ChatBot>> GetAllAsync()
         {

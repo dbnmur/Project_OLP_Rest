@@ -24,7 +24,7 @@ namespace Project_OLP_Rest.Controllers
 
         // GET: api/ChatBots
         [HttpGet(Name = "get-chatbots")]
-        public async Task<IEnumerable<ChatBot>> GetChatBots()
+        public async Task<IEnumerable<Domain.ChatBot>> GetChatBots()
         {
             return await _chatBotService.GetAllAsync();
         }
@@ -50,7 +50,7 @@ namespace Project_OLP_Rest.Controllers
 
         // PUT: api/ChatBots/5
         [HttpPut("{id}", Name = "edit-chatbot")]
-        public async Task<IActionResult> PutChatBot([FromRoute] int id, [FromBody] ChatBot chatBot)
+        public async Task<IActionResult> PutChatBot([FromRoute] int id, [FromBody] Domain.ChatBot chatBot)
         {
             if (!ModelState.IsValid)
             {
@@ -83,7 +83,7 @@ namespace Project_OLP_Rest.Controllers
 
         // POST: api/ChatBots
         [HttpPost(Name = "add-chatbot")]
-        public async Task<IActionResult> PostChatBot([FromBody] ChatBot chatBot)
+        public async Task<IActionResult> PostChatBot([FromBody] Domain.ChatBot chatBot)
         {
             if (!ModelState.IsValid)
             {

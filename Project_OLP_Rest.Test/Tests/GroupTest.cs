@@ -17,11 +17,11 @@ namespace Project_OLP_Rest.Test
         [TestMethod]
         public async Task GroupAddTestAsync()
         {
-            var options = new DbContextOptionsBuilder<OLP_Context>()
+            var options = new DbContextOptionsBuilder<OlpContext>()
             .UseInMemoryDatabase(databaseName: "Add_writes_to_database_ADD")
              .Options;
             // Run the test against one instance of the context
-            using (var context = new OLP_Context(options))
+            using (var context = new OlpContext(options))
             {
                 Domain.Group group = new Domain.Group()
                 {
