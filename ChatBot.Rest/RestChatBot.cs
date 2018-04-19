@@ -78,7 +78,6 @@ namespace ChatBot.Rest
                     if (match.Success)
                     {
                         Tuple<string, object> res;
-                        string msg = null;
                         if (rule.GetType() == typeof(ExerciseBotRule))
                         {
                             ExerciseBotRule exerciseBotRule = rule as ExerciseBotRule;

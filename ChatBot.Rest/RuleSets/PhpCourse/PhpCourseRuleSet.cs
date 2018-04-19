@@ -37,24 +37,35 @@ namespace ChatBot.Rest.RuleSets
                     return new Tuple<string, object>(responseText, response);
                 }
             ),
-            //new ExerciseBotRule(
-            //    Name: "try-complete-exercise",
-            //    Weight: 100,
-            //    MessagePattern: new Regex("(give (me )?(a )?(random )?exercise)"),
-            //    Process: delegate (Match match, ChatSessionInterface session, IExerciseService exerciseService)
-            //    {
-            //        Exercise exercise = exerciseService.FindBy(ex => !ex.IsCompleted).Result;
-            //        string responseText = "I have found an exercise";
-            //        ExerciseResponse response = new ExerciseResponse()
-            //        {
-            //            ExerciseId = exercise.RecordId,
-            //            Show = true,
-            //            MarkDone = false
-            //        };
+            new ExerciseBotRule(
+                Name: "try-complete-exercise",
+                Weight: 100,
+                MessagePattern: new Regex("((the )?answer (to )?(exercise|task) ([0-9]+) (is )?(.*))"),
+                Process: delegate (Match match, ChatSessionInterface session, IExerciseService exerciseService)
+                {
+                    Exercise exercise = exerciseService.FindBy(ex => ex.RecordId == Int32.Parse(match.Groups[5].Value)).Result;
+                    string responseText = "I have found an exercise";
+                    if (exercise.IsCompleted)
+                        responseText = "The exercise is already completed.";
+                    else if (!(new Regex(exercise.AnswerRegex, RegexOptions.IgnoreCase).IsMatch(match.Groups[7].Value)))
+                        responseText = "Incorrect answer. Try again.";
+                    else
+                    {
+                        responseText = "Answer correct!";
+                        exercise.IsCompleted = true;
+                        exerciseService.Update(exercise);
+                    }
 
-            //        return new Tuple<string, object>(responseText, response);
-            //    }
-            //),
+                    ExerciseResponse response = new ExerciseResponse()
+                    {
+                        ExerciseId = exercise.RecordId,
+                        Show = true,
+                        MarkDone = true
+                    };
+
+                    return new Tuple<string, object>(responseText, response);
+                }
+            ),
             new BotRule(
                 Name: "setcoursename",
                 Weight: 10,
