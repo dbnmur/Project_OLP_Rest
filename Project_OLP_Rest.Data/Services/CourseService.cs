@@ -24,7 +24,7 @@ namespace Project_OLP_Rest.Data.Services
             return await _entities
                 .Include(course => course.Modules)
                 .Include(course => course.ChatBot)
-                .SingleAsync(predicate);
+                .FirstOrDefaultAsync(predicate);
         }
     }
 }
