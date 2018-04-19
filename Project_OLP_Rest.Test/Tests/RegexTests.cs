@@ -35,7 +35,7 @@ namespace Project_OLP_Rest.Test.Tests
             string Message = "hi";
             
             ChatSessionInterface session = new RestChatSession();
-            string answer = chatBot.FindAnswer(session, Message);
+            var answer = chatBot.FindAnswer(session, Message);
            
             Assert.AreEqual(answer,"Hi!");
 
@@ -66,7 +66,7 @@ namespace Project_OLP_Rest.Test.Tests
             session = new RestChatSession();
             answer = chatBot.FindAnswer(session, Message);
 
-            Assert.AreEqual(answer, "sorry what ?");
+            Assert.AreEqual(answer.Item1, "sorry what ?");
         }
 
         [TestMethod]
@@ -76,9 +76,9 @@ namespace Project_OLP_Rest.Test.Tests
             string Message = "ate";
 
             ChatSessionInterface session = new RestChatSession();
-            string answer = chatBot.FindAnswer(session, Message);
+            var answer = chatBot.FindAnswer(session, Message);
 
-            Assert.AreEqual(answer, "bye bye");
+            Assert.AreEqual(answer.Item1, "bye bye");
 
         }
 
@@ -88,8 +88,8 @@ namespace Project_OLP_Rest.Test.Tests
             chatBot = new RestChatBot(_errorBotRules);
             string Message = "I have exception";
             ChatSessionInterface session = new RestChatSession();
-            string answer = chatBot.FindAnswer(session, Message);
-            Assert.AreEqual(answer, "Whats the problem ?");
+            var answer = chatBot.FindAnswer(session, Message);
+            Assert.AreEqual(answer.Item1, "Whats the problem ?");
         }
 
         [TestMethod]
@@ -98,8 +98,8 @@ namespace Project_OLP_Rest.Test.Tests
             chatBot = new RestChatBot(_errorBotRules);
             string Message = "find the solution to this error";
             ChatSessionInterface session = new RestChatSession();
-            string answer = chatBot.FindAnswer(session, Message);
-            Assert.AreEqual(answer, "try this.  google.com");
+            var answer = chatBot.FindAnswer(session, Message);
+            Assert.AreEqual(answer.Item1, "try this.  google.com");
         }
 
         [TestMethod]
@@ -109,9 +109,9 @@ namespace Project_OLP_Rest.Test.Tests
             string Message = "tell me a joke";
             List<string> jokes = JokeRuleSet.jokeList;
             ChatSessionInterface session = new RestChatSession();
-            string answer = chatBot.FindAnswer(session, Message);
+            var answer = chatBot.FindAnswer(session, Message);
             Console.WriteLine(answer);
-            Assert.IsTrue(jokes.Contains(answer));
+            Assert.IsTrue(jokes.Contains(answer.Item1));
         }
     }
 }
